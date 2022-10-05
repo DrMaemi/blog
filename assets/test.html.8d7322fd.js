@@ -1,1 +1,0 @@
-import{_ as t}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as e,c as s,a as o}from"./app.e052b098.js";const c={},_=o("p",null,"test post under /posts",-1),n=[_];function r(a,l){return e(),s("div",null,n)}const i=t(c,[["render",r],["__file","test.html.vue"]]);export{i as default};
