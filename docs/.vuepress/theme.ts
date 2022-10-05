@@ -12,7 +12,7 @@ export default hopeTheme({
 
   iconAssets: "iconfont",
 
-  logo: "/logo.svg",
+  logo: "/logo.png",
 
   repo: "DrMaemi/blog",
 
@@ -21,6 +21,7 @@ export default hopeTheme({
   pageInfo: ["Author", "Original", "Date", "Category", "Tag"],
 
   blog: {
+    avatar: "/assets/image/profile.png",
     medias: {
       // Baidu: "https://example.com",
       // Bitbucket: "https://example.com",

@@ -3,7 +3,8 @@ home: true
 layout: Blog
 icon: home
 title: Home
-heroImage: /logo.svg
+heroImage: /logo.png
+bgImage: /assets/image/bg-image.png
 heroText: Maemi's Devlog
 tagline: 어려울수록 기본에 미쳐라
 # heroFullScreen: true
