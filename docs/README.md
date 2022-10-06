@@ -12,12 +12,12 @@ projects:
   - icon: /assets/icon/programmers.png
     name: Programmers
     desc: Algorithm
-    link: algorithm/programmers
+    link: algorithm/programmers/
 
   - icon: /assets/icon/boj.png
     name: Baekjoon Online Judge
     desc: Algorithm
-    link: algorithm/boj
+    link: algorithm/boj/
 
   - icon: /assets/icon/springboot.png
     name: Spring Boot
@@ -27,12 +27,12 @@ projects:
   - icon: /assets/icon/cpp.png
     name: C++
     desc: Programming Language
-    link: programming-language/cpp
+    link: programming-language/cpp/
 
   - icon: /assets/icon/java.png
     name: Java
     desc: Programming Language
-    link: programming-language/java
+    link: programming-language/java/
 
 # footer: customize your footer text
 ---
