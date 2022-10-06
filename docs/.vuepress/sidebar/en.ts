@@ -1,31 +1,22 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export const enSidebar = sidebar({
-  "/": [
-    "",
+  "/programming-language/cpp/": [
     {
-      icon: "discover",
-      text: "Demo",
-      prefix: "demo/",
-      link: "demo/",
-      children: "structure",
-    },
-    {
-      text: "Articles",
       icon: "note",
-      prefix: "posts/",
+      text: "C++",
+      link: "/programming-language/cpp/",
       children: "structure",
+      activeMatch: "^/programming-language/cpp/$",
     },
-    "intro",
-    "slides",
   ],
-  "/posts/": [
+  "/programming-language/java/": [
     {
-      text: "Articles",
-      icon: "note",
-      link: "/posts/",
+      icon: "/assets/icon/java.png",
+      text: "Java",
+      link: "/programming-language/java/",
       children: "structure",
-      activeMatch: "^/posts/$",
+      activeMatch: "^/programming-language/java/$",
     },
   ],
 });

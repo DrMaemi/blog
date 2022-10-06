@@ -106,6 +106,12 @@ export default hopeTheme({
     // },
   },
 
+  navbarLayout: {
+    left: ["Brand"],
+    center: [],
+    right: ["Links", "Repo"],
+  },
+
   encrypt: {
     config: {
       "/demo/encrypt.html": ["1234"],
@@ -126,10 +132,10 @@ export default hopeTheme({
        * Using Giscus
        */
       provider: "Giscus",
-      repo: "vuepress-theme-hope/giscus-discussions",
-      repoId: "R_kgDOG_Pt2A",
+      repo: "DrMaemi/blog",
+      repoId: "R_kgDOIH95IA",
       category: "Announcements",
-      categoryId: "DIC_kwDOG_Pt2M4COD69",
+      categoryId: "DIC_kwDOIH95IM4CR0m3",
 
       /**
        * Using Twikoo

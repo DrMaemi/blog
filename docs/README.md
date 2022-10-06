@@ -9,35 +9,30 @@ heroText: Maemi's Devlog
 tagline: 어려울수록 기본에 미쳐라
 # heroFullScreen: true
 projects:
-  - icon: project
-    name: project name
-    desc: project detailed description
-    link: https://your.project.link
+  - icon: /assets/icon/programmers.png
+    name: Programmers
+    desc: Algorithm
+    link: algorithm/programmers
 
-  - icon: link
-    name: link name
-    desc: link detailed description
-    link: https://link.address
+  - icon: /assets/icon/boj.png
+    name: Baekjoon Online Judge
+    desc: Algorithm
+    link: algorithm/boj
 
-  - icon: book
-    name: book name
-    desc: Detailed description of the book
-    link: https://link.to.your.book
+  - icon: /assets/icon/springboot.png
+    name: Spring Boot
+    desc: Back-end
+    link: backend/springboot/
 
-  - icon: article
-    name: article name
-    desc: Detailed description of the article
-    link: https://link.to.your.article
+  - icon: /assets/icon/cpp.png
+    name: C++
+    desc: Programming Language
+    link: programming-language/cpp
 
-  - icon: friend
-    name: friend name
-    desc: Detailed description of friend
-    link: https://link.to.your.friend
-
-  - icon: /logo.svg
-    name: custom item
-    desc: Detailed description of this custom item
-    link: https://link.to.your.friend
+  - icon: /assets/icon/java.png
+    name: Java
+    desc: Programming Language
+    link: programming-language/java
 
 # footer: customize your footer text
 ---
