@@ -1,5 +1,7 @@
 ---
 title: '[JAVA] 리플렉션(Reflection)'
+category:
+  - Java
 date: 2022-09-06
 ---
 

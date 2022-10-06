@@ -1,4 +1,5 @@
 import { defineUserConfig } from "vuepress";
+import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 import theme from "./theme.js";
 
 export default defineUserConfig({
@@ -21,4 +22,14 @@ export default defineUserConfig({
   theme,
 
   shouldPrefetch: false,
+
+  plugins: [
+    docsearchPlugin({
+      locales: {
+        "/": {
+          placeholder: "Search"
+        },
+      },
+    }),
+  ],
 });

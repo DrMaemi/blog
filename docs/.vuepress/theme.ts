@@ -75,9 +75,10 @@ export default hopeTheme({
         description: "Interested in * in Computer Science, Software Engineering.",
       },
 
-      metaLocales: {
-        editLink: "Edit this page on GitHub",
-      },
+      // metaLocales: {
+      //   editLink: "Edit this page on GitHub",
+      // },
+      editLink: false,
     },
 
     /**
@@ -109,7 +110,7 @@ export default hopeTheme({
   navbarLayout: {
     left: ["Brand"],
     center: [],
-    right: ["Links", "Repo"],
+    right: ["Search", "Repo"],
   },
 
   encrypt: {
