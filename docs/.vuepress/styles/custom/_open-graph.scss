@@ -1,0 +1,152 @@
+figure.opengraph,
+figure.opengraph {
+	display: block;
+	margin-top: 30px;
+	margin-bottom: 30px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+figure.opengraph a,
+figure.opengraph a {
+	position: relative;
+	box-sizing: border-box;
+	display: block;
+	height: 200px;
+	border: 1px solid #d9d9d9;
+	text-decoration: none;
+	color: #000;
+    z-index: 1;
+}
+
+figure.opengraph a:hover,
+figure.opengraph a:hover {
+	opacity: 1;
+}
+
+
+figure.opengraph div {
+	position: relative;
+}
+
+figure.opengraph a::before,
+figure.opengraph a::before,
+.blogview_content figure.opengraph a::before {
+  background: none;
+}
+
+figure.opengraph a div.og-image::before,
+figure.opengraph a div.og-image::before,
+.blogview_content figure.opengraph div.og-image::before {
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+  // background-image: url(https://t1.daumcdn.net/tistory_admin/static/manage/post-editor/thumb-tistory.png);
+  position: absolute;
+	position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  // background-size: 100% 100%;
+  background-position: 0 0;
+  content: '';
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+figure.opengraph div.og-image {
+	position: absolute;
+	top:0; bottom:0;
+	left:0; width: 200px;
+	border-right: 1px solid #d9d9d9;
+	background-size: cover;
+	background-position: center;
+}
+
+figure.opengraph div.og-text {
+	position: absolute;
+	left: 201px; right: 0;
+	top:0; bottom:0;
+	box-sizing: border-box;
+	padding: 33px 46px 0 39px;
+}
+
+figure.opengraph div.og-text p.og-title,
+figure.opengraph div.og-text p.og-title {
+	color: #000000;
+	font-size: 22px;
+	line-height: 28px;
+	max-width: 467px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 0 0 10px 0 !important;
+	overflow: hidden;
+	font-family: 'Noto Sans DemiLight', 'Noto Sans KR', sans-serif;
+}
+
+figure.opengraph div.og-text p.og-desc,
+figure.opengraph div.og-text p.og-desc {
+	margin: 0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-family: 'Noto Sans DemiLight', 'Noto Sans KR', sans-serif;
+	font-size: 14px;
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #909090;
+	max-height: 42px;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+}
+
+figure.opengraph div.og-text p.og-host,
+figure.opengraph div.og-text p.og-host {
+	position: absolute;
+	bottom: 24px;
+	font-family: AvenirNext, sans-serif;
+	font-size: 14px;
+	color: #909090;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+	figure.opengraph a,
+	figure.opengraph a {
+		height: 90px;
+	}
+	figure.opengraph a::before,
+	figure.opengraph a::before {
+		left: 44px;
+	}
+
+	figure.opengraph div.og-image {
+		width: 88px;
+	}
+
+	figure.opengraph div.og-text,
+	figure.opengraph div.og-text {
+		left: 89px;
+		padding: 13px 12px 0 20px;
+	}
+
+	figure.opengraph div.og-text p.og-title,
+	figure.opengraph div.og-text p.og-title {
+		font-size:16px;
+		-webkit-line-clamp: 1;
+	}
+
+	figure.opengraph div.og-text p.og-desc,
+	figure.opengraph div.og-text p.og-desc {
+		display:none;
+	}
+
+	figure.opengraph div.og-text p.og-host,
+	figure.opengraph div.og-text p.og-host {
+		bottom: 10px;
+	}
+}
