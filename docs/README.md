@@ -12,33 +12,27 @@ projects:
   - icon: /assets/icon/programmers.png
     name: Programmers
     desc: Algorithm
-    link: algorithm/programmers/
+    link: category/programmers/
 
   - icon: /assets/icon/boj.png
     name: Baekjoon Online Judge
     desc: Algorithm
-    link: algorithm/boj/
+    link: category/baekjoon-online-judge/
 
   - icon: /assets/icon/springboot.png
     name: Spring Boot
     desc: Back-end
-    link: backend/springboot/
+    link: category/springboot/
 
   - icon: /assets/icon/cpp.png
     name: C++
     desc: Programming Language
-    link: programming-language/cpp/
+    link: category/cpp/
 
   - icon: /assets/icon/java.png
     name: Java
     desc: Programming Language
-    link: programming-language/java/
+    link: category/java/
 
 # footer: customize your footer text
 ---
-
-This is a blog home page demo.
-
-To use this layout, you should set both `layout: Blog` and `home: true` in the page front matter.
-
-For related configuration docs, please see [blog homepage](https://vuepress-theme-hope.github.io/v2/guide/blog/home/).

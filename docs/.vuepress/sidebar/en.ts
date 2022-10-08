@@ -1,22 +1,46 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export const enSidebar = sidebar({
+  "/algorithm/boj/": [
+    {
+      icon: "/assets/icon/boj.png",
+      text: "Baekjoon Online Judge",
+      link: "/category/baekjoon-online-judge/",
+      children: [
+        {
+          text: "카테고리",
+          prefix: "categorized/",
+          collapsable: true,
+          // activeMatch: "^/algorithm/boj/categorized/",
+          children: [
+            {
+              text: "구현",
+              prefix: "implementation/",
+              collapsable: true,
+              // activeMatch: "^/algorithm/boj/categorized/implementation/",
+              children: "structure",
+            },
+          ],
+        },
+      ],
+    },
+  ],
   "/programming-language/cpp/": [
     {
-      icon: "note",
+      icon: "/assets/icon/cpp.png",
       text: "C++",
-      link: "/programming-language/cpp/",
+      link: "/category/cpp/",
+      // activeMatch: "^/programming-language/cpp/",
       children: "structure",
-      activeMatch: "^/programming-language/cpp/$",
     },
   ],
   "/programming-language/java/": [
     {
       icon: "/assets/icon/java.png",
       text: "Java",
-      link: "/programming-language/java/",
+      link: "/category/java/",
+      // activeMatch: "^/programming-language/java/",
       children: "structure",
-      activeMatch: "^/programming-language/java/$",
     },
   ],
 });
