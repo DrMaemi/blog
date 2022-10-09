@@ -20,6 +20,12 @@ export const enSidebar = sidebar({
               // activeMatch: "^/algorithm/boj/categorized/implementation/",
               children: "structure",
             },
+            {
+              text: "스택",
+              prefix: "stack/",
+              collapsable: true,
+              children: "structure",
+            },
           ],
         },
         {
