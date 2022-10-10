@@ -19,6 +19,11 @@ export default defineUserConfig({
     // },
   },
 
+  // <script type="text/javascript" src="/assets/js/viewer.min.js"></script>
+  head: [
+    ["script", {type: "text/javascript", src: "/assets/js/viewer.min.js"}]
+  ],
+
   theme,
 
   shouldPrefetch: false,

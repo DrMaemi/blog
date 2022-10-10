@@ -1,0 +1,18 @@
+img {
+  &.icon {
+    max-height: 25px;
+    border-radius: 100%;
+  }
+}
+
+.project {
+  img {
+    border-radius: 100%;
+  }
+}
+
+.breadcrumb {
+  .icon {
+    max-height: 15px;
+  } 
+}

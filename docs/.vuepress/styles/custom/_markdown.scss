@@ -1,5 +1,10 @@
 /* image align center */
 .theme-hope-content:not(.custom) {
+  cap {
+    display: block;
+    text-align: center;
+  }
+
   .align-center {
     text-align: center;
 

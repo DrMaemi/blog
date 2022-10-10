@@ -4,6 +4,8 @@ import { enSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://drmaemi.github.io/blog",
+  darkmode: false,
+  hideSiteNameonMobile: false,
 
   author: {
     name: "Dr.Maemi",
