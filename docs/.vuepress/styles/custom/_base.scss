@@ -1,0 +1,11 @@
+/* image align center */
+.theme-hope-content:not(.custom) {
+  .align-center {
+    text-align: center;
+
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+}
