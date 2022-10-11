@@ -1,10 +1,14 @@
 import { defineUserConfig } from "vuepress";
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 import theme from "./theme.js";
+import { path } from "@vuepress/utils";
 
 export default defineUserConfig({
   base: "/blog/",
   dest: "./dist",
+  alias: {
+    "@DetailsOpen": path.resolve(__dirname, "components/DetailsOpen.vue"),
+  },
 
   locales: {
     "/": {
