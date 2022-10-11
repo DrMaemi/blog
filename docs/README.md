@@ -24,10 +24,10 @@ projects:
     desc: Back-end
     link: category/spring-boot/
 
-  - icon: /assets/icon/cpp.png
+  - icon: /assets/icon/c++.png
     name: C++
     desc: Programming Language
-    link: category/cpp/
+    link: category/c++/
 
   - icon: /assets/icon/java.png
     name: Java

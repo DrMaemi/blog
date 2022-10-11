@@ -198,7 +198,7 @@ export default hopeTheme({
 
     pwa: {
       favicon: "/favicon.ico",
-      cacheHTML: false,
+      cacheHTML: true,
       cachePic: true,
       appendBase: true,
       update: "force",

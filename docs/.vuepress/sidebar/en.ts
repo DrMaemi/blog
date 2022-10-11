@@ -209,11 +209,20 @@ export const enSidebar = sidebar({
       ],
     },
   ],
-  "/programming-language/cpp/": [
+  "/backend/spring-boot/": [
     {
-      icon: "/assets/icon/cpp.png",
+      icon: "/assets/icon/springboot.png",
+      text: "Spring Boot",
+      link: "/category/spring-boot/",
+      // activeMatch: "^/programming-language/cpp/",
+      children: "structure",
+    },
+  ],
+  "/programming-language/c++/": [
+    {
+      icon: "/assets/icon/c++.png",
       text: "C++",
-      link: "/category/cpp/",
+      link: "/category/c++/",
       // activeMatch: "^/programming-language/cpp/",
       children: "structure",
     },
