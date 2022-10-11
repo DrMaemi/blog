@@ -20,8 +20,9 @@ export default defineUserConfig({
   },
 
   // <script type="text/javascript" src="/assets/js/viewer.min.js"></script>
+  // <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
   head: [
-    ["script", {type: "text/javascript", src: "/assets/js/viewer.min.js"}]
+    ["script", {type: "text/javascript", src: "https://viewer.diagrams.net/js/viewer-static.min.js"}]
   ],
 
   theme,

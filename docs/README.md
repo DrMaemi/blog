@@ -2,7 +2,7 @@
 home: true
 layout: Blog
 icon: home
-title: Home
+title: Maemi's Devlog
 heroImage: /logo.png
 bgImage: /assets/image/bg-image.png
 heroText: Maemi's Devlog
@@ -22,7 +22,7 @@ projects:
   - icon: /assets/icon/springboot.png
     name: Spring Boot
     desc: Back-end
-    link: category/springboot/
+    link: category/spring-boot/
 
   - icon: /assets/icon/cpp.png
     name: C++
