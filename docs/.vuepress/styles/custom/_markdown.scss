@@ -22,7 +22,8 @@
 }
 
 div[class*=language-]::before {
-  top: 0.45em;
+  top: 0.25em;
+  right: 0.75em;
 }
 
 th {
