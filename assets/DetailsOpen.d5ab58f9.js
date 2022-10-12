@@ -1,0 +1,1 @@
+import{_ as a}from"./_plugin-vue_export-helper.cdc0426e.js";const n={mounted(){var e=document.getElementsByTagName("details"),t=Array.from(e);t.forEach(r=>r.open=!0)}};function o(e,t,r,s,c,i){return null}const _=a(n,[["render",o],["__file","DetailsOpen.vue"]]);export{_ as D};
