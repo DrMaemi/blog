@@ -1,0 +1,223 @@
+---
+title: '[C++] STL - <set>'
+icon: article
+category: C++
+date: 2022-05-27
+order: 7
+---
+
+## 집합(set) 컨테이너
+```cpp:no-line-numbers
+template <
+    class T, // set::key_type/value_type
+    class Compare = less<T>, // set::key_compare/value_compare
+    class Alloc = allocator<T> // set::allocator_type
+> class set;
+```
+
+집합(set)은 고유한(unique) 요소를 특정 순서에 따라 저장하는 연관 컨테이너(Associative Container)다. 집합에 저장된 데이터는 수정이 불가하지만 새로운 자료가 삽입되거나 기존에 있던 데이터를 삭제할 수 있다.
+
+집합은 내부적으로 *strict weak ordering* 기준에 따라 언제나 정렬되어 있으며 해당 기준은 집합 내부 비교 객체(comparison object)에 따라 결정된다. 따라서 C++에서 사용자 정의 자료형을 요소로 가지는 집합을 사용할 때는 비교를 위한 연산자`<` 오버로딩이 필요하다.
+
+::: info
+*strict weak ordering*은 *strict partial order*이면서 *incomparability*가 *equivalence*를 의미하는 *order*이다. strict partial order의 정의는 다음과 같다.
+
+> 집합 A와, A에서 정의된 relation〈 에 대하여〈 가 다음 두 조건을 만족시키면〈 는 strict partial order이다.
+i) a〈 a 는 성립하지 않는다 (nonreflexivity)
+ii) a〈 b 이고 b〈 c 이면 a〈 c 이다 (transitivity)
+for a, b, c ∈ A.
+
+이 때 strict partial order 이기 때문에 〈 는 A의 모든 원소에 대해 비교가능할 필요는 없다. 이 상태에서〈 가 weak ordering 이 되면서 추가되는 조건인
+
+> incomparability는 equivalence를 의미한다.
+
+에 의해〈 는 total ordering 이 된다. 즉, A x A 의 모든 pairs (a,b) ∈ A x A 에 대하여, a〈 b 가 정의되거나, 정의되지 않을텐데, 정의되면 그것으로 끝이고, 정의되지 않으면 equivalence 인 것이다. 즉, '같다'1. 따라서 strict weak ordering〈 에 의해 집합 A의 모든 원소쌍은 관계를 갖게 된다.
+:::
+
+집합 컨테이너를 이용하려면 다음 코드를 추가해야 한다.
+
+```cpp:no-line-numbers
+#include <set>
+```
+
+## 멤버 함수
+각 멤버함수의 예제 코드를 작성하기엔 양이 매우 많기 때문에 [cplusplus.com](https://m.cplusplus.com/reference/set/set/)에서 각 멤버 함수 링크를 클릭하여 예제를 확인하자.
+
+### 생성자(Constructor)
+- *empty container constructor*
+- *range constructor*
+- *copy constructor*
+- *move constructor*
+- *initializer constructor*
+
+### 소멸자(Desctructor)
+- ~set
+
+### 반복자(Iterators)
+- begin
+- end
+- rbegin
+- rend
+- cbegin
+- cend
+- crbegin
+- crend
+
+### 용량(Capacity)
+- empty
+- size
+- max_size
+
+### 수정자(Modifiers)
+- insert
+- erase
+- swap
+- clear
+- emplace
+- emplace_hint
+
+### 관찰자(Observers)
+- key_comp
+- value_comp
+
+### 연산(Operations)
+- find
+- count
+- lower_bound
+- upper_bound
+- equal_range
+
+### 할당자(Allocator)
+- get_allocator
+
+## 예제
+### 선언
+```cpp:no-line-numbers
+vector<int> v({1, 2, 3});
+set<int> first; // empty constructor
+set<int> second({1, 2, 3}); // list initializer constructor
+set<int> third(v.begin(), v.end()); // range constructor
+set<int> fourth(third); // copy constructor
+```
+
+### 선언 with 구조체
+::: details <code>&lt;</code>연산자 오버로딩
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+
+    bool operator<(const Student& rhs) const {
+        if (id != rhs.id) return id < rhs.id;
+        return name < rhs.name;
+    }
+};
+
+set<Student> s({
+    {1, "1"},
+    {2, "2"},
+});
+
+set<vector<Student>> s2({
+    {{1, "1"}, {2, "2"}},
+    {{3, "3"}, {4, "4"}, {5, "5"}},
+});
+```
+:::
+
+::: details Compare 클래스 사용
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+
+    bool operator>(const Student& rhs) const {
+        if (id != rhs.id) return id > rhs.id;
+        return name > rhs.name;
+    }
+};
+
+struct StudentCompare {
+    bool operator()(const Student& lhs, const Student& rhs) const {
+        return lhs > rhs;
+    }
+};
+
+set<Student, StudentCompare> s({
+    {1, "1"},
+    {2, "2"},
+});
+```
+:::
+
+### find, erase
+```cpp:no-line-numbers
+set<vector<Student>> s2({
+    {{1, "1"}, {2, "2"}},
+    {{3, "3"}, {4, "4"}, {5, "5"}},
+});
+
+set<vector<Student>>::iterator it = s2.find({{1, "1"}, {2, "2"}});
+s2.erase(it);
+```
+
+```cpp:no-line-numbers
+set<int> s({1, 2, 3});
+auto it = s.find(4);
+
+if (it == s.end()) {
+    cout << "4 doesn't exist.\n";
+}
+```
+
+### 집합 연산
+- `<algorithm>` 헤더의 `set_union`, `set_intersection`, `set_difference` 이용
+- 집합 연산에 사용되는 두 자료구조(피연산자)는 모두 오름차순 또는 내림차순 방식으로 동일하게 정렬되어 있어야 함
+- 두 자료구조는 이터레이터나 포인터로 색인이 가능해야 함
+- `std::inserter`를 이용하면 결과 컨테이너의 메모리 제어(ex. resize, erase)를 할 필요 없음
+
+```cpp:no-line-numbers
+vector<int> v = {1, 2, 3};
+set<int> s = {4, 5, 6};
+vector<int> res(v.size()+s.size());
+
+vector<int>::iterator it = set_union(
+    v.begin(), v.end(),
+    s.begin(), s.end(),
+    res.begin()
+);
+
+res.erase(it, res.end());
+print(res); // 1 2 3 4 5 6
+```
+
+```cpp:no-line-numbers
+vector<int> v = {1, 2, 3};
+set<int> s = {4, 5, 6};
+vector<int> res;
+
+insert_iterator<vector<int>> it = set_union(
+    v.begin(), v.end(),
+    s.begin(), s.end(),
+    inserter(res, res.begin())
+);
+
+print(res); // 1 2 3 4 5 6
+```
+
+## A. 참조
+::: left
+cplusplus.com, "std::set," *cplusplus.com*, [Online]. Available: [https://m.cplusplus.com/reference/set/set/](https://m.cplusplus.com/reference/set/set/) [Accessed May 26, 2022].
+
+adnoctum, "Strict weak ordering," *Tistory*, May 11, 2010. [Online]. Available: [https://adnoctum.tistory.com/206](https://adnoctum.tistory.com/206) [Accessed May 26, 2022].
+
+공부하는 식빵맘, "[STL 컨테이너] set, unordered_set (+ map)에 사용자 정의 구조체 혹은 객체 담기," *Github.io*, Apr. 1, 2021. [Online]. Available: [https://ansohxxn.github.io/stl/mapsetcustom/](https://ansohxxn.github.io/stl/mapsetcustom/) [Accessed May 31, 2022].
+
+UnluckyJung, "C++ 합집합, 교집합, 차집합 STL," *Github.io*, Apr. 24, 2020. [Online]. Available: [https://unluckyjung.github.io/cpp/2020/04/24/Set_Func/](https://unluckyjung.github.io/cpp/2020/04/24/Set_Func/) [Accessed Jun. 15, 2022].
+:::
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>

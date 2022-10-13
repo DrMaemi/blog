@@ -1,0 +1,38 @@
+---
+title: '[C++] STL - <numeric>'
+icon: article
+category: C++
+date: 2022-06-16
+order: 13
+---
+
+## `<numeric>` 헤더
+`<numeric>`은 컨테이너 각 요소에 대하여 누적 연산하는 몇 가지 멤버 함수를 가지는 헤더다.
+
+`<numeric>` 헤더 하위의 함수들을 이용하려면 다음 코드를 추가해야 한다.
+
+```cpp:no-line-numbers
+#include <numeric>
+```
+
+## `<numeric>`의 함수들
+자세한 내용과 예제 코드는 [cplusplus.com](https://m.cplusplus.com/reference/numeric/)에서 확인하자.
+
+- accumulate
+- adjacent_difference
+- inner_product
+- partial_sum
+- iota
+
+## 예제
+### 리스트 합 `accumulate`
+```cpp:no-line-numbers
+unordered_set<int> s1{1, 2, 3, 4, 5};
+cout << accumulate(s1.begin(), s1.end(), 0.1);
+// 15.1
+```
+
+## A. 참조
+::: left
+cplusplus.com, "&lt;numeric&gt;", *cplusplus.com*, [Online]. Available: [https://m.cplusplus.com/reference/numeric/](https://m.cplusplus.com/reference/numeric/) [Accessed Jun. 15, 2022].
+:::

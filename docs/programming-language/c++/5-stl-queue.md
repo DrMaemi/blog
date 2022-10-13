@@ -1,0 +1,264 @@
+---
+title: '[C++] STL - <queue>'
+icon: article
+category: C++
+date: 2022-05-27
+order: 5
+---
+
+## 큐(queue) 컨테이너
+
+```cpp:no-line-numbers
+template<class T, class Container = deque<T>> class queue;
+```
+
+::: info
+큐(queue)는 FIFO(First-In-First-Out) 연산을 위해 설계된 컨테이너 어뎁터(Container Adaptor)다.
+
+컨테이너 어댑터(container adapter)란 기존 컨테이너의 인터페이스를 제한하여 만든 기능이 제한되거나 변형된 컨테이너를 의미합니다. 이러한 컨테이너 어댑터는 각각의 기초가 되는 클래스의 인터페이스를 제한하여, 특정 형태의 동작만을 수행하도록 합니다.
+:::
+
+큐 컨테이너를 이용하려면 다음 코드를 추가해야 한다.
+
+```cpp:no-line-numbers
+#include <queue>
+```
+
+## 큐 멤버 함수
+각 멤버함수의 예제 코드를 작성하기엔 양이 매우 많기 때문에 [cplusplus.com](https://m.cplusplus.com/reference/queue/queue/)에서 각 멤버 함수 링크를 클릭하여 예제를 확인하자.
+
+### 생성자(Constructor)
+- *initialization constructor*
+- *move-initialization constructor*
+- *allocator constructor*
+- *initialization with allocator constructor*
+- *move-initialization with allocator constructor*
+- *copy with allocator constructor*
+- *move with allocator constructor*
+
+### 용량(Capacity)
+- empty
+- size
+
+### 요소 접근(Element access)
+- front
+- back
+
+### 수정자(Modifier)
+- push
+- pop
+- swap
+- emplace
+
+## 큐 예제
+### 선언
+```cpp:no-line-numbers
+deque<int> myDeck({1, 2, 3});
+list<int> myList({4, 5, 6});
+
+queue<int> first; // empty constructor
+queue<int> second(myDeck); // copy with allocator constructor
+queue<int, list<int>> third(myList);
+queue<int> fourth(second); // copy constructor
+queue<int> fifth({1, 2, 3});
+```
+
+queue 컨테이너의 기능(FIFO 연산)을 수행할 수 있는 기반 컨테이너는 *list*와 *deque*이 있으며, 생성자를 통해 인스턴스화(Instanciation)할 때 명시하지 않으면 기본 값으로 *deque*을 사용한다.
+
+### 선언 with 구조체
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+};
+
+queue<Student> q({{1, "1"}, {2, "2"}});
+```
+
+```cpp:no-line-numbers
+queue<vector<int>> q({
+    {1, 1},
+    {2, 2},
+});
+```
+
+### while & front & pop
+요소 순차 접근 및 제거
+```cpp:no-line-numbers
+queue<int> q({1, 2, 3, 4, 5});
+
+while (!q.empty()) {
+    cout << q.front() << " ";
+    q.pop();
+}
+```
+
+### vector → queue 형변환
+```cpp:no-line-numbers
+vector<Student> v = {{1, "1"}, {2, "2"}, {3, "3"}};
+queue<Student> q(deque<Student>(v.begin(), v.end()));
+```
+
+## 우선순위 큐(Priority Queue) 컨테이너
+```cpp:no-line-numbers
+template <
+    class T,
+    class Container = vector<T>,
+    class Compare = less<typename Container::value_type>
+> class priority_queue;
+```
+
+힙(Heap) 자료구조를 이용해서 구현한 우선순위 큐는 큐와 마찬가지로 컨테이너 어뎁터이다.
+
+## 우선순위 큐 멤버 함수
+각 멤버함수의 예제 코드를 작성하기엔 양이 매우 많기 때문에 [cplusplus.com](https://m.cplusplus.com/reference/queue/priority_queue/)에서 각 멤버 함수 링크를 클릭하여 예제를 확인하자.
+
+### 생성자(Constructor)
+- *initialization constructor*
+- *range initialization constructor*
+- *move-initialization constructor*
+- *move-range initialization constructor*
+- *allocator constructor*
+
+### 용량(Capacity)
+- empty
+- size
+
+### 요소 접근(Element access)
+- top
+
+### 수정자(Modifier)
+- push
+- pop
+- swap
+- emplace
+
+## 우선순위 큐 예제
+### 선언
+::: details Max Heap & empty constructor
+```cpp:no-line-numbers
+priority_queue<int> first; // empty constructor
+```
+:::
+
+::: details Min Heap & range constructor
+```cpp:no-line-numbers
+priority_queue<int, vector<int>, greater<int>> second(v.begin(), v.end()); // range constructor
+```
+:::
+
+### 선언 with 구조체
+::: details Max Heap with <code>&lt;</code>연산자 오버로딩
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+
+    bool operator<(const Student& rhs) const {
+        if (id != rhs.id) return id < rhs.id;
+        return name < rhs.name;
+    }
+};
+
+priority_queue<Student> pq;
+```
+:::
+
+::: details Min Heap with <code>&gt;</code>연산자 오버로딩
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+
+    bool operator>(const Student& rhs) const {
+        if (id != rhs.id) return id > rhs.id;
+        return name > rhs.name;
+    }
+};
+
+priority_queue<Student, vector<Student>, greater<Student>> pq;
+```
+:::
+
+::: details Compare 클래스 사용
+Min Heap
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+
+    bool operator>(const Student& rhs) const {
+        if (id != rhs.id) return id > rhs.id;
+        return name > rhs.name;
+    }
+};
+
+struct StudentCompare {
+    bool operator()(const Student& lhs, const Student& rhs) const {
+        return lhs > rhs;
+    }
+};
+
+priority_queue<Student, vector<Student>, StudentCompare> pq;
+```
+
+Max-Min Heap (toggle)
+```cpp:no-line-numbers
+struct Student {
+    long long id;
+    string name;
+
+    bool operator<(const Student& rhs) const {
+        if (id != rhs.id) return id < rhs.id;
+        return name < rhs.name;
+    }
+
+    bool operator>(const Student& rhs) const {
+        if (id != rhs.id) return id > rhs.id;
+        return name > rhs.name;
+    }
+};
+
+class StudentCompare {
+    bool reverse;
+
+public:
+    StudentCompare(const bool reverse): reverse(reverse) { }
+
+    bool operator()(const Student& lhs, const Student& rhs) const {
+        if (reverse) return lhs > rhs;
+        return lhs < rhs;
+    }
+};
+
+priority_queue<Student, vector<Student>, StudentCompare> pq1(1);
+priority_queue<Student, vector<Student>, StudentCompare> pq2(v.begin(), v.end(), 1);
+```
+:::
+
+비교 구조체에서 연산자 `()` 정의, 템플릿에 사용된 구조체에서 연산자 `<` 오버로딩을 통해 컨테이너 내부 정렬 기준을 명시할 수 있다.
+
+위 방식은 다른 STL 컨테이너의 템플릿 인자에 사용되는 비교 객체에 똑같이 사용될 수 있다. 예를 들면 집합 `set<T, Compare, Alloc>`의 `Compare`에 사용될 수 있다.
+
+### while & top & pop
+요소 순차 접근 및 제거
+```cpp:no-line-numbers
+while (!pq.empty()) {
+    Student t = pq.top();
+    cout << t.toString() << " ";
+    pq.pop();
+}
+```
+
+## A. 참조
+::: left
+cplusplus.com, "std::queue", *cplusplus.com*, [Online]. Available: [https://m.cplusplus.com/reference/queue/queue/](https://m.cplusplus.com/reference/queue/queue/) [Accessed May 26, 2022].
+
+cplusplus.com, "std::queue", *cplusplus.com*, [Online]. Available: [https://m.cplusplus.com/reference/queue/priority_queue/](https://m.cplusplus.com/reference/queue/priority_queue/) [Accessed May 26, 2022].
+:::
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>
