@@ -282,6 +282,8 @@ backtony, "Spring - AOP 총정리," *Velog.io*, Jun. 18, 2022. [Online]. Availab
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
 </script>
 
 <DetailsOpen/>
+<UmlScript/>

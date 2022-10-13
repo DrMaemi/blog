@@ -282,6 +282,8 @@ tutorialspoint, "Spring Boot JPA - Architecture", *tutorialspoint.com*, [Online]
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
 </script>
 
 <DetailsOpen/>
+<UmlScript/>

@@ -269,6 +269,8 @@ seongwon97, "[Spring JPA] 영속성 컨텍스트(Persistence Context)," *Velog.i
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
 </script>
 
 <DetailsOpen/>
+<UmlScript/>

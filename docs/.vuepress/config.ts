@@ -8,6 +8,7 @@ export default defineUserConfig({
   dest: "./dist",
   alias: {
     "@DetailsOpen": path.resolve(__dirname, "components/DetailsOpen.vue"),
+    "@UmlScript": path.resolve(__dirname, "components/UmlScript.vue"),
   },
 
   locales: {
@@ -22,12 +23,6 @@ export default defineUserConfig({
     //   description: "vuepress-theme-hope 的博客演示",
     // },
   },
-
-  // <script type="text/javascript" src="/assets/js/viewer.min.js"></script>
-  // <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
-  head: [
-    ["script", {type: "text/javascript", src: "https://viewer.diagrams.net/js/viewer-static.min.js"}]
-  ],
 
   theme,
 

@@ -210,6 +210,8 @@ VMWare, Inc., "Spring Boot with Docker," *spring.io*, [Online]. Available: [http
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
 </script>
 
 <DetailsOpen/>
+<UmlScript/>

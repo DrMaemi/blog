@@ -190,6 +190,8 @@ wbluke, "JPA Entity의 기본 생성자 관련 예외 정리하기," *Tistory*, 
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
 </script>
 
 <DetailsOpen/>
+<UmlScript/>

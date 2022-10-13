@@ -122,6 +122,8 @@ seongwon97, "[Spring JPA] JPA란?," *Velog.io*, Sep. 14, 2021. [Online]. Availab
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
 </script>
 
 <DetailsOpen/>
+<UmlScript/>
