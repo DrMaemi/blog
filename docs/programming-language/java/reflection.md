@@ -1,8 +1,10 @@
 ---
 title: '[JAVA] 리플렉션(Reflection)'
+icon: article
 category:
   - Java
 date: 2022-09-06
+order: -1
 ---
 
 ## 리플렉션(Reflection)이란?
@@ -11,8 +13,7 @@ date: 2022-09-06
 > 구체적인 클래스 타입을 알지 못해도 멤버 변수, 하위 메서드에 접근할 수 있도록 해주는 API
 
 ## 예제
-
-```java
+```java:no-line-numbers
 public class Music {
     private String singer;
     private String title;
@@ -32,8 +33,7 @@ public class Music {
         return title;
     }
 }
-```
-```java
+
 public class Reflection {
     public static void main(String[] args) {
         Object music = new Music("IU", "YOU AND ME");
@@ -47,7 +47,7 @@ public class Reflection {
 이렇게 구체적 클래스 타입을 알지 못할 때 Music 클래스의 멤버를 사용할 수 있도록 하는 기능이 바로 Reflection입니다.
 
 ## Reflection 사용
-```java
+```java:no-line-numbers
 public class Reflection {
     public static void main(String[] args) {
         Object music = new Music("IU", "YOU AND ME");
@@ -71,7 +71,7 @@ public class Reflection {
 - getDeclaredConstructor() - 기본 생성자를 가져옴
 - getDeclaredConstructor(&lt;Type.class, ...&gt;) - 인자로 넘긴 타입들을 인자로 갖는 생성자를 가져옴
 
-```java
+```java:no-line-numbers
 public class Reflection {
     public static void main(String[] args) {
         Object music = new Music("IU", "YOU AND ME");
@@ -99,4 +99,6 @@ public class Reflection {
 ```
 
 ## A. 참조
+::: left
 yebali, "Spring, JPA에 기본 생성자가 필요한 이유," *Velog.io*, Sep. 8, 2021. [Online]. Available: [https://velog.io/@yebali/Spring-JPA에-기본-생성자가-필요한-이유](https://velog.io/@yebali/Spring-JPA에-기본-생성자가-필요한-이유) [Accessed Sep. 6, 2022].
+:::

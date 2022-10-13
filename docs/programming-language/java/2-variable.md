@@ -1,0 +1,703 @@
+---
+title: '[JAVA] 변수(Variable)'
+icon: article
+category: Java
+date: 2022-08-03
+order: 2
+---
+
+## 1. 변수(Variable)
+중요한 프로그래밍 능력 중 하나가 바로 값(data)을 잘 다루는 것입니다. 값을 저장하는 공간인 변수를 잘 이해하고 활용하는 것이 그 첫걸음으로 중요합니다.
+
+### 1.1. 변수(Variable)란?
+프로그래밍 언어에서 변수란 값을 저장할 수 있는 메모리상의 공간을 의미하며, 이 공간에 저장된 값은 변경될 수 있습니다.
+
+> 변수란, 단 하나의 값을 저장할 수 있는 메모리 공간
+
+하나의 값만 저장할 수 있으므로 새로운 값을 저장하면 기존의 값은 사라집니다.
+
+### 1.2. 변수의 선언과 초기화
+변수를 사용하려면 먼저 변수를 선언해야 하는데, 변수의 선언 방법은 다음과 같습니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-03T08:57:28.030Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\&quot; etag=\&quot;Ny2Z1pb9BujVcNal9y3Y\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;iF9pbWF-rhL5AfyV3uQm\&quot; name=\&quot;그림 1. 변수 선언\&quot;&gt;7Vhdk5sgFP01PLbjVyI+RpO0D9vOdtJpdx+pskoXJYNkk+yvLyBGjWby0XTTh53JAxzhIuecy5UAN8o3nzhaZl9YgilwrGQD3ClwHNtzHKB+VrKtEH/kVUDKSWIGNcCCvGIDWgZdkQSXnYGCMSrIsgvGrChwLDoY4pytu8OeGO2uukQp7gGLGNE++pMkIqtQ6PgN/hmTNKtXtsdB9SRH9WCzkzJDCVu3IHcG3IgzJqpWvokwVeTVvFTz5gee7l6M40KcNCG22Zx+W0K/nNnombnf7fCDifKC6MpsmMhokjrFSghUyLn+aWQWgmAKwkg14AQEnhowizToKXAyBtAzSAD10xCELoB6GIQ1GKlhk2ruGITQMCS2Ne0Cb+SmwkzkVAK2bJaCs2ccMcq4RApWqBd8IpTuQYiStJDdWNKCJR6+YC6IFHRiHuQkSdQy4TojAi+WKFZrrqV9JcbZqkiwYsxS4Vkh5ignVJn3B+YJKpCBjVPtQNOkOZTr4M1Bceyd5DJXMMux4Fs5xExwXJMWJk12/l83pnPHBstahnMNhozP013oxgqyYdxwhjPcnjN6IuEimagUa8hv6fUXTOKkl5NHeWzxNBqgqcY4pkiQl274Ie7MCvesyodaJm/Ulcnbo79kKx5jM6udjPuB/COBBOIpFr1AWsrdti9X13tXd0AU6FxHXdc+Eugfqzs+S92YorIk8RUExhsiHtSUj5Zvuo+6G8Cx6U83JqTubFude8yJ3Lg6szV2qlvktrQsx6rcrVzl1kf5tj6xLz0zvG4gx39bV/l9Vw1X9ymANRjMABydUN1Pr9ocl+QV/dKhlE2WaruagFEIRlMVayVYaVx5xodD28zeYc9fo9hbB4RsGRK+Za2HNzov/veC4O4LdXFBcG6busGpqdv7ln9P3W7qwtulLlmk+GERWCz/bX19RHdxLu4GLnA9ybqpOXTraal5QuZ6wyJcgV17j1076LPrDd2CbOd8fmW3uXxXidb8heHO/gA=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 1. 변수 선언&gt;</div>
+
+- **변수 타입**
+    - 변수에 저장될 값이 어떤 타입(type)인지 지정
+    - 자바에서 정수형, 실수형, 문자형 등의 타입 제공
+- **변수 이름**
+    - 변수가 사용하는 메모리 공간에 이름을 붙여주는 것
+    - 프로그램은 변수 이름을 통해 메모리에 값을 저장하거나 읽어올 수 있음
+
+변수를 선언하면 메모리의 빈 공간에 '변수 타입'에 알맞은 크기의 저장 공간이 확보되고 그 저장 공간은 '변수 이름'을 통해 사용할 수 있습니다.
+
+변수를 선언한 이후부터 변수를 사용할 수 있으나 그 전에 반드시 변수를 **초기화(initialization)**해야 합니다. 메모리는 여러 프로그램이 공유하는 자원이므로 전에 다른 프로그램에 의해 저장된 알 수 없는 값(쓰레기 값, garbage value)이 남아있을 수 있기 때문입니다.
+
+변수에 값을 저장할 때는 대입 연산자 '='를 이용합니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-03T08:49:56.667Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\&quot; etag=\&quot;FqURzNnuLwD9GVrVc4tM\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;cmOZX6hpALt_818UsOVe\&quot; name=\&quot;그림 2. 변수 선언과 초기화\&quot;&gt;rVTLbtswEPwaHgvobeooKoqLAn3BTZP0RoiMxJYSHZqO5H59lxJlSbUDpEABHcjZ2V1zdtYozJt+q+m+/qgYlyjwWI/CGxQEfhQEyH4eO43IJo5GoNKCOdIM7MRv7kDPoUfB+GFFNEpJI/ZrsFRty0uzwqjWqlvTnpRcd93Til8Au5LKS/ReMFOPKA42M/6ei6qeOvtJOkYaOpHdSw41ZapbQGGBwlwrZcZT0+dcWvEmXca821ei5x+meWvekvD5y6fQo/Iu//az/cEeH+LKe37nqrxQeXQPFlANpANVoJ5FvCBGIbE3KG0/DxUEkRBhOOQIY5RilwF4FiOSDxwIRSgbDmmCCEbFDUpjSy4ymw6hobZN8lE6JZHIlrQUjIg3JKUojVx2hp2Y5jRNyPAe3k9q00gAfDgejFa/eK6k0oC0qgUmeRJS/gVRKaoWriUoyAEnL1wbAbPPXKARjNk2pKuF4bs9LW3PDpwOmFbHlnErrmfLq9bc0kZI6/PvXDPaUgc7U/vpIOMgN/Th/atz9M/ugLXiquFGn4AyJSTOUG6jzqvSzf6McDJi9cKboeNRtxLVufTsGjg441w3UfOh/PrwvKX3eNvhJEh4fXfNRBdDWot1Tc7F/N6gZXR9ov9D3mgtr59eyhtPO72Ud/Pv8sJ13v8htvgXDYs/&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 2. 변수 선언과 초기화&gt;</div>
+
+### 1.3. 변수의 명명규칙
+변수 이름처럼 프로그래밍에서 사용하는 모든 이름을 **식별자(identifier)**라고 하는데, 식별자는 같은 영역 내에서 서로 구분(식별)될 수 있어야 합니다. 이와 관련해서 식별자를 만들 때는 다음과 같은 규칙을 지켜야 합니다.
+
+1. 대소문자가 구분되며 길이에 제한이 없음
+    - True와 true는 서로 다름
+2. 예약어를 사용해선 안됨
+    - true는 예약어라서 사용할 수 없으나 True는 가능
+3. 숫자로 시작해서는 안됨
+    - top10은 허용되지만 7up은 허용되지 않음
+4. 특수문자는 '_'와 '$'만을 허용
+    - $harp은 허용되지만 S#arp은 허용되지 않음
+
+::: info
+예약어(reserved word는 키워드(keyword)라고도 하며 프로그래밍 언어의 구문에 사용되는 단어를 의미합니다.
+
+자바에선 예를 들어 abstract, assert, boolean, break, byte, public, protected, package 등이 있습니다.
+:::
+
+
+또 다음과 같이 네이밍 컨벤션으로 자바 프로그래머들에게 권장하는 규칙들이 있습니다.
+
+1. 클래스 이름의 첫 글자는 항상 대문자
+    - 변수와 메서드의 이름 첫 글자는 항상 소문자
+2. 여러 단어로 이루어진 이름은 단어의 첫 글자를 대문자로
+    - Camel Case
+    - ex. lastIndexOf, StringBuffer
+3. 상수의 이름은 모두 대문자로하며, 여러 단어로 이루어진 경우 '_'로 구분
+    - ex. PI, MAX_NUMBER
+
+## 2. 변수의 타입
+프로그래머가 사용하는 값(data)의 종류(type)은 크게 '문자'와 '숫자'로 나눌 수 있으며 숫자는 다시 '정수'와 '실수'로 나뉩니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-03T09:03:05.684Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\&quot; etag=\&quot;swPNOSOOd_S1CIboB8Zo\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;pfRPuoMwX9dVqIKuVH2R\&quot; name=\&quot;그림 3. 값(data)의 종류\&quot;&gt;7VjdbpswGH0aq9tFK4wNgUugyXYzqVKr7doJbrBKcOY4TdKnnw0mgKFdl3VBakcrxT7+w+ccf9gGKFntvwiyzr7xlObAddI9QNfAdSF2XaD/nfRQIRMPV8BSsNRUaoBb9kQN6Bh0y1K66VSUnOeSrbvgghcFXcgORoTgu261e553R12TJe0BtwuS99EfLJVZhQbupMG/UrbM6pGhH1YlK1JXNjPZZCTluxaEpgAlgnNZpVb7hOaavJqXqt3smdLjiwlayNc0ePqR3YR3h8l08TCf3WXJfE2dS6POI8m3ZsJgGoHYAaGC/Vx1HM+FSi116lNKJPlsZiMPNUWCb4uU6lEcVWmXMUlv12ShS3fKFArL5CpXOaiS97yQM7JiufbDdypSUhADG/Eh1nmW5wnPuSiHQH75mHotfFY+CjfToELS/bP8wCPryq6Ur6gUB1XFNDgKZZyK6vyu0d03UNaS3DMYMU5bHntuxFAJo8cfaIMGtIlBlIA4ANMEhFMQOmOIkZTP25COLNKPbI5FOh4gPQFBAKL43ZKOwpFJ93qkX0QXwFWdORfQJFQQ+rnVsTKO4qTJ9LRQtMgu4SRny0KlF4oequiMNXlMhfjIFKxYmurmsaAb9kTmZVdayTVnhSwn68XAu9Z9bSXfGJVUdiMFf6C1TAUvqKVcDdniDnvgLbQNrAXl97WF7oC46F+J6/fEhS6qNHWqn0vo9NfUB9cRT3B3jQ4ERgjPqeNkMDJGaqvgmRAZBmNExqmv/96IdWixjkeOjMHw50htA/C7JR2PTXq9rNqs2xzTIo308aKJDS1OuwK8luEXt7Y07Z1TLH7V6/GtWNAXJmamIYlYUvm7nWdfr5Ye3gt6CJoTyR67rzskkhnhRkfn1hcs7H7BMLR0rqZpWrUPPFZHRx/Vi9m3Oqp46HVUeuY47b+wEfzgNsKj2six1A9OtBGybeS557XRwBn9XdgIv9JGk1Ft5Fnq41NtFNrRKDivjQauEz6UjYIxbYStaIRPjUYYWZslH16FEAch8uHEcSFC53VV/74EXWmwPNehK6d8c9fR3/DqOnGzXdf3iUGNqaFbcM+W/4+CXcmHjoJ4wLsnHAVVtrmRrkzS3Ouj6S8=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 3. 값(data)의 종류&gt;</div>
+
+값(data)의 종류(type)에 따라 저장될 메모리 공간의 크기와 저장 형식을 정의한 것이 **자료형(data type)**입니다.
+
+자료형은 크게 기본형(primitive type)과 참조형(reference type) 두 가지로 나눌 수 있는데, 기본형 변수는 **실제 값을 저장**하는 반면 참조형 변수는 **값이 저장되어 있는 주소(memory address)**를 저장합니다. 자바는 C언어와 달리 참조형 변수 간 연산이 불가하므로 실제 연산에 사용되는 것은 모두 기본형 변수입니다.
+
+### 2.1. 기본형(Primitive Type)
+기본형에는 모두 8개의 자료형이 있으며 크게 논리형, 문자형, 정수형, 실수형으로 구분합니다.
+
+- 논리형
+    - `boolean`
+    - true와 false중 하나를 값으로 가지며, 조건식과 논리적 계산에 사용됨
+    - 다른 기본형과 연산 불가(나머지 7개 기본 형은 서로 연산과 변환 가능)
+- 문자형
+    - `char`
+    - 문자를 저장하는데 사용, 변수에 하나의 문자만 저장 가능
+    - 내부적으로 정수(유니코드, 2 byte 문자체계)로 저장하기 때문에 정수형과 별반 다르지 않으며 정수형, 실수형과 연산도 가능
+- 정수형
+    - `byte`, `short`, `int`, `long`
+    - 정수를 저장항는데 사용, 주로 `int` 사용(CPU가 가장 효율적으로 처리할 수 있는 타입)
+    - `byte`는 이진 데이터를 다룰 때 사용, `short`는 C언어와의 호환을 위해 추가됨
+    - 효율적 실행보다 메모리 절약이 필요할 때 `byte`와 `short` 사용
+- 실수형
+    - `float`, `double`
+    - 실수를 저장하는데 사용, 주로 `double` 사용
+
+<div class="align-center">
+
+종류/크기 | 1 byte | 2 byte | 4 byte | 8 byte
+:------: | :----: | :----: | :----: | :----:
+논리형 | boolean | | | 
+문자형 | | char | | |
+정수형 | byte | short | **int(기본)** | long
+실수형 | | | float | **double(기본)**
+
+</div>
+
+
+### 2.2. 상수(Constant)와 리터럴(Literal)
+상수(Constant)는 변수와 마찬가지로 '값을 저장할 수 있는 공간'이지만, 변수와 달리 한 번 값을 저장하면 다른 값으로 변경할 수 없습니다. 즉 **값을 한 번 저장하면 변경할 수 없는 저장공간**입니다.
+
+상수를 선언하는 방법은 변수를 선언할 때 변수의 타입 앞에 키워드 `final`을 추가하면 됩니다.
+
+```java:no-line-numbers
+final int MAX_SPEED = 10; // 상수 MAX_SPEED 선언 & 초기화
+```
+
+상수는 **반드시 선언과 동시에 초기**화해야 하며, 그 후부터 상수의 값을 변경하는 것이 허용되지 않습니다.
+
+```java:no-line-numbers
+final int MAX_SPEED; // Error
+final int MAX_VALUE = 100; // Ok
+MAX_VALUE = 200; // Error
+```
+
+리터럴(Literal)이란 그 자체로 값을 의미하는 것으로 변수에 할당되는 값입니다. 본래 12, 123, 3.14, 'A' 와 같은 값들을 '상수'라 하는데, 프로그래밍에서 상수의 개념을 위와 같이 정의했기 때문에 이와 구분하기 위해 다른 이름으로 부르는 용어가 바로 리터럴입니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-03T12:16:43.869Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36\&quot; etag=\&quot;D1-okQLkKWrHGkw20cva\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;OldFaWXFEjvZ-ZGxfnnV\&quot; name=\&quot;그림 4. 상수(Constant)와 리터럴(Literal)\&quot;&gt;7Zlbc6IwGIZ/TS47QwggXorS7cV2ujPOtp292UkharaROCFU7a/fAAHl4HE8dDp6I7wkX8j3vDkYAepPFz8Enk0eeUgYMI1wAdAAmCaErq2+UmWZK47p5sJY0FAXWglD+km0aGg1oSGJKwUl50zSWVUMeBSRQFY0LASfV4uNOKu2OsNj0hCGAWZN9YWGcpKrrtlZ6Q+EjidFy9Dp5k+muCisexJPcMjnaxLyAeoLzmV+NV30CUuTV+Qlr3e/4Wn5YoJEcp8KBk/84csT4+ELCZK7USeh/p2O8oFZojtMVTTTWBIs1FcmGaYBLYA83Q25LHIjyUK17E3klCkBqkvM6DhS14F6JyKU8EGEpCqbPf1gSsMwre4JEtNP/JaFUs14M64azljZHrAHaaxE8jj3Qxo6loK/kz5nXMUdRDxKo4woY3WJR1LbCDr6/h5PKUsN+ExEiCOs5aImMJGRfcpOpq9NFhsTDUt8yveET4kUS1WkqOBo4try0NL385WByjKTNfMgrWHt2XEZeoVVXWiyB1A2G5RHNMJZtYz2Y+/173Pv52+/RA7XknEjfjBxt0nctC9J3GkQb7AkUdhLJ8hVItewCp5EIQk1qi0ZrSd+c4ZJ2Jhpd+Z3LX9t6Ss0QRiW9KMavi2nuoVfPPe9xldiKAesVQ0R80QERNdan2LrgYwdgSQWYyIbgTLEZbePp965Ud+fOtoFa2/qjfn+stTdG/UDqCOrAqvcaB5M3doR6MzUuzfqB1DvwtoCjY6jjpwdgU5H/cnsDpf++9v7xxP882/4YL++frbs17dRDxiOYxp8AfDqV1uWmC1dc666Bei4p1kMkFlbDIyzTQutWWxu9W8GOckM0rFPNINYtUCGeVGDoO9rEPuqMwiscT12Bil/PBaBILyoQazva5DOVQ3iVg1y/M6zHqh+inBmg9hNg/ge8BBQxvX7wHVB121Y5sufHFnXOTmyqoO95eDoXOdGm9fYBtueA3p94A+AawHPSJXuPfCsG+T9INdPGlogdy4JueWYKB23agDD2wA+kG398Kekdq0RvMdpUHV5nk+oJMMZDtKnc4FnVcp7rN7WlhS3QDtB1t2dA8oyWpJebq0OyLq6Xf1Hly+hq386kf8f&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 4. 상수(Constant)와 리터럴(Literal)&gt;</div>
+
+#### 리터럴 타입과 접미사
+변수에 타입이 있는 것처럼 리터럴에도 타입이 있습니다.
+
+<div class="align-center">
+
+종류 | 리터럴 | 접미사
+:-: | ----- | -----
+논리형 | false, true | 없음
+정수형 | 123, 0b0101, 077, 0xFF, 100L | 없음(int), L
+실수형 | 3.14, 3.0e8, 1.4f, 0x1.0p-1 | 없음(d), f, d
+문자형 | 'A', '1', '\n' | 없음
+문자열 | "ABC", "123", "A", "true" | 없음
+
+</div>
+
+::: note 정수형, 실수형 변수 타입의 기본 자료형은 int, double로 리터럴 타입도 이와 동일합니다.
+```java:no-line-numbers
+float pi = 3.14; // 에러. float타입 변수에 double타입 리터럴 저장 불가
+double rate = 1.618; // OK. 접미사 d 생략 가능
+```
+:::
+
+::: note 2, 8, 16진수로 표현된 리터럴을 변수에 저장할 수 있습니다.
+```java:no-line-numbers
+int octNum = 010;   // 8진수 10, 10진수로 8
+int hexNum = 0x10;  // 16진수 10, 10진수로 16
+int binNum = 0b10;  // 2진수 10, 10진수로 2
+```
+:::
+
+::: note JDK 1.7부터 정수형 리터럴 중간에 구분자 '_'를 넣을 수 있게 되었습니다.
+```java
+long big = 100_000_000_000L;    // long big = 100000000000L;
+long hex = 0xFFFF_FFFF_FFFF_FFFFL;  // long hex = 0xFFFFFFFFFFFFFFFFL;
+```
+:::
+
+::: note 문자 리터럴(작은 따옴표 '')과 문자열 리터럴(큰 따옴표 "")은 다른 개념입니다.
+```java
+char ch = 'J';          // char ch = 'Java'; 는 불가능
+String name = "Java"    // 'Java'는 불가능.
+String name = new String("Java");   // 본래 String은 클래스로 이 표현이 올바르지만 특별히 위와 같이 명시적 초기화도 가능
+
+String str = "";        // OK. 내용이 없는 빈 문자열 가능
+char ch = '';           // 에러. 문자 리터럴 '' 안에 반드시 하나의 문자 필요
+char ch = ' ';          // OK. 공백(blank) 문자
+```
+:::
+
+::: note 기본형과 참조형 구별 없이 어떤 타입의 변수도 문자열과 덧셈연산을 수행하면 그 결과 문자열이 됩니다(toString() 오버라이딩 고려).
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-09T11:32:36.662Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;Olt4eMyuVFeGztPP-KQP\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;GzuBr_g9nNLBMYsiQMv1\&quot; name=\&quot;설명 1. 문자열 덧셈 연산\&quot;&gt;7Vpdb5swFP01ftjDpPCdPBaadtI0bVKrba9OcAKawcyYkezXzwZDwmepCqSaeEnsY/v6cu85trEAmhOcHimMvC/ERRioK/cEtHugqrqp8l8BnHPAUJUcOFLfzaEr4Mn/iyS4kmjiuyiudGSEYOZHVXBPwhDtWQWDlJK02u1AcHXWCB5RA3jaQ9xEf/gu83J0rVoX/BPyj14xs2Ju8pYAFp3lk8QedEl6BWlboDmUEJaXgpODsIhdEZd83ENHa+kYRSEbMuD5s/MtTdY/D2n8eF7hZy34Gn9UpJk/ECfyiaW37FyEgJIkdJGwsgKanXo+Q08R3IvWlOecYx4LMK8pvHggIXuAgY9Fvr8j6sIQCtjH2CGYUI6GJESyp8y3ovO6dARRhk6dj6iUgeOEQyRAjJ55l2JAwRpJNlWX9fSSOs2QmHeVNktiULLlWJq+BJQXZExfE1/1f46vpgyMr2pOFuBmfLc2uHOAvQZbB2y2YLPKChawdSAkYme/Juau2btKJszfiRBjFrmPcRa6O95B0aNTFr+inZeO4h+GIjbsHKHCHn+EXdEqptmqYG2CjZqV53KrdyYTBoJR4S6O8iFNv4c6LX2lb3O2rgbOTlalPMT+MeRljA6iRTDY5wv0nYQD33XFYJsiPh/cZYaEkiLihyzjm2ED415YShiJpSR4NWaU/EJ12bQrqU1zEwhMrS9gxjCBaVPpq239Gls7OfuHMLNXQte8nUFIrYLPZTxANW8UzYgyXvTXoz/r1vrTGvpDpw9L0vqSpqnNU8msOdMnWjOt/lXnqn+tMv7KWCJWpXEE7y52K90WwvcQ3mgSvnyBnoXxRhvju/I94lG3UxGtnJrSk1coorZ3d7lqLfQfSP/1relv3njBt/oW1Bsv972+FX0Wrg/kut5y41LeMM7CdWs6rkvuDD/mlKXRGa+88IbX5sS0yss8eu1J60XlVa0uyutRXttd8qzKW0+kvC7CDBCj9U62mxY/2ix0WV62pbeKw2oRx6xHsM1E4mA06bjdr1/B3WhfkA6OvjPU7S7076a/sWo5lZlz0r/Q2uj8DxMx+Tvmv3RwdP7X7S787+G/1sL/ka5cefXyjUTWdvWhibb9Bw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 5. 문자열 덧셈 연산&gt;</div>
+
+```java:no-line-numbers
+public class CharStringTest {
+    public static void main(String[] args) {
+        String name = "Ja"+"va";
+        String str = name+8.0;
+
+        System.out.println(name);   // Java
+        System.out.println(str);    // Java8.0
+        System.out.println(7+" ");  // 7
+        System.out.println(" "+7);  //  7
+        System.out.println(7+"");   // 7
+        System.out.println(""+7);   // 7
+        System.out.println(""+"");  // 
+        System.out.println(7+7+""); // 14
+        System.out.println(7+""+7); // 77
+        System.out.println(7+7+""); // 14
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+Java
+Java8.0
+7 
+ 7
+7
+7
+
+14
+77
+14
+```
+
+- 덧셈 연산자는 왼쪽에서 오른쪽 방향으로 연산을 수행하기 때문에 결합 순서에 따라 결과가 달라짐
+- 7과 같은 정수형 타입의 값을 문자열로 변환할 때 빈 문자열("")을 더해주면 된다는 사실을 알아둘 것
+:::
+
+### 2.3. 형식화된 출력 - printf()
+`printf()`는 지시자(specifier)를 통해 변수의 값을 여러 가지 형식으로 변환하여 출력하는 기능을 가지고 있다.
+
+<div class="align-center">
+
+지시자 | 설명
+----- | ----
+%b | **b**oolean 형식으로 출력
+%d | 10진(**d**ecimal) 정수의 형식으로 출력
+%o | 8진(**o**ctal) 정수의 형식으로 출력력
+%x, %X | 16진(he**x**a-decimal) 정수의 형식으로 출력
+%f | 부동 소수점(**f**loating-point) 형식으로 출력
+%e, %E | 지수(**e**xponent)
+%c | 문자(**c**haracter)로 출력
+%s | 문자열(**s**tring)로 출력
+
+</div>
+
+```java:no-line-numbers
+public class PrintfEx1 {
+    static int finger = 10;
+    static int hex = Integer.MAX_VALUE;
+
+    public static void main(String[] args) {
+        System.out.printf("finger = [%5d]%n", finger);  // finger = [   10]
+        System.out.printf("finger = [%-5d]%n", finger); // finger = [10   ]
+        System.out.printf("finger = [%05d]%n", finger); // finger = [00010]
+
+        System.out.printf("hex = %x%n", hex);           // hex = 7fffffff
+        System.out.printf("hex = %#x%n", hex);          // hex = 0x7fffffff
+        System.out.printf("hex = %#X%n", hex);          // hex = 0X7FFFFFFF
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+finger = [   10]
+finger = [10   ]
+finger = [00010]
+hex = 7fffffff
+hex = 0x7fffffff
+hex = 0X7FFFFFFF
+```
+
+- `%n`은 줄바꿈을 의미
+- 10진수를 2진수로 출력해주는 지시자는 없음
+    - `Integer.toBinaryString(int x)`를 사용한 지시자 `%s`를 이용해 출력해야 함
+- C언어에서는 char 타입을 지시자 `%d`로 출력할 수 있지만 자바는 허용하지 않음
+    - `System.out.printf("c = %c, %d", c, (int)c)` 처럼 반드시 형 변환이 꼭 필요함
+
+```java:no-line-numbers
+public class PrintfEx2 {
+    public static void main(String[] args) {
+        String url = "www.java.com";
+
+        float f1 = .10f;    // 0.10, 1.0e-1
+        float f2 = 1e1f;    // 10.0, 1.0e1, 1.0e+1
+        float f3 = 3.14e3f;
+        double d = 1.23456789;
+
+        System.out.printf("f1 = %f, %e, %g%n", f1, f1, f1);
+        // f1 = 0.100000, 1.000000e-01, 0.100000, 0.100000
+        System.out.printf("f2 = %f, %e, %g%n", f2, f2, f2);
+        // f2 = 10.000000, 1.000000e+01, 10,0000
+        System.out.printf("f3 = %f, %e, %g%n", f3, f3, f3);
+        // f3 = 3140.000000, 3.140000e+03, 3140.00
+        System.out.printf("d = %f%n", d);
+        // d = 1.234568 → 마지막 자리 반올림 됨
+        System.out.printf("d = %14.10f%n", d);
+        // d =   1.2345678900 -> 공백 유의
+        System.out.printf("[%s]%n", url);
+        // [www.java.com]
+        System.out.printf("[%20s]%n", url);
+        // [        www.java.com]
+        System.out.printf("[%-20s]%n", url);
+        // [www.java.com        ] 왼쪽 정렬
+        System.out.printf("[%.8s]%n", url);
+        // [www.java] 왼쪽에서 8글자만 출력
+    }
+}
+```
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-09T13:54:27.268Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;iyrWyGQBulhqB3ZGLzdR\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;yq8Rl_iodBO-bbWSbtmI\&quot; name=\&quot;설명 2. %전체자리.소수점아래자리f\&quot;&gt;7Vtbb6M4FP41lmYftuKakMeQZqYPu9JI1V40by44iXccnDFOk/TXrw0GAoe0s6u0gIiUB3N8/75jO+czIHexPX4ReLf5nceEIceKj8i9R45je46D9M+KT7ll6nu5YS1obApVhkf6QozRMtY9jUlaKyg5Z5Lu6saIJwmJZM2GheCHerEVZ/Ved3hNgOExwgxa/6Kx3OTWwJlW9gdC15uiZ3syy3O2uChsZpJucMwPZyZ3idyF4Fzmqe1xQZgGr8Alr/f5Qm45MEES+TMVXh6+ff3nD/Lb/bcnevT+5nL5Y/2raeUZs72Z8OMplWR7x/fybidoIlefkDP5sdejDGNVNCulevKVmWnjk0qsdcL2CpMaRGm9g+WstnIr1WRSdYWchfaaX7JkBp88FZxIctRFNnLLlMFWSczoOlFpRlY655kISRWHc2Pe0jjWlUNBUvqCn7KG1EzCHVczzDzED5F/r1vaS57mXqgbTqXg38mCMy6UJeGJbmVFGWuaeCKN8yoY8ufPeEuZdvs/iYhxgsup6OGR40Ua7dI51KoifEukOKkiRQXf+JNZUIF5PFTe6RYutznzTNfYsFkQ67LlymdUwrjNf3AhB7gQIEzwfRKT2IB+2FBJHnc40rkHtW3UubwAHUD4AgmmV6skr1i2zvvgb7cR8JH4u73B/33wDnqGtwfwtrsC/ArwlgdtX+D1Abx3Q4bX6xm8EwBvZ9vFNeCd9gzeKYDXHTC8rtUzeAMArzdkeN2ewTsD8PpDhnfSM3iLo/YM38mQ8Z31DV8YzU4HjK/n9A1fGOoFQ8a3b5GcDUO52ZDx7VvkZsPQzRowvn7fQjcbxm6DxrdvsZsL9wcoPVwWRyM1byJGJo+Wz52RBjcdGHGPnbTmSdE5aXAng3H8yEkDymHnpEFtC6oDYyeteaZ1ThpUzKDmMHbSmipn56RBHQ4KGSMnDWinnZMG1T2ojoydtKYi2zVpxXb9quQydtKaOm/npEEdEuo4YyetKR53ThoUN4s/uDfWSkmvkHheYc37UNZaJJGbJtJkzesbay3v0NxEkSZr076xBuNr+6aKNEVjq2+swQDbvskiTdbcvrEGI2zAWbrBO52M9oKdQoGj70Rz+MaVSnX/kl2wMLp7KNL/+7JFcIkl5dorZta1/mm8+Zpz+1vO78YIDJ/VEJcLNFsiNelliOYTNF/cVlbjf35QX1nlMjojcvqRK8uHEbUmL3DQPMjovEfa1xSjcxS6KPSzhIUC70JuqHNDO8tdoHCRuYKt007mHyrL1A1RcIsoGv7RuPlxigDjzD3s2Yf6BwzeAWfvcYddf3nebufl+oBP4XL02066Mhi+PuAw8AaAkySe64+59KpgOE1pdOlQs34e8bwXEoMPwN6E8hysFqwKmyBMHYvP9ebb8DM9fNXL9xVdq0lByvciIqZWxcLbDfmNhiQWayJBQxmd5bTbGFaP1QdsefHqM0B3+S8=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 6. %전체자리.소수점아래자리f&gt;</div>
+
+### 2.4. 콘솔에서 입력받기 - Scanner
+자바 프로그램 구동 시 콘솔에서 입력받는 방법 중 최신 방법은 JDK 1.6부터 추가된 Console 클래스를 이용하는 것인데, 이 클래스는 이클립스와 같은 IDE에서 잘 동작하지 않으므로 유사한 Scanner 클래스를 이용합니다.
+
+::: note Scanner 클래스를 사용하려면 아래와 같은 패키지 import 문장을 추가해야 합니다.
+```java:no-line-numbers
+import java.util.Scanner; // Scanner 클래스를 사용하기 위해 추가
+```
+:::
+
+::: note 이후 Scanner 객체를 생성합니다.
+```java:no-line-numbers
+Scanner scanner = new Scanner(System.in);
+```
+:::
+
+::: note 이후 Scanner 객체의 <code>nextLine()</code>, <code>nextInt()</code>, <code>nextFloat()</code> 메서드를 이용하면 됩니다.
+
+`nextLine()`의 경우 한 줄을 문자열로 입력받기 때문에 숫자로 적절히 변환해야 하는 작업이 필요합니다.
+
+```java:no-line-numbers
+public class ScannerEx {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("두 자리 정수를 하나 입력해주세요.>");
+        String input = scanner.nextLine();
+        int num = Integer.parseInt(input); // 입력받은 문자열을 숫자로 변환
+
+        System.out.println("입력 내용:"+input);
+        System.out.printf("num = %d%n", num);
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+두 자리 정수를 하나 입력해주세요.>22
+입력 내용:22
+num = 22
+```
+:::
+
+## 3. 진법
+### 3.1. 10진법과 2진법
+대부분의 컴퓨터는 2진수(0과 1)밖에 모르기 모르기 때문에 사람이 이해하는 10진수는 컴퓨터에서 2진수로 저장됩니다.
+
+### 3.2. 비트(bit)와 바이트(byte)
+한 자리의 2진수를 비트(bit, **bi**nary digi**t**)라고 하며, 1 비트는 **컴퓨터가 값을 저장할 수 있는 최소 단위**입니다.
+
+그러나 1 비트는 너무 작은 단위이기 때문에 **1 비트 8개를 묶어** 바이트(byte)라는 단위를 정의해 **데이터의 기본 단위**로 사용합니다. 자바에서 데이터를 다루는 최소 단위가 바로 이 바이트입니다.
+
+그 외에도 **워드(word)**라는 단위가 있는데, 워드는 **CPU가 한 번에 처리할 수 있는 데이터의 크기**를 의미합니다. 워드의 크기는 CPU 스펙에 따라 32비트, 64비트 등이 될 수 있습니다.
+
+<div class="align-center">
+
+설명 | 값
+:-: | :-:
+$n$비트로 표현할 수 있는 값의 개수 | $2^n$
+$n$비트로 표현할 수 있는 값의 범위 | $0$ ~ $2^n-1$
+
+</div>
+
+### 3.3. 8진법과 16진법
+2진법이 오직 0과 1 두 개의 기호만으로 값을 표현하기 때문에 자리수가 상당히 길어진다는 단점이 있습니다. 이 단점을 보완하기 위해 2진법 대신 8진법이나 16진법을 사용합니다.
+
+**8진수는 2진수 3자리를, 16진수는 2진수 4자리를 한 자리로 표현할 수 있습니다.**
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-09T14:27:45.842Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;O01G5VEhQUPNSy_aB7UE\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;-VJ1LrqityF4xoAb5AzE\&quot; name=\&quot;설명 3. 10진수와 16진수\&quot;&gt;7Ztbb5swFIB/DY+VMOaWx4aku0jbS6Xt2QM3eDM4cpwl7a8fNIYAJ5VaKZttOikP5tgY+A6J/B2Ch7Pq+EGSbflFFJR7gV8cPbzyggCFQeC1H794PEWSKDwFNpIVetA5cM+eqA76OrpnBd2NBiohuGLbcTAXdU1zNYoRKcVhPOxB8PFRt2RDQeA+JxxGv7NCladoGiTn+EfKNmV3ZBQvTj0V6QbrK9mVpBCHQQivPZxJIdSpVR0zylt4HZfTfncv9PYnJmmtXrODCP3PVbFY8a+f8hu1yRgPft7oWX4Tvqfjs1WPHQIp9nVB21l8Dy8PJVP0fkvytvfQJL2JlarizRZqmg+iVnekYrzN9zcqC1ITHdbJRWG7zTjPBBeyCdSipt0QfdT2QDslxa8eeju3PlcqFT2+CAH1aJt7koqKKvnYDOl2iPT16dsRpXr7cE4u1qFykNcuRvTttOlnPhNvGhr6GxIQgAQgUwn4O8BTy4BjADyYFfD+l9MW4CEAjk0Bvwbe0DK8EcAbuow3sQxvDPBGDuPFvmV4E4A3dhkvtgxvCvAmLuONLcO7AHhTl/EuLMPbrWQGfBcO8w0D2/hC++uQuwnYNrlDF+zOmN5dA7BtMoegzXXMnQQc2SZvCNobclnfItv0DUF/Qy4LXGSbwCFocMhlhYttUzgEHQ65LHGxbRKHoMW9ryJ9vyo1lgEoevOu0hsn3t3h76ZMb544lEGXF3rTOr15vtAFXV7nTQv15vlCFXR5mTet1JvnC03Q5VXetFRvni8UwTnV6s3zhR44p2K9eb5QA+dUrDfPF1rgrSm+QwtE14Btm/AFUPiWs4Ftm+t1Ew9gZ3OBPS3om4cNNW81G9i2OR+GzreeDWzbBBBDAbybC+xp0d887AvPBa0oSl+Ftm1uiC88JPS9debdJl4ato009RZQZxoEagyZcLapm3beoKANwmULiuWE3+qOihVFu/tS0h17Ij/6Sv9WsFo9X1i09KJVO9deiZ3OTF8mnabmhWwNE3o571fI4yv+rZD80zReeBQZ/0/jG9N46dt4pTQ2m+f3cZ77Bm814fUf&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 7. 10진수와 16진수&gt;</div>
+
+### 3.4. 정수의 진법 변환
+#### 10진수를 n진수로 변환
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T03:43:06.969Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;vfkXpkccBj2oBmSMKdpC\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;tGLxX_AnxH94wqZXMHOw\&quot; name=\&quot;그림 8. 10진수를 n진수로 변환\&quot;&gt;7Zxbb+MoFIB/jaWZh5V8TdPHJp3uaKRd7arSzjONacKUmAiTJp1fv7gGXwKu484Y2w1SpTrHBGK+w7nASZxguT3+ScFu8xeJIXZ8Nz46wa3j+17o+07258YvueQqCnPBmqJYNCoF9+gnFEJXSPcohmmtISMEM7SrC1ckSeCK1WSAUnKoN3skuD7qDqyhIrhfAaxKv6OYbXLp3L8q5V8hWm/kyN7sOr+zBbKxeJJ0A2JyqIiCL06wpISw/Gp7XEKcTZ6cl/x9dw13iw9GYcLOecOPJcI3T99m8+OPxb9f4+gx/Pv5D9HLM8B78cDhTHxc9iLngMEjH2GxYVvMBR6/BBitE3694mNDygXPkDLEZ+1G3NiiOM7evqAwRT/Bw2tXLn+9Iyhhr0yihRPdZn3tGUlz7lnXKaPkCS4JJrzf24QkWS+PCONTEUmYUBcvFK/vwBbhTNH+gzQGCeBi8Xz848Fj48R5BQ6ux5BsIaMvvEmhxILgi1RN8fpQKoRssqnoQiBkQKjguui5pMQvBKgO0CIFmoJsTcl+1/jsYrEILKWKdpiToH1OZibnJGifE5jEN5lFKHWootF8vpIYxkJLG5TpVOfyIWCsmJByGpsBqnNbmbtIM3dSRiEGDD3Xx9RNqBjhn2zJlahOEaRkT1dQNKraD/k+2ZABuoZMafiKq3iK9xMMLcG+CB7rC7Khm575zkZotYKBrdbVlHR+NimdN6TVc0vwQ1uta4WvHyiEP3yA3EWbZC8DB8meGhF6lweuLbOJamurWOoVaIFRaGcEgcaDhNnAQYJ3Rr43Hh+TI5yMkzHkRrwzol/LcMqBgvR3VX9zgQ6nkz6NJVQ4Iw0z7nWuh/Y6k8pscoSTsVimbJKavViGH8vrqAc4kXU6b6qT7CZS7KvRVMdX44XBnU7RxVBOx1fVecQGq3KMOwWDZcgkSWSW4Yd1OiphFfFlOp0mdRqL0znjmNy409FsOpp1OpM6ec4RTsZgmXI6k9ojnRjDUTgdf4SbNP58aNM1qU0af1oJvinFntQmzcQYjsJ0yeEqhF0F8YXGy+PepAnU/YgLzHRanKJbX1y6UmCz0Gx62h2aphLSLDQ1M7XQ2qBpKlPMQlMzZwutDZrmYNcsNDVVttBaoOkORsxCU+uHLLQ2aENXMwZqZneBcf/b0PxgZIGIrDyqpeMznDF64Bfr7MJZ+s6CZy6ucpE35AOXbS3w+iqdR63AdTsI/QFXc7wLrNvruEqHjjxDNcez0NqgDR15hvYrGZ2hDR55hmqOZ4OYNmhDR56h7jjUBjH9BTEaf2g2iNF9v8QC7w24boWbBa47DrfA+1vhmuDJLHDdUb8F3t8K1wReZoHr6gIs8P6Aa4p5jAKXg9n0qEOkrYFmNNKOun1jYYVBmqKV8+sFPDkb+Zt0XjG9b5b0NExuz8U7xxNWRRXOO6t5TjsqfqDNUD1PpG4+ZfF3bnLTfWFxP3nu54olrtzh/8F2xy+ShzT799qJ67mel30XVu3Ib+zHmoeaeTgp9NLVonhGKzSjMyru6+v/sEEM3u/AKrt7oGBX5/lu86ABUwcYw0ewx+z3kDhZojozrTM1ha3pAIK/LH9FM1/j5W+RBl/+Bw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 8. 10진수를 n진수로 변환&gt;</div>
+
+#### n진수를 10진수로 변환
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T03:43:38.773Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;qnZgFhJda21Wg_itLVeF\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;hlqTW6BN8wtqlcCWrGgV\&quot; name=\&quot;그림 9. n진수를 10진수로 변환\&quot;&gt;7VrRbtowFP2aSNtDp9gJIX0stKWTNmlSpXWvJjFgzYkz4xTo189O7EBwoLB2EKpIPNjHzo197vG1r4njDZPliKNs9p3FmDrQjZeOd+tACHwIHfVz41WJ9Ht+CUw5iXWnNfBIXrAGXY3mJMbzWkfBGBUkq4MRS1MciRqGOGeLercJo/W3ZmiKLeAxQtRGn0gsZiUawv4af8BkOjNvBsF12ZIg01nPZD5DMVtsQN6d4w05Y6IsJcshpoo8w0v53P2O1mpgHKfikAdGd970mk8SMnrK2OjXj8dV9HKlrTwjmpsJQ8+BAZUmB/N8LItTVfwE3M8Glq/YaNGTEyvDmMBLhc9EQiUAZBFRMk1lmZc8DZ4xF0RSfKPxhMSxenrA8Zy8oHFhyZX1jJFUFA7sDZzerTKVCzYvRaIszwVnv/GQUcYlkrJUWZkQSrchlgqtLeDr+j1KCFWq/Il5jFJUzUUNDy93sgwq30nRY5ZgwVeyi34g1N5eGT30yvpiQzy6y2xDN57GkJbrtDK89qgsaKc2O3j1ECVRMs7Br3v3W078+CuNmhxseYyzPI1xrElfzIjAjxmKVOtCruq6M3dQZzFsO+Ed2AUH0Oudkl5o0QsvmN4q6raFXs+i17tkev2W0evbwcGtgn+G0hrRwZ9cbVUFV1dlDL6RHQD4EgRBP1sWHJlO693BbCWZgWBtH8m2eyq0ePXR20sk3YD5B99fQL+uodCWUO+UEuqdQ0Kgk9BbwpDbLgkFeySkWFDOM3mBEQc4SCfuqzop7Xc6adSJ1y6dhE1HWTlYGUDco/YZlKhTQTqeZ0Vd/lxoW2pL8Goarrdv4jtVf7C8KZ589DzNg6+fxarU/TSZWkOq5gcbDl4n42GXix/i461ksdr3zpaL29niR0rGm/g9aToD7HTRv2B+t7Px8/Nr54vBJfPrt41fO5kKu3S81VsMdHv1Y0Tf1pB/Ug31LQ25ltMuaI3227ZG7Szk/69Rr1ujb7oya9savT6Dhro7s7fdhbRMQyaqn1RDr9+ndRrao6GgbRpq/HO4uFgKj9qFGm6ofMtQWw6wTaMN9kx7d+BsMOTuMdTdy/3DvVzTgQ8GJ10l9q2N5bL3OUKX3jCfGYFmV9RdFuMJyql4H+7DenwKG8KT6bLJfBXHjqBeVtdfPhVtG9+PeXd/AQ==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 9. n진수를 10진수로 변환&gt;</div>
+
+### 3.5. 실수의 진법 변환
+#### 10진 소수점수를 2진 소수점수로 변환
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T03:44:03.235Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;wqz9DvL4LpAORaTuBGjN\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;GVRayu834ZySsLS9PGxP\&quot; name=\&quot;그림 10. 10진 소수점수를 2진 소수점수로 변환\&quot;&gt;7Zldb5swFIZ/TaTtohWGQMhlmrarJnWrVGnTdudiB6wZzIxpaH/9DJgPA/loOpFpQooi+8U+hvMcH5OTmbUOs08cxsE9Q5jOTANlM+t6Zppgbpqz/GOgl1JZ2PNS8DlBalAjPJJXrERDqSlBONEGCsaoILEueiyKsCc0DXLOtvqwDaP6qjH0cU949CDtq98JEkGpuuai0e8w8YNqZeAsyyshrAarJ0kCiNi2JVk3M2vNGRNlK8zWmObOq/xSzrvdcbW+MY4jccyEHxd3D/7mpxtvv342793E/3KzvFBWniFN1QMbl45pqzsWL5UbBM7kIleBCKkUgGxCSvxItine5FeeMRdEum2l5JAglE++4jghr/CpMGTIfsxIJAoo9tXMvs4tpYIlJfjccCI4+4XXjDIulYhFuZUNobQrsUioeAFz1b+FIaF5pH3DHMEISlk9oLw9nO30HKh5yEDGLMSCv8gh1QRHIVQxDCqk2yYiqiFBKxgspUEVg35tucEkG4rUG6iZA9QmaAeguWeGZg1Am5jtZ2b3mdljMpv3mGWya07U2tTqE25PehyVmj1RO4HaufeaM1E7gdrAqTYqtUWPWvEtl3NoDuNJNvy8ASpFLlOL01tLl+8Rr5qLMfm6x/I1BvlOePfjHUi6o76ULt+3fY0J71685/7NUVVR2ny7xHCEVnmhRPY8CpOEeDo/ztIIYaSo7HBe18clm6piAmr3YtQrtxx07oGjrdI4plCQZ938kEfVCg95fDXsLLDU2XWhJCzlHlaz2nWWA4ZMo2NIQO5j0TNUAK4f+x3Md9Z0yg2cxDDSIsD5neY1qILhRbm/VnIAAJeO4yzirIBXDaq2fm0trbPBB2B8bGWJ1pW2WqxeyUcnD08GCeb/efoAc1uPHKufPpajpo+hQhMwwBB8cyf7CfK+M2IIsjsq5H5h6l8/I+S9Fcn4iCxYJtuDMX62U8fSo8ECp546biesnJFPnX6prBdFepRsAyLwYwwLjFsOYz2kTg6igd39N3Iz0HMzMPrb1rTtfqDU74Bv2Liy2/wvVBJq/l2zbv4A&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 10. 10진 소수점수를 2진 소수점수로 변환&gt;</div>
+
+#### 2진 소수점수를 10진 소수점수로 변환
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T03:51:48.028Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;k3utFBmhtBdVdwONRLMU\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;-jW7UQ9UO0U099wouDJt\&quot; name=\&quot;그림 11. 2진 소수점수를 10진 소수점수로 변환\&quot;&gt;7Vtbc+IgFP41mdl9sBNIE/WxXtrOzuy03W5t96mDCSrTGLIRL91fv2CIiqD2Eq/NSxsOcDh858Zh0HLq/clVguLeTxrg0IJ2MLGchgVhtQL4X0F4TQkutFNCNyFBSgJzwj35hyUxGzYkAR4oAxmlISOxSvRpFGGfKTSUJHSsDuvQUF01Rl2sEe59FOrURxKwXkqtwPKcfo1Jt5etDLxq2tNH2WC5k0EPBXS8QHKallNPKGXpV39Sx6HALsMlnXe5oncmWIIj9pYJt6BSP09u/OdaBBvt+hNgrT+lSsplhMKh3LDHmxMLeqgfW04tag/EP94O+SK1QYwisRX2KvHx/g6F/DWGJ6yEQtKNLOdCqIMLhZN0phzCv7riv9Bsyo3LmjJMO2aLDOPPrlFaXEKwW1rhA9vgphOx0mBqoKILgDPP88rxxCiAshe57/Uy6WAsaUDIAE9KOQJRwSxz+mwg0OfABbHSaTp6CqYG8NyvCp7zTvCgIiQU0nF6j/VDTgD8U4raCHFH9IxwwggPmReS3CdBICbXEszFQ+0pI5u3Y0oiNg3Ibs1yG4LTkFG5BcF4wBL6gus0pHz3jYhGgkuHhOEyie9C5gpwLtuXqE9CkWVaOAlQhGZbEeLhycqoCWaxmOcwTPuYJa9TS5n2OhUZvmX+Alk4H8+zATyXtN5CJnAkDckE1J2xnsdo/iHD9DtCNqhqMVtT2bhHGL6PkS/aY56YVf2tgGsZ1VQbWdoDZlWoKgtwBw1Dlg/2ZRX6io68WzEgD90coK/e+f/ad8HDg+ffllhn1Gy1khLQkLfPPOhujCEfTB3tjPQN2N8VZ22bXFgJOG/24VmsOWUvrm524uqWfNhoSNBgSJrOEjqMAhxI1PNxaYMWcoAXvAHfbcVII76O6Vh7tPDOcDoUeM81ePUUdETwlg8MXleDd36yXDiofbTI2XUhU6Qixdqgq1hb1XCq2aWxlTVjc4/Ylx1wYL6sX7Cs9+Ut1sSFHyp+6B2WH+pVXW6GsrX6/0sYimPvzVAen69/NW/c5tOPLiK/O6NK/eraWIQCG1iGshGurBoLFSvloaphaEgapouGran4xMtDE77bSspGfPXyEBwxvMvl4d7h1ctD+5jhLR8YvIby8IjhXT6x7x1eT4MXrjuHFcX3ESV67SbNcJjbqbHp1fdaYyuqw10ZyvKd4L4NRb9HyMtQiuow1wunfRuK4R7B2vK7B7gy+xQPejY86LFPSTc7fs9zUnZ9CAH7Cz7nMVUbs7enu7nOs7WAnSkyIKPP2tdGd2gj/6U7rRZLfqoUwZFEhBEUmlmK6Znz2faZu8lLclx6XQzlosC9yzKHBWwUhpOnGi789A1+6hr81Nupn+r37sfgp+oDtU89KSus9t1Wa3iyCHLKLrw5/+3AtG/hBxhO8z8=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 11. 2진 소수점수를 10진 소수점수로 변환&gt;</div>
+
+### 3.6. 음수의 2진 표현 - 2의 보수법
+어떤 수의 'n의 보수'는 **더했을 때 n이 되는 수**를 말합니다. 7의 '10의 보수'는 3이고, 7과 3은 '10의 보수 관계'에 있다고 합니다.
+
+이 때 n진수 '10'은 **자리올림이 발생하고 0이 되는 수**를 말합니다. 이것은 'n의 보수 관계'에 있는 두 수를 더하면 자리 올림이 발생하고 0이 된다는 의미입니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T04:18:17.769Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;Fi3m7SkGA4S98p_etb6e\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;zIQij06SdSgRW9RG5iFK\&quot; name=\&quot;그림 12. 2의 보수 관계에 있는 두 2진수의 덧셈\&quot;&gt;7Znfb5swEMf/GqTtoRI2IUkfS9pumrRpUqT1cXJjB6wZnBnTJP3rZwfzw5go6daWFu0p5uw74s/3cO6CFyzS3SeBNslXjgnzoI93XnDtQQjAPFQf2rIvLVM4Lw2xoNgsagxL+kiM0TfWgmKSWwsl50zSjW1c8SwjK2nZkBB8ay9bc2bfdYNi4hiWK8Rc6x3FMimtczhr7J8JjZPqzmB6Wc6kqFpsdpInCPNtyxTceMFCcC7LUbpbEKbhVVxKv9sjs/UXEyST5zgEvzOU7qc/ZXQj93dL+OUafrswUR4QK+wN53JfIRC8yDDRUXwviLYJlWS5QSs9u1WiK1siU6augBqueSZvUUqZ1vsHERhlyJiNuGCiryljC864UIaMZ8oemW9ChCS7o1sENTiVcYSnRIq9WmIcYGBYm2QDFfttI93EmJKWapUbMskS15EbnmpgkD4BL3Tw+u8Z7+yN4Q1Glb0BeGN4J6PKXnD5xvCGo8LrnL2zgfFOR3U4OGfv0Hhno8LrnL1D452PCq9z9g6N99LB68HIAaw2LG2KiNE4U+OV2jhRjCKNhap24cpMpBRj7R4JktNHdH8IpeXZcJrJwzbCyAuvdaxC8tygV5e5FPwX6bDvkcNRrF/Y51AtPK1a8JqqVQ+pJVtHM5LhK933NcBa8tlPzJmPRClM1f3Bmi3BTut4kmyLXNhDrrIJwpCkD3b4PpzmDt91crWEm9jC1d10FSLnhVgR49XuGTuBgvBEIIlETKQT6KBuve1/ENyt8MdUI8GhS1AwrhK/WyQNz3dcNX63Shqer1vkv2e+3TJpeL7jqvKd38XB+bplvg98tYkp04VnXtyrYayHH+DHyqru1JpQ3gdHP+zzAv5Rt7NrXUbWcuSVbjA9/d8QeN1S1+1QVGL8XWZc/E+NZ0yNniYIvO5LhTO6oJc4k21tMFmjokwqqz8CL3d6+x0l/J7TG/QoUUv2BCnUZfNqrmxnmhecwc0f&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 12. 2의 보수 관계에 있는 두 2진수의 덧셈&gt;</div>
+
+#### 음수를 2진수로 표현
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T04:21:48.714Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;bJ4F1hLVe_We2hixApEr\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;JGkg6hDj3uB9tYvC2s9w\&quot; name=\&quot;그림 13. 음수를 2진수로 표현하는 과정\&quot;&gt;7Zldb9owFIZ/jaXtolPifF8SoN3FplWqtGm7mVxsglcTZ8bhY79+duIEkoBCO0qrDqlSndf2ybHfJ/gEgDOcr28EymafOSYMQAuvgTMCENouhED/WXhTKoHnlkIiKDaDtsId/UOMaBk1p5gsGgMl50zSrClOeJqSiWxoSAi+ag6bcta8a4YS0hHuJoh11W8Uy1mphjDY6h8JTWbVnW0/KnvmqBpsVrKYIcxXO5IzBs5QcC7L1nw9JExvXrUv5bzrA711YoKk8pgJNz9x8sP+5ZCHr1+W69vv7sb6dGWiLBHLzYKvPAB9piLGi/xepy03Zi/837nONZ7yVF4tCqcGaoDtZ8rteNuvWon+/8623lexVFpFuLLHbEgdGUqy1vpMzpkSbNVEjCapak/U6ohQwpIISZUvA9Mxpxjr6bEgKhd0X4Sy1HXGaSoL170YeCMdK5e8zLcIvZCCP5AhZ1zFHaU81VGmlLG2pNZpgLR9c32N5pRplL8SgVGK6sXo9Mj6oDV2bbh6UgifEyk2akg1wTKMmIfEhl55vdpBzgyZ7dDmGg0ZyJM68pYD1TAoPAILp4PFhYqzUwE9r5eK4JxUuB0qTgVFHSdD6T8FsmzLPhmp8CCoW7VIuCtfqD5EtWv1Ux2dk2rv9VOtoL5Q/aqp9oL+E/ysVPt7qG5ZRlI80BWy9oihxYJOmgYKnqeYYGPKgb1rb3FpTVUq2/XuEtyps1t7q3LjuZiQ/mpVIpEQ2Ve+dL3a8cLb40WlCcKQpMtmuvsMMne41bjuHNthC4Wo5XG5TDNrt2BvBXLagZxWoHIfOoEKXuplPx2h4C0i5ByJkPuiCHnwQ/OUdIKnQgSDvlDPjFH4FjFyj8TIe0mMXL/5AVJ/qfJYiDy3J9AzIxR1ERpDENlgoPKwwHioG2EIxjEIh0B9bI4HILZA1CXtPy9TbL9VfFdG9pQp7ZPnZGVKdf891qqVWLDwNgChqxvK4Si8WNq01LFfm6Xd7xQrS2FlaTQqnLT0Exs7IL7Ye/B1uf1iscfeWjuPv7D/QG8e2KsZleQuQ8WJuhIoa/r5qPO8MgKTKcrLF+LOOb/HsBM40arGw64P/j4fOlX7EUaoy+3vAuUhuv11xRn/BQ==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 13. 음수를 2진수로 표현하는 과정&gt;</div>
+
+#### 2의 보수 구하는 방법
+어떤 2진수가 있을 때 그 수의 2의 보수는 **1의 보수를 구한 다음 1을 더하면** 됩니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T05:09:58.614Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;77hPlTpJubGd2L8x_D06\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;QEYIKEufx3-GBs0fzXLF\&quot; name=\&quot;Page-14\&quot;&gt;7Vpbb5swFP41lraHSthcQh6BpJu0TavUbt36MrngJGgGZ8Zpmv762cEkgGlTqW0uqFIe7M/2sfnOxZxDgB1l9584ns++sYRQgKzkHtgjgBB0EALqZyWrEhm4TglMeZroSVvgMn0gGrQ0ukgTUjQmCsaoSOdNMGZ5TmLRwDDnbNmcNmG0uescT4kBXMaYmuh1mohZifposMU/k3Q6q3aG3rAcyXA1WT9JMcMJW9YgewzsiDMmylZ2HxGqyKt4KdedPzK6ORgnuXjOguD6+83Vl0k44e4FE6NfP0bh7zN92DtMF/qB9WHFqmKAs0WeECXEAna4nKWCXM5xrEaXUucSm4mMyh6UzQnLxTnOUqrU/ZPwBOdYw1q30JH9QnD2l0SMMi6hhEzwgooNXhG9FphSWs3LWS4lhPrIhAty/ygXcMOwNE3CMiL4Sk7RC3ytk1Wzu9xq2LE0NqtpF3mutixtVdON5C3xsqG579bDeYiu7Jubh+WP5YCt/mVf/0TZGTT0APeiiLehF7b4hZbbQbDJr229Eb3IoNc6YXo3pz8Weu1eWS/yjoxep1fWC50jo9fttfUidGB6vX5Zb/tqGxyY3kG/rLd9tR2aXr9X1mtcbYem18w/Ttl6javt0PRWWfRT+R3Jk0AlyrIXU1wUadxktEn/M/j1OhO5cl+SGOn2TnJr5Lkd5FUYJxSL9K4pvotRvcMFS+XGj0cep5XrFWzBY6JX1fPsXYLaSaPAfEqEIWit4M1jv0DnZi4JxggMIQjkwSwIxhEYjsBQRjYLjEMQ2iB0FOj7CpRI4IIwWo8GIHRBEIGxnO+uRwM1PzBjoHQa0bQbTNNproxK6pdIPwuVa6UxpoEeyNIkUctDTor0Ad+uRSkbmytq1mS5IXBHStZCsEKbl1E+0P7b4dKG13cb72sE1qHfsh6zpAC9N3L9zspOhxWg8F1trYANd78s2/vUmlmoeCpea75eEqwdI1ijEwjWQ7eptnaIfW6stq0dgl4vVneq2yycVKEa1kK17+hQ7csw7NSCsQzVQxW837264dW2tdurN56/F7fuWQWnlQMjf3+vuZ309qyCg46MXrOCc9L0tgtkh6a3XxWcdg58cHrNCo66Y30PDBVsQXnNIq/8+ri4lc2pan5AHytUblobqGdPaEcq9X4tP30td1gGHLyOacju9st6+ba2/X+CPf4P&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 14. 2의 보수 구하기&gt;</div>
+
+::: info
+어떤 2진수 a의 1의 보수에 1을 더한 값 b가 있을 때 a+b의 결과는 항상 자리올림이 발생하고 모든 자릿수가 0이 됩니다.
+:::
+
+## 4. 기본형(Primitive Type)
+### 4.1. 논리형 - boolean
+논리형 변수 boolean 타입에는 `true`와 `false` 중 하나를 저장할 수 있으며 기본값(default)은 false입니다.
+
+자바에서는 대소문자가 구별되기 때문에 `True`와 `true`는 다른 것으로 간주된다는 것에 유의합시다.
+
+### 4.2. 문자형 - char
+문자형 변수 char 타입에는 단 하나의 문자만 저장할 수 있습니다.
+
+```java:no-line-numbers
+char ch = 'A'; // 문자 'A'를 char 타입의 변수 ch에 저장
+```
+
+위 문장은 변수에 문자가 저장되는 것 같지만 사실은 문자가 아닌 문자의 유니코드(정수)가 저장됩니다. 컴퓨터는 숫자밖에 모르기 때문에 모든 데이터를 숫자로 변환합니다.
+
+문자 리터럴 대신 문자의 유니코드를 직접 저장할 수도 있습니다.
+
+```java:no-line-numbers
+public class CharToCode {
+    public static void main(String[] args) {
+        char ch = 65; // 'A'
+        char hch = '가';
+
+        System.out.printf("%c=%d(%#X)%n", ch, (int)ch, (int)ch);
+        System.out.printf("%c=%d(%#X)%n", hch, (int)hch, (int)hch);
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+A=65(0X41)
+가=44032(0XAC00)
+```
+
+- 어떤 문자의 유니코드를 알고싶으면 char형 변수에 저장된 값을 정수형(int)로 변환하면 됩니다.
+
+```java:no-line-numbers
+char hch = 0xAC00; // char hch = '가';
+char hch = '\uAC00' // 이렇게도 가능
+```
+
+#### 특수문자 다루기
+영문자 이외에 tab이나 backspace 등의 특수문자를 저장하려면 조금 특별한 문자 리터럴로 저장해야 합니다.
+
+```java:no-line-numbers
+char tab = '\t'; // 변수 tab에 탭 문자 저장
+```
+
+<div class="align-center">
+
+특수 문자 | 문자 리터럴
+-------- | ---------
+tab | \t
+backspace | \b
+form feed | \f
+new line | \n
+carriage return | \r
+역슬래쉬(\) | \\
+작은따옴표 | \'
+큰따옴표 | \"
+유니코드(16진수)문자 | \u유니코드(ex. \u0041)
+
+</div>
+
+```java:no-line-numbers
+public class SpecialCharEx {
+    public static void main(String[] args) {
+        System.out.println('\'');               // println(''')로 하면 오류 발생
+        System.out.println("abc\t123\b456");    // \b에 의해 3이 지워진다
+        System.out.println("\n");               // 개행(new line)문자 출력 후 개행(println)
+        System.out.println("\"Hello\"");        // 큰따옴표를 출력하려면 이렇게 해야 한다
+        System.out.println("c:\\");
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+'
+abc	12456
+
+
+"Hello"
+c:\
+```
+
+#### char 타입의 표현 방식
+char 타입은 2 byte(=16 bit)의 크기를 가지고 문자의 유니코드가 저장됩니다. 유니코드는 모두 양수이므로 char 타입은 0 ~ 65535($2^16-1$)의 범위를 가집니다.
+
+2 byte의 크기를 가지는 정수형은 short 타입이 있는데, short 타입은 음수를 표현해야 하기 때문에 -32768($-2^15$) ~ 32767($2^15-1$)을 범위로 가집니다.
+
+다음과 같이 변수 ch와 s에 'A'와 65를 저장하면 둘 다 2진수로 같은 값이 저장됩니다. 그러나 두 변수의 값을 출력해보면 결과가 다릅니다. `println()` 메서드가 전달받은 인자의 타입이 정수형이면 10진수로 해석하고, 문자형이면 저장된 정수 값에 해당하는 유니코드 문자로 해석하여 출력하기 때문입니다.
+
+```java:no-line-numbers
+char ch = 'A';
+short s = 65;
+Systme.out.println(ch); // A
+Systme.out.println(s);  // 65
+```
+
+#### 인코딩과 디코딩
+컴퓨터는 코드표를 이용해 프로그램에서 읽어들인 문자를 숫자로 변환하거나 역변환하는데 이를 인코딩과 디코딩이라 합니다.
+
+코드표는 아스키(ASCII), 확장 아스키(Extended ASCII)와 한글, 코드 페이지(Code Page, CP), 유니코드(Unicode) 순으로 변화해왔습니다.
+
+오늘날엔 유니코드를 많이 사용하며, 유니코드에 포함된 문자들의 집합이 있고 이 문자 집합에 번호(16진수 값)를 부여한 것이 유니코드 인코딩입니다.
+
+유니코드 인코딩에는 데이터 타입 크기에 따라 UTF-8, UTF-16, UTF-32 등 여러 종류가 있는데 자바에서는 16 bit, 2 byte 크기를 가지는 UTF-16를 사용합니다. UTF-16은 모든 문자를 2 byte의 고정 크기로 표현하고 처음 128 문자가 아스키와 동일합니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T09:35:02.629Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;QDEYUPUVyVJZHtJV9JzX\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;5mUwyD8btmkZj7KI7Zx7\&quot; name=\&quot;그림 15. 유니코드(unicode)를 이용한 인코딩과 디코딩\&quot;&gt;7Zpdb5swFIZ/DerVIjAfgctA0k6aKk2L1O3WC25izeDIOB/Nr58d7AQwVZJqjE2krSLz2hzDeY59OKSWm2T7JwbXq2eaImIBO91b7tQCIAod8SmFt1LwgV0KS4bTUnLOwhwfkBL1sA1OUVEbyCklHK/r4oLmOVrwmgYZo7v6sFdK6rOu4RIZwnwBial+xylflWoIxmf9M8LLlZ7ZCaKyJ4N6sLqTYgVTuqtI7sxyE0YpL1vZPkFE+k77pTzv8Z3e04UxlPNrTjh8+eEH+dP228shcbPxYf7sk0/KyhaSjbrhh8mDul7+pp3A0V5MEa94RoTgiCYkeJmL9kJMjpgQtohxLNw2UR0ZTlN5esxQgQ/w59GULY7XFOf8CMWPLX8qbW04LUrw0nTBGf2FEkqosDvNaS6tvGJCmhLNuYoXJ1THjzDDREbaC2IpzKGQ1Q2Ky0P7dz3nnHiIOEY0Q5y9iSH6BB2MKoadwCuPd+eI8NSQVSUYtAZVDC5Pls+YREORuoEaMKgZyFCeTmT4S0YEFgVe1AEyuslTlCoo7/iu6mLvhEavA+fkXZQai+iibyu+81t8pzWGCOR4Wzff5lA1w1cZXhV0XlRHN45Gft1IQTdsgdR51fXTMAXci6Y4ZEvEDVNHxqdb/zh27479SuwGq8j+GHQjfpqGOkbuG8gD/74917dn4HoXt+e2WOtsew7MdTpLrGhqxaFsxFMr8qxZLD8n0f9H0+s22fqNFafRVWiOW2i6XdEct9A8spMQ7zRvpBn1TFM/yjVwThK1OKOZpS+xQrGeNncrzNF8DReydyfKnjrgm7KqJmMB9/H405pvqwzFyNCWv8pmm4U/QM51GuRck5wDWtCBztCZxcqRWGJNbMkwFH+NDdaVvXeYwGs+D/UP06xhRqNRD6xS9Ao3hF8kpbbOLlaWH1wJI+gKhjtYGMbK6B+GWeZNBoHCWBch6BuFWX7Fg0QB7LBvFGZR1Udm/wdQuGZ1+5dRmBXRULKFASO49jmqMxjhYGE0U3f/MIBZobS8rhsCi/5zNzALjCAYJIv+kzcw64tgPEwWvWdv0PJ2eggk9Fs9vUHZZrLwojYQzu2vQMTh+Xv98qug8z9HuLPf&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 15. 유니코드(unicode)를 이용한 인코딩과 디코딩&gt;</div>
+
+### 4.3. 정수형 - byte, short, int, long
+정수형에는 모두 4개의 자료형이 있으며, 각 자료형이 저장할 수 있는 값의 범위가 서로 다릅니다. 크기 순으로 나열하면 다음과 같습니다.
+
+<div class="align-center">
+
+타입 | 크기(byte)
+:-: | :-:
+byte | 1
+short | 2
+**int** | **4**
+long | 8
+
+</div>
+
+byte부터 long까지 1 byte부터 2배씩 크기가 증가합니다. 기본 자료형(default data type)은 int입니다.
+
+#### 정수형 표현 형식과 범위
+모든 정수형은 부호있는 정수로 가장 왼쪽 첫 번째 비트를 부호 비트(sign bit)로 사용하고, 나머지는 값을 표현하는데 사용합니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T10:11:55.405Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;Vq5iKuiW2j8lOl4u-cbn\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;Ybaq3_GG8NSb3kL6Kzeg\&quot; name=\&quot;그림  16. 정수형의 표현 형식\&quot;&gt;1VZNj5swEP01lnYPlTAOiTkCSdpLT6jtsXKCA26NTR2nJPvrOwazCYWoXam7UlEUjd98MH7zNAkiWX1+b1hTfdQFlygMijMiaxSGeBGGyH2C4tIjq2jRA6URhQ+6Arl44h4MPHoSBT+OAq3W0opmDO61UnxvRxgzRrfjsIOW47c2rOQTIN8zOUW/iMJWPUrD1RX/wEVZDW/Gy7j31GwI9jc5VqzQ7Q1ENohkRmvbW/U549KRN/DS523veJ8bM1zZv0nYrnLW0p38muaf8GHdcPrj2ztf5SeTJ3/h3HdrLwMFRp9UwV2VAJG0rYTlecP2ztvC0AGrbC3hhME8aGW3rBbSzfszNwVTzMN+uHjhzkLKTEttuleQrHsA9+1wY/n57j3xM3sgO65rbs0FQoaEgfDLMBJ/bq/zIx6qbkY3YMwrpnyufCUVDM/rCzgOJxwrx3uwE/bNuVZa8X9Ec/RnmnH8ljyTOS0DjYn73qQoXSIKxhrFFKV0AGNEFw6kCYAPaJOheIli7AxKXSgEgS+GtRVA51mXB0GQkc0G4UcULiVcNt0ZsEpnqZtGIJF0jUCRDaKRrxbTwYtRApVdOygNHrrSKUpoF5e5bkkC0nmcaAdmaccCYVKUCmzJD87j5i1gtSUerkVRuOTU8KN4YruukNNdo4Wy3XiiFEVrV+lk9dFrCo5Ha/R3/puoZnQ2keJ9xd5sg6B7XmkbrKYyDRczMo1eS6bRRKb/8RagY3bpzKrFM+Ti5cvZheP1x7Lz3fzlIJtf&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 16. 정수형의 표현 형식&gt;</div>
+
+따라서 n비트로 표현할 수 있는 값의 개수 $2^n$개 중 절반은 '0'으로 시작하는 $2^{n-1}$개의 값을 0과 양수의 표현에 사용하고, 나머지 절반은 '1'로 시작하는 $2^{n-1}$개의 값을 음수의 표현에 사용합니다.
+
+#### 정수형의 오버플로우
+정수형 타입이 **표현할 수 있는 최대값에 1을 더하면 최소값이 되고, 최소값에 1을 빼면 최대값이 되는 것**을 오버플로우라고 합니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T11:01:13.236Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;SnY6X3zg3VXVM4clnP-m\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;xESSG0Zpys7Y8uSYl2Z4\&quot; name=\&quot;그림 17. 정수형의 오버플로우\&quot;&gt;7Vtdc6M2FP01mmkfnEECY/FobGe3O0233TRp3zpaUGxmZeRiuXb2168Ewl/CibcTJOraeQhcCWTOuRykczHwR/PNu4IsZnc8pQwgL90AfwwQghD35T8Vea4iIcJVYFpkqe60C9xnX6kOejq6ylK6POgoOGciWxwGE57nNBEHMVIUfH3Y7Ymzw1EXZEqNwH1CmBn9I0vFrIpiNNjF39NsOqtHhmFUtcxJ3VlfyXJGUr7eC/kT4I8KzkW1Nd+MKFPg1bhUx92eaN1+sYLm4pwDko+9Xm/1jj7kv/z2uP7pMb17SHr6LP8QttIXDCYxiEOAPTAZgwiDGIPJCEQDgEPVhIcgCuQRkh8ZHspwoDYwVn2r6xTPNXgFX+UpVeN7wI/Xs0zQ+wVJVOtapouMzcScyT0oN594Lm7JPGMqUx5pkZKc6LBOCxio/YyxEWe8KIfw4/JPxpei4F/oXstt+dFnaIrrS6eFoJuTmMItUzLFKZ9TUTzLLvoA5GlydXZjvbvepQr0dWy2lyZ1jOjsnG7PvCNQbmgOv4NPdC6fE0XZlc8jPoOgY3z6Bp/oypPE23+dJ9gST3/ih98fPpC7zfqvXz+Mi43of/zUoKOedVZynst4TFg2zeVuUV12vJRjZPn0k0YBonakD6Iz7xXUFgfmveKcA0af9ij4udx7MwaOxco9A4HJgOc5I6EFnWmEuEloWoO4b0AMXSe5baEJXKd52D0O7AqNcwYGTULjjIQ2hKYJYqtCgw2Ib25uXKe5bakJXSd61EUW7IqNcw7q264bJLQhNk0QWxUbaK6fBq6z3LbWnOs1tEeCaR45J8Gu1LinoGENC+FFTWzOtWraw9hcpdp30NxqzXbfXaKb61iAQqYw+Cw3pmqjh39QFmfcB9GotKpHpYs9BLEHIvRj3V+Ovz3ENY9W5aoDLJor4QuTq0aM7cqVudY18F3OyEJtJquCPccFSb5Q8TrQO1ZK2Fm2eP+dFJww+I2SgFd+ti11IRW+UFZ4Ay77+HUuUQOVQWtUmmvqWsQUlEBVsWskwr9XvFK0Gr29kBY7VcfDYBiUJT5UVoTGqpqHS7kcwlI3ZZ9SMXdqWY11QjAl3OIwTWptSyTsVH65WJGSJYQNdcM8S1N1eFzQZfaVfC5Ppdhe8CwXJYj9GPTH6lwrwZc6g4xE0Xdxw43dlHgn8rOlglNoPEH7Ri5FVgtOpjMQuX762Z7FOK931Cd+cRYz2J/FjNRrFOr+vM5iusNiQ/H2wmYxzstW9aSlGx6aK8FyXjdBpr/QARrs6o17EkwD4rL85EaI7crNGfbCi+aC8ie692C2rVfOSy/INBh6zh7MbuTKPQemAQEvbHrkvP6FTjsDjXplLCO8q1yd/7ZuezSai/L/1yuI7imoB7vcdxDPftm5PYwbfjVyjO+bWNL/yoY+Mpud29Bw8PrTxqoN7Ztr8asN/d+woY8rGmFrLrTc3f00rWzb+4GfP/kG&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 17. 정수형의 오버플로우&gt;</div>
+
+```java:no-line-numbers
+public class OverflowEx {
+    public static void main(String[] args) {
+        short sMin = -(1 << 15);
+        short sMax = (1 << 15)-1;
+        char cMin = 0;
+        char cMax = (1 << 16)-1;
+
+        System.out.println("sMin = "+sMin);
+        System.out.println("sMin-1 = "+(short)(sMin-1));
+        System.out.println("sMax = "+sMax);
+        System.out.println("sMax+1 = "+(short)(sMax+1));
+        System.out.println("cMin = "+(int)cMin);
+        System.out.println("cMin-1 = "+(int)--cMin);
+        System.out.println("cMax = "+(int)cMax);
+        System.out.println("cMax+1 = "+(int)++cMax);
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+sMin = -32768
+sMin-1 = 32767
+sMax = 32767
+sMax+1 = -32768
+cMin = 0
+cMin-1 = 65535
+cMax = 65535
+cMax+1 = 0
+```
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T10:59:56.333Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;156ozoCE2DDEfhUec5_M\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;D1qPcUGAhyh7v-ALzwld\&quot; name=\&quot;그림 18. char 타입과 short 타입의 표현 범위\&quot;&gt;7Vldb9sgFP01SN1DJOOv2I+1k66a1HVSq25vFY1pzIpNhknT9mG/fWDjxDb2mlRpqmnJS+AAF3PPAXOvgRNnT585WqQXLMEU2FbyBJwJsG0IA0/+KeS5Qnw7qIA5J4nutAGuyAvWoKXRJUlw0eooGKOCLNrgjOU5nokWhjhnq3a3e0bbsy7QHBvA1QxRE/1OEpFWaGCPN/g5JvO0nhn6YdWSobqzXkmRooStGpAzBU7MGRNVKXuKMVXOq/1SjTsbaF0/GMe52GYAv3wovqbn6Ppy5JzPo7PzKysZQbsy84joUq94liJ+IjGfSrNRsVzI4lwVoV+DcpIGDqanILJAGH/SCxXPtfc4W+YJVg9gyY6rlAh8tUAz1bqSepFYKjIqa1AW71kuzlBGqJLKDeYJypGGtS6gq+sxo4yXUzhW+VNPKjh7wHVLznK8BmvmylkIpY3hcfkr11T6AXOBnwY9DNe8ScFjlmHBn2UXPcD2NNVa67ar66uNcmAth7ShGkdjSIt1vja94VMWNKW70AsNeouUcXHk9y38wrDDL/xofs3da1CE8+RUnYOyNqOoKMisdBviwoQbZLWZ3Qt1TZaqx8SJcfi+ykXD116Pq2uMY4oEeWyb7/O/nuEbI3LiDdVwYCvXJgq25DOsRzVP3Y4hd/yKIcnEHAvDUCmH9bLfrhBnJ4Uw2e+gOpBznxFK/xVVdA+At6qia2hdP5Aq3KMq9qcKZ19nRdfQoVXhHVWxP1UMXgZ3VYVh6MCq8I+q2ONZ8dp1YOuzomvowKoYG6oY9cYU3kBM0ZWQvJWLtm4QJfNcXU8lc1jqIFJ3dyIj81PdkJEkUcMjjgvygu5KU0okC7Xo0g1eBLyJsrUUrNDyGgolmoFDDfWockC8fWIFewg5OjRD3ww5+uT6bhFHYPC+C+0jeCR+y1xC94bYQ7x/SOJDg3jryOWWXLoDZ3WDS+eQXNb3zNd28UBC6LiLt2XeGbq7fdQuhmY+oEwISghMJyBwQCALMQinIPDKwgSEgW4NIQjjshCAwC3BCEQ2CN2yZ1yDNgh8EKppdrwT+ChTOcP8rlB/v6WBXV8u1snIsce+emI1XJXHZtpyWK0U34v/VKvdlFePVN3DJq/NLIX6NvFOUrW2lt9Qmrwz/sTSIvQ9z/GOInyTCNfp9Oar0n0nFY5vb2+yn/bF9fOp63z5xYWIftTvur+Fv+/yFcRkZw/uDdreDXq2eF80sQ4xdvCurG6+bVZR5+YLsTP9Aw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 18. char 타입과 short 타입의 표현 범위&gt;</div>
+
+### 4.4. 실수형 - float, double
+실수형은 실수를 저장하기 위한 타이브올 float과 double 두 가지가 있습니다.
+
+<div class="align-center">
+
+타입 | 저장 가능한 값의 범위(양수) | 정밀도 | 크기(byte)
+:-: | :----------------------: | :---: | :-------:
+float | $1.4 \times 10^{-45}$ ~ $3.4 \times 10^{38}$ | 7자리 | 4
+double | $4.9 \times 10^{-324}$ ~ $1.8 \times 10^{308}$ | 15자리 | 8
+
+</div>
+
+위 표의 타입별 범위는 양의 범위만 적은 것으로, 이 범위에 '-'부호를 붙이면 음의 범위가 됩니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T11:33:26.385Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;Nfk5Y4-YC_JiAIXnf0mB\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;nLcc_5jz3Da0ONtTWlLm\&quot; name=\&quot;그림 19. float 타입으로 표현할 수 있는 값의 범위\&quot;&gt;7Zpdb5swFIZ/DZepAEM+Lpu0aS+2aVq17doFF6wZHBmnSXOx3z4b7GA+0iQVJa1GVKlwsI/t8z6Yc0IssEi2dwyu4q80RMRy7XBrgRvLdR3PdS35Z4cvhWXie4UhYjhUjUrDA94hZbSVdY1DlFUackoJx6uqMaBpigJesUHG6Kba7ImS6qgrGKGG4SGApGn9jUMeF9apOynt9whHsR7ZGc+KKwnUjdVKshiGdGOYwK0FFoxSXhwl2wUiMng6LkW/5YGr+4kxlPJTOgR3P+jy+uc398vjbuePELkno5ELCjfPkKzVitVs+YsOAaPrNETSi22B+SbGHD2sYCCvboTowhbzhIgzRxw+0ZQvYYKJ1PsXYiFMoTIrcR1PnS8ooSwfAtj5R9gzzugfpK+kNEV7ow5/PgomxOi+yD/CrhaDGEfbg2Fy9sEX1CKaIM5eRBPVAQAloALWGSv9NqX8jq9ssSE9UDaoiIv2rktRxIHS5RyNBomqEjkT+4NJdMJdhNLwWu5H4iwgMMtwkIcNMt40G2JVle1EOlOlYpoobGyCR7UwYt0Wam1jiECOn6vu2+KvRvhOsRi4lNqtST2rSZjRNQuQ6mXufjVHPjjiSCgRId5wlOOwX/bbCfHOIoSKdr1yIMZeYkI+CxX1DeCtVDQcef1S4Q9UdEcF6GqvaDjqmYrxWVSoJ/AlqLD/Zypcu18qpg0qRuDKy+fn2rJcGhMu9VqvxGEkD8FUG8WAhr1Bk0jFeBUhSHCUypxEiIgEEnOZsGFRFl2rCwkOQ9l9zlCGd/AxdyV5WMn15xHx55Z/I32tOc0UaYfyRzNb1KYWQA9w3Mat1UGeWUfHackz7T7zTD0BEwLndQhGnn+IgjFMZGmQPmby31/p4c2+BqJOIco9tIcYRO2/+uiHqBMS03epLpvydBDfWTW8s2Z0vUlLdPfFYvfhHTK8Lp/lXlfP8rqjnjM857wUb8DiVSy8mX1lGx+nG0iOuO0bmclZyAxVwWV2kr6rAmd2FhYf6KtHMSvV0dXTMc4/PEDHqsHPApBehwHQUFa+axHg1feei5eVeg3Ds6WTraH+qqGu28lbw4XfWWgKDCzsBhfDTd7+GllXflo7e9q4yUE397g4LX9FUGhf/hYD3P4D&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 19. float 타입으로 표현할 수 있는 값의 범위&gt;</div>
+
+#### 실수형의 표현 형식
+실수수형은 값을 부동소수점수(floating-point)의 형태로 저장합니다. 부동소수점수는 실수를 '$\pm M \times 2^E$'와 같은 형태의 정규화된 2진 실수로 표현하는 것을 말합니다. 부동소수점수는 부호(Sign), 지수(Exponent), 가수(Mantissa) 세 부분으로 이루어져 있습니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T15:33:37.860Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;BfiK5C_BM6eH0iZaYK9I\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;n4YvWERCNumCQVcN_IR4\&quot; name=\&quot;그림 20. 부동소수점수(floating-point)\&quot;&gt;7ZjLctsgFIafhmU6Erp6aSlOuslMZjK9LalEJKZYqAhFdp++BwnZxlKaS3NpZ+yFDT9wgPP9EoyRl643l5LU5ZXIKUfYyTfIO0cY+yGGby1sByEIvEEoJMsHyd0LN+wXNaJj1JbltLE6KiG4YrUtZqKqaKYsjUgpOrvbreD2rDUp6ES4yQifql9YrspBjXG01z9SVpTjzG64GFrWZOxsdtKUJBfdgeStkJdKIdRQWm9SynXuxrwM4y7uad0tTNJKPWbAt+31106prvM+efHXLsNnl6uzMc13hLdmx2a1ajumQIq2yqmO4iAv6Uqm6E1NMt3aAXPQSrXmUHOheCsqdUHWjGven6nMSUWMbOC6vqmnggvZT+E5/Qf0Rknxg97fMjLop2Kcjz0rUUHsxGyGSkU396bJ3SUfTEvFmiq5hS5mQGwysh1JD9VuDx8vTJfyELxnRGIMV+wi75lAwWB5CqIpoRSjBGTnql82dqA95Eonqa0tduHPVtsrsUqF+e1HaBCzQ3TDWdMjW0IHN643s4FWYyTY3BDMngDkflWjemQuAKVsBxHOigrKGQCjwDbROBk8kUvTsGZ5rocnksL6yPc+lLZILVil+vQHCQrOdaxWicbYbuIu45kZGx24FYd/NvWcVV/AhW5g29B13YkPXX/Gh8Fr2dCf2nCVoCRE8MCsztEiRkn839HdvYvemK6/sOnOvGWCGbiv9o4JZuAuUeL0cFMUx5rvCe7j4B6dIFH0vmzDGbYpWkYntk9ni/3433pwo4evb7TKl/oirNlx0jQss8Ha17u/vr8RuTs6oQ6TH9Smd7hhtTSfXMKPiMCORCsz+tABNSX3AJlRk5QTxe7sZczhMjNca1MfGMM5eqP72A4xLN+MOrylHwVyI98OFBwFggQXVE0C9e7Zbfv5hopPhrIOxXczlB9YPlhEz/MTduw4Lo7e1E+Lk5+sg/jd/BThD1FoW2GsP9lTM7H88IVsBdX9fyJD9/0fS97qNw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 20. 부동소수점수(floating-point) - 정규화된 2진 실수&gt;</div>
+
+실수형은 정수형과 표현 형식이 다르며, 이 때문에 실수형 float 타입은 같은 크기의 정수형 int 타입보다 더 큰 수를 표현할 수 있으며 동시에 오차가 발생할 수 있습니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-10T11:40:22.680Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;OAgdUX6hKHG3sYuNmhKF\&quot; version=\&quot;20.2.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;_w-u4JTm2oVSYs6TPi-b\&quot; name=\&quot;그림 20. int 타입과 float 타입의 표현 형식\&quot;&gt;7Zddr5owGMc/DYm7WAItCl4ePbpliTcz2bLLah+lWaGm1iF++rVQEFbcdhLl5GQjxrT/vj6/f1/Aw/P0/EGSQ7ISFLiHfHr28LOHUBAi5JmfT4tKicZhJewlo7bSVVizC1jRt+qJUTh2KiohuGKHrrgVWQZb1dGIlCLvVtsJ3h31QPbgCOst4a76lVGVVGqMoqv+Edg+qUcOJtOqJCV1ZRvJMSFU5C0JLzw8l0KoKpWe58ANvJpL1W55o7SZmIRM/U0DvLowUOpTvFzgb9lmk+SXz+9tLz8IP9mA16PgnZ2wKmoKUpwyCqYj38OzPGEK1geyNaW59l1riUq5zgU6uROZWpKUcWP5F5CUZMTK1t8gNHnG+VxwIcsh8Lx8tG5nBFLB+WaoQQNQrzwQKShZ6Cp1g5p5Ubti8/nVwrGVkpZ72GrELpp90/OVq05YtC/AjBzMWEfgb5gaHHUmMrgT5ejPlHEwJGbsYGY6FL0Y8JP+N8Q9pCP3S/hlBR+bBqPQmFEocFe+xqO6zAln+0ynOexMiUHI9HnxZOWUUWoazyQc2YVsyo6MlQehJ1NGPJ5542fT00mJo7VJZ49Kiu/wi0891jnu3l4Erf3ll89j9lfsGo8GNT50jH/D+2rahRu5cEPUAzeIH0V38m9cEtNXviQiB/NiFA+P+YEXRA/hYNBzoh6sxXg1QvgtQ24O399ARv6gkN2Xyh0XpO8ijpsUwv+v5LueZpOeZXCn40xnr58tZVnr4w8vfgI=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 21. int 타입과 float 타입의 표현 형식&gt;</div>
+
+<div class="align-center">
+
+기호 | 의미 | 설명
+:-: | :--- | :----
+S | 부호(**S**ign bit) | 0이면 양수, 1이면 음수
+E | 지수(**E**xponent) | 부호있는 정수를 표현하는 비트 크기로, 범위는 -127 ~ 127(float), -1024 ~ 1023(double)
+M | 가수(**M**antissa) | 실제 값을 저장하는 부분, 10진수로 7자리(flaot), 15자리(double)의 정밀도로 저장 가능
+
+</div>
+
+- 부호(**S**ign bit)
+    - 0이면 양수, 1이면 음수를 의미
+    - 정수형과 달리 2의 보수법을 사용하지 않기 때문에 양의 실수를 음의 실수로 바꾸려면 부호 비트만 0에서 1로 변경하면 됨
+- 지수(**E**xponent)
+    - 정규화된 2진 실수에서 2의 지수승 형태로 소수점의 위치를 표현하는 부분
+    - -bias ~ $2^{bits}$-bias의 범위를 표현
+    - bias는 음의 지수를 표현하기 위해 설정한 임의의 값
+    - IEEE 표준에 따르면 32비트 부동소수점수를 표현할 때 지수의 bias는 127로 규정
+    - &lt;그림 21&gt;의 지수 부분은 8비트로 부호없는 정수 0~255의 값을 가졌을 때 bias를 고려해 -127~128의 값을 표현하게 됨
+        - 이와 같이 표현하는 방식을 기저법이라 함
+        - 이 중 -127이나 128은 NaN(Not a Number), 양의 무한대(POSITIVE_INFINITY), 음의 무한대(NEGATIVE_INFINITY)와 같은 특별한 값을 표현하는 데 사용됨
+    - float 타입의 지수의 최대값은 127로 표현할 수 있는 최대값은 $M \times 2^{127}$이며 $2^{127}$은 약 $10^{38}$임
+- 가수(**M**antissa)
+    - 정규화된 2진 실수에서 실제 값을 표현하는 부분
+    - float 타입에서 가수는 23비트의 크기를 가지기 때문에 가수의 마지막 자리가 $2^{-23}$의 자리이므로 지수의 최소값은 $2^{-126-23}$(약 $10^{-45}$)이 됨
+        - 10진수 0.0000... 을 2진수로 변환했을 때 0.0000..1에서 1이 $2^{-23}$의 자리인 경우
+
+#### 부동소수점의 오차
+실수 중에는 파이($\pi$=3.141592)와 같은 무한 소수가 존재하므로 정수와 달리 실수를 저장할 때는 오차가 발생할 수 있습니다. 또한 10진수가 아닌 2진수로 저장하기 때문에 10진수로 유한소수이더라도 2진수로 변환하면 무한소수가 되는 경우도 있습니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-11T04:30:33.344Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;HZ9zmQc7RARVBdkdzGxi\&quot; version=\&quot;20.2.3\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;nj3VhiQEJO1ifgEE9L_v\&quot; name=\&quot;그림 22. 10진 유한소수를 2진 소수로 변환하면 무한소수가 될 수 있다\&quot;&gt;7VfbbqMwEP0aPzbC5hJ4zKXdqtVKlSrt5dHFLlg1OGtMk/Tr1waTYKBKW23bhy2KwsyxPYY5xx4D/FWx+ybxJv8uCOUAeWQH/DVACMI41DeD7FskCi2QSUZspyNwy56oBT2L1ozQyumohOCKbVwwFWVJU+VgWEqxdbvdC+7OusEZHQG3KeZj9CcjKm/RGM2P+CVlWd7NDKOkbSlw19m+SZVjIrY9yD8H/koKoVqr2K0oN8nr8tKOu3im9fBgkpbqJQPU+o8sr67Di+wSXz9kVzW842c2yiPmtX1hgCKu4y1rbWTGSDpEhz6AeswMmAkHnSHygzCaTw9psqD2XWoV3Rk8VwXXANQm5iwrtc3pvWl5pFIxTcXCwgUjxAxeSlqxJ3zXBPK0vxGsVA3R4RKEaxOpVqJqxWQCV0qKB7oSXEiNlKI0Ue4Z50NIlMpqEHnWv8AF40a9P6gkuMSHVzGPR3fPsgEPHOvFQUVBldzrLnYACq0s7LpIrLs9igx2XfKewAKLYavr7BD5SL02LPuvUAIaKQF6HrQ86ws2l7l7sPkzv9ls9kWrQyt0aYXzMa8B+khew4kVPmCMlmRhtkrtpRxXFUtd/qSoS0KJZeWZ5A1zrBMm97/MmJkX+R3w2wZpnPXO8fZ974ZKphNApQXbh6ZktFsPmNHlAcuMqlNKHzPYY2hq4XWYpBwr9ug+xhRrdoYbI+KeQKKBQNCA+ErUMqV2VH87PxUoGgRq8zAK1Ijo8Npv11X0+boKUNzX1ZlWWoD+Z3H5/lBc8G3i8uOhuOCHims+UYzA+Qos5iAOzLlD24l2tbEGSWhsjcQRiFsjBkn8isIkWyY+tzLB4F0r04DRJByfN6bqkv9edSkeUYxchpdgsQLL4IvhlzKcDI8eExTDj6Q4OV0i3BKwzZmitxucmtat/qB0yTxdIdoMj0n49+snHp/rwmgiufANBzvtHj8L2y31+HHtn/8F&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 22. 10진 유한소수를 2진 소수로 변환하면 무한소수가 될 수 있다&gt;</div>
+
+&lt;그림 22&gt;의 2진 무한소수를 float 타입으로 메모리에 저장할 때 가수가 표현할 수 있는 자릿수는 최대 23자리이므로 나머지 수는 버려져 오차가 발생합니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-11T05:08:10.882Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;EVBbZvKolLL41gnhQLoB\&quot; version=\&quot;20.2.3\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;r1_5qiZ3DGhZJwRTc7Ez\&quot; name=\&quot;그림 23. 부동소수점수 오차\&quot;&gt;7Ztfc5s4EMA/jWbSh3gQ/3k0jtNMp+n0LnPp9FE2sk2LkQ+Lxs6nPwmEDUgpJAd23MGT1vIiCbM/7a5WkoExWe8+JmizuicBjoCuBTtg3ABdh6auA/6nBftc4rh2LlgmYSAqHQUP4TMWQk1I0zDA20pFSkhEw01VOCdxjOe0IkNJQp6q1RYkqt51g5ZYEjzMUSRLv4UBXeVSV3eO8jscLlfFnaHt5VfWqKgsnmS7QgF5KomMKTAmCSE0L613Exxx5RV6ydvdvnD18MUSHNM2Df65v7UW06+f0sf0y2755fn7D+/TNXTzbn6hKBVPLL4t3RcqSEgaB5j3ogHDf1qFFD9s0JxffWLQmWxF1xH7BFlxQWJ6i9ZhxHk/4iRAMRJiAVfnvSzCKJqQiCRMEJOYyX3xRXBC8e7FR4QHxbERh8ka02TPqogGjjey8jZitLlC909HdLYlqqxK2AxTVERiuCwPfR81ygpCqa9QsC7pF2oaewptxP6xF8xe/F2D2X/8bzQaSRSYVmhV1SgKlzErR3jBr3DNhWzgjoV4HQYBb+wneBs+o1nWEdf9hoQxzZ7T8oF1w3tKKdnmdHjHW5qQn7iGR0FMgqpm3wHYgxEJrp7M1SyqlLn2hlVhNtMJGGvAs8B0DHwHeBMwvQGeBzzzFSznTCE4OTdNaPZK09TMCk1oyjgdBU2jL5pesxPEcTDm4YQzitB2G86rAKtOstkLZirO74IDKQQ1arKkKUuhqUKW4AjR8Fe1e5X6xB2+8sFUAgWrZgfrBLYkTeZYtCrHnqaO3FpHFCVLTKWOMpqHx3474OL2ZTfMXKwdcTOcscKSZjhyQVoImFtWueiiHvsqab0tkx36G1x5C1cOFTHaNE/py6HZbP5s8rbhRfacNETR32yqieJlxqRhQjQjlJK14JWIx3lhCtTSbSSEMqsmfGRcc/V145QNt8LlwKnE5WD/ZS56b1ysi+eyiMLNnbhhF7ZjGi0YGadkZEuMdHZ/bRYytzRMeyr0DEev0TPPO+2BjgRvxz7qRSzbppt6eOPaybLtXIdM/G9K8grGYsETmrIob2uUYmPeXgqZlTtd2KjpOV7aZnO8VI2a/sLlMFtuN8nV7Y5mywY87WxZl2fLIrtlY48VvCkYWxdnp30ntbCa1B6MsmHwdeHd0ffHj+Yd2j+snW/3+PP67vP0r2soQdQkZh0v7eUqLlFgUWGSvbqa/9QMQ7FwoJqi9qZj5eqeWNjjbydXuBj2tXyyC9U7zar3Tql6QxGFWuTzRzg8qedv4pPGneyr0vs/B65hN8M9RLOT0JVT8gtcRXV/j7nkJLXs1ZGlWvVdEEMRilRusospo5KmnMjDgWZL09TeGUs5Z3y4PJYNWUdfllmfvsAzT1/kXazpVfb+9mRfCsKGOnS+sCLgQ925moVo++HDMKpajipbbxxVEJ5yWMkLBPcDzJZZpGM1wjypi1DtnF0ezDPFbqu6JHD22A3lNYEBZutDC/CdwZQXH24HmC1hmvY7gykvZ3gDzJYwvfdmmXK+ezPAbAfTcpots6/TIWqYcsLLoro221M8MG25hWk0r2G4p2Sqy6Ez3+FygMvhgqkPxhPgm9kRTis7yzkBrg3cvOACz708+L/Z/+oRPqxtZnqWxP602amu2DlgvH072930gXvLT+3KvMX5Xm0YAf9zBED37ENAceKPm3x2WJsXxmDsZgWb+4GBczvORpWzahepr/NNasyvOEA4T5No7ydo/hNztg2bd8edvmwrr3TKr+223gsYFGBLpwq9riZZXnWSBYvP5f0+a6T4oUxxhK17VvJBwuyoiQvGJi/4GjPJq8xR6zxIc+PUxDUWtj3tAteL32CmWXPxiLCLkWDXTq0obPbEvlmeb48vD+2Zkqe6B+4veWIfjz9dzA+eHX8Aakz/Aw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 23. 부동소수점수 오차&gt;</div>
+
+이 때 버려진 값들에 의해 발생할 수 있는 최대 오차는 $2^{-23}$인데, 이 값은 가수의 마지막 비트의 단위와 같습니다.
+
+$2^{-23}$은 10진수로 0.0000001192(약 $10^{-7}$)이므로 float의 정밀도가 7자리라는 의미가 이 점에 기인합니다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-08-11T05:16:43.157Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36\&quot; etag=\&quot;GTxIsSMIZnkk5oP3K9hs\&quot; version=\&quot;20.2.3\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;KkSqPM5L962lpdrn_LlK\&quot; name=\&quot;그림 24. float 타입의 오차는 소수점 이하 7번째 자리부터 발생하므로 유효 숫자 = 정밀도 = 7개\&quot;&gt;7VlNc5swEP01OroDksHm6K98HDppJzPtWbEU0FQgKkRi59dXMpIBYzc1jZ0LXJCetA+0+7QrY4AW6eZW4jz5KgjlAHpkA9ASQOiHKNA3g2wrZBqhCoglI3ZSDTyyN2pBz6IlI7RoTVRCcMXyNrgWWUbXqoVhKcVre9qz4O2n5jimHeBxjXkX/cmISuwq4KTG7yiLE/dkP4yqkRS7yXYlRYKJeG1AaAXQQgqhqla6WVBunOf8UtndnBjdv5ikmfoXg9k8WdF7BcN7dgsfHtT3u9FyZFleMC/tgnU35JpwXpS5bsamOYLIoZq/MaDvOM11I3sqzA2sIJhGIDKczuLJTfa+eLurQbUf8/3KpmHve8feZHLqRXYuVlsXN0U3Bk9UyjXg6ybmLM50e639RaUGXqhUTEd6ZgdSRogxn0tasDf8tKPydD8XLFM7HQVzECwNV6lEUWnVUBdKil90IbjQvMtMZIblmXF+CIlMWYlDz/ZvcMq42Rw/qCQ4wxZ2lgAi6zW3SPPadHNSBP5eWnpPUpFSJbd6ijWYWjFunVxt/7XWNnKCTRq6HlsM2+0U75lrxemGFd0ZAoQdAXZCSTMyMzu59mMjqlKUGaHERmq/x97x7mEQTnubkk5+eNfXDWcGR3zpMEk5VuylTX/MwfYJ34wM61Dq3NqOpRe0KQpRyjW1Vs3E8B6Rf0CksIyp6hDt4r1fdn8JoEECfSUQXUoCh0QXlsD4iASqNG9C09JC+LsUbmBU5eCZqRbjfFMVJDvuKsMErBYgWoFIF5c5mIVgtmiUkIp+qCHn1BB/2hbLtFtDwmuWkGDIHz3zB/yoEtIhunIJCQcJfLoE0OeWkMkggb6niIN87gdePwl0iELvqhKYDhLomwU89MUbe/UF/x7IMxRxFu+FBRIdEcgHHTPD4Zj50cfMwx83yFb5zzpnum8lQ375/1NG3xLTIbpyBvG7H0wHDfTUQN+iAseX0oDu1t/jq+n1vxpo9Qc=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 24. float 타입의 오차는 소수점 이하 7번째 자리부터 발생하므로 유효 숫자 = 정밀도 = 7개&gt;</div>
+
+```java:no-line-numbers
+public class FloatToBinEx {
+    public static void main(String[] args) {
+        float f = 9.1234567f;
+        int i = Float.floatToIntBits(f);
+
+        System.out.printf("%f%n", f);
+        System.out.printf("%X%n", i);
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+9.123457
+4111F9AE
+```
+
+## A. 참조
+::: left
+S. Namgung, "변수(Variable)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 2, pp. 20-73.
+
+메시에, "컴퓨터에서의 실수 표현: 고정소수점 vs 부동소수점," *Tistory*, Mar. 20, 2019. [Online]. Available: [https://gsmesie692.tistory.com/94](https://gsmesie692.tistory.com/94) [Accessed Aug. 11, 2022].
+:::
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
+</script>
+
+<DetailsOpen/>
+<UmlScript/>
