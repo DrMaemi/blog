@@ -218,6 +218,30 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/computer-science/computer-network/": [
+    {
+      icon: "/assets/icon/computer-network.png",
+      text: "Computer Network",
+      link: "/category/computer-network/",
+      children: "structure",
+    },
+  ],
+  "/computer-science/data-structure/": [
+    {
+      icon: "/assets/icon/data-structure.png",
+      text: "Data Structure",
+      link: "/category/data-structure/",
+      children: "structure",
+    },
+  ],
+  "/computer-science/design-pattern/": [
+    {
+      icon: "/assets/icon/data-structure.png",
+      text: "Data Structure",
+      link: "/category/design-pattern/",
+      children: "structure",
+    },
+  ],
   "/programming-language/c++/": [
     {
       icon: "/assets/icon/c++.png",
