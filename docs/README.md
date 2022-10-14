@@ -23,6 +23,21 @@ projects:
     name: Spring Boot
     desc: Back-end
     link: category/spring-boot/
+  
+  - icon: /assets/icon/computer-network.png
+    name: Computer Network
+    desc: Computer Science
+    link: category/computer-network/
+
+  - icon: /assets/icon/data-structure.png
+    name: Data Structure
+    desc: Computer Science
+    link: category/data-structure/
+
+  - icon: /assets/icon/design-pattern.png
+    name: Design Pattern
+    desc: Computer Science
+    link: category/design-pattern/
 
   - icon: /assets/icon/c++.png
     name: C++
