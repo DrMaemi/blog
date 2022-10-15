@@ -39,6 +39,11 @@ projects:
     desc: Computer Science
     link: category/design-pattern/
 
+  - icon: /assets/icon/operating-system.png
+    name: Operating System
+    desc: Computer Science
+    link: category/operating-system/
+
   - icon: /assets/icon/c++.png
     name: C++
     desc: Programming Language

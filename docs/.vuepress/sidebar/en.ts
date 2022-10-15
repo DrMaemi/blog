@@ -237,8 +237,16 @@ export const enSidebar = sidebar({
   "/computer-science/design-pattern/": [
     {
       icon: "/assets/icon/data-structure.png",
-      text: "Data Structure",
+      text: "Design Pattern",
       link: "/category/design-pattern/",
+      children: "structure",
+    },
+  ],
+  "/computer-science/operating-system/": [
+    {
+      icon: "/assets/icon/operating-system.png",
+      text: "Operating System",
+      link: "/category/operating-system/",
       children: "structure",
     },
   ],
