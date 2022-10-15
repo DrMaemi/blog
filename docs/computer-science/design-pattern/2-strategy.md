@@ -1,0 +1,168 @@
+---
+title: '[디자인패턴] 전략(Strategy) 패턴'
+icon: article
+category: Design Pattern
+date: 2022-09-03
+order: 2
+---
+
+## 전략 패턴(Strategy Pattern)이란?
+전략 패턴(Strategy Pattern), 또는 정책 패턴(Policy Pattern)은 **실행 중 알고리즘을 선택**할 수 있게 하는 패턴이며, GoF 디자인 패턴 중 행위 패턴에 속합니다.
+
+![](https://drive.google.com/uc?export=view&id=19DPCjZybzDo_UvwYvt_nffVxkm5dsxuD)
+&lt;그림 1. 전략 패턴 UML 클래스 다이어그램&gt;
+{ .align-center }
+
+## 예제 - 카드 또는 계좌 결제 방법 결정
+::: details OrderController
+```java:no-line-numbers
+public class OrderController{
+
+    @PostMapping("/pay")
+    public void pay(@RequestBody PayInfoDto payInfoDto) {
+        Client client = new Client();
+
+        client.pay(payInfoDto);
+    }
+}
+```
+:::
+
+::: details Client
+```java:no-line-numbers
+public class Client{
+
+    @Autowired CardDao cardDao;
+    @Autowired AccountDao accountDao;
+    @Autowired CardAPI cardApi;
+    @Autowired AccountAPI accountApi;
+
+    ...
+
+    public void pay(PayInfoDto payInfoDto){
+
+        if(PayInfoDto.type == "CARD") {
+            cardDao.insertCardInfo(payInfoDto);         // 카드 정보 저장
+            cardApi.pay(payInfoDto);                    // 카드 정보 기반 결제
+        }
+        else if(PayInfoDto.type == "ACCOUNT") {
+            accountDao.insertAccountInfo(payInfoDto);   // 계좌 정보 저장
+            accountApi.pay(payInfoDto);                 // 계좌 정보 기반 결제
+        } 
+        else {
+            // 존재하지 않는 결제 타입인 경우 에러 발생
+        }
+    }
+}
+```
+:::
+
+## 문제점
+- 결제 타입으로 카드, 계좌이체 외에 인터넷 뱅킹, 신용카드, 체크카드, 휴대폰 결제 등이 계속 늘어날 경우 분기처리해야 하는 if-else 코드가 추가되어야 함. if문 내 if문이 필요해질 수 있음
+    - 코드 가독성 저하
+- 주어진 결제 로직이 다른 클래스에서도 사용되는 경우 코드를 그대로 복사하여 작성해야 함
+    - 코드 재사용성 저하
+    - 변경사항 발생 시 일괄 적용 어려움(유지보수 어려움)
+
+## 개선 방법 - 전략 패턴 사용
+주문 서비스(OrderService) 객체는 카드 결제, 계좌 이체 등의 방법을 이용하여 공통된 '결제' 서비스를 이용하므로 이에 착안하여 추상화한 결제 서비스(PayService)에 의존하도록 설계합니다. 카드 서비스(CardService)와 계좌 서비스(AccountService)가 결제 서비스를 구체화하도록 구현합니다.
+
+::: details PayStrategy
+```java:no-line-numbers
+public interface PayStrategy {
+    void pay(PayInfoDto payInfoDto);
+}
+```
+:::
+
+::: details CardService
+```java:no-line-numbers
+@Service
+@RequiredArgsConstructor
+public class CardService implements PayStrategy{
+    private final CardDao cardDao;
+    private final CardApi cardApi;
+
+    @Override
+    public void pay(PayInfoDto payInfoDto) {
+        cardDao.insertCardInfo(payInfoDto);         // 카드 정보 저장
+        cardApi.pay(payInfoDto);                    // 카드 정보 기반 결제
+    }
+}
+```
+:::
+
+::: details AccountService
+```java:no-line-numbers
+@Service
+@RequiredArgsConstructor
+public class AccountService implements PayStrategy {
+
+    private final AccountDao accountDao;
+    private final AccountApi accountApi;
+
+    @Override
+    public void pay(PayInfoDto payInfoDto) {
+        accountDao.insertAccountInfo(payInfoDto);   // 계좌 정보 저장
+        accountApi.pay(payInfoDto);                 // 계좌 정보 기반 결제
+    }
+}
+```
+:::
+
+::: details Client
+```java:no-line-numbers
+public class Client {
+
+    private PayStrategy payStrategy;
+
+    public Client(PayStrategy payStrategy) {
+        this.payStrategy = payStrategy;
+    }
+
+    public void pay(PayInfoDto payInfoDto) {
+        payStrategy.pay(payInfoDto);
+    }
+}
+```
+:::
+
+::: details OrderController
+```java:no-line-numbers
+@RestController
+@RequiredArgsConstructor
+public class OrderController {
+    private final CardService cardService;
+    private final AccountService accountService;
+
+    @PostMapping("/pay")
+    public void pay(@RequestBody PayInfoDto payInfoDto) {
+        PayStrategy payStrategy = null;
+
+        if (payInfoDto.type == "ACCOUNT") payStrategy = accountService;
+        else if (payInfoDto.type == "CARD") payStrategy = cardService;
+
+        Client client = new Client(payStrategy);
+        client.pay(payInfoDto);
+    }
+}
+```
+:::
+
+- 클라이언트가 결제 기능과 관련된 구체적 메서드를 직접 호출하지 않도록 카드 서비스, 계좌 서비스 클래스를 생성하고 각 클래스 내부에 관련 구체적 기능(알고리즘)을 구현함
+- 클라이언트는 결제 기능이라는 관련된 상위 인터페이스에 의존함
+- if-else 분기 로직을 완전 제거하는 것은 어려움, 따라서 if-else 분기 로직을 최상위 Context에 작성하고 조건에 부합하는 적절한 하위 클래스를 인터페이스에 맵핑하여 전달하도록 구현
+    - 새로운 결제 로직은 결제 인터페이스를 구현하는 클래스 단위로 작성하여 유지보수가 용이해짐
+    - if-else 분기 로직을 사용하는 객체는 최상위 Context로 한정시켜 코드 변경 최소화
+- 정리하면, SRP와 OCP를 통해 코드의 유지보수성을 향상시키고 코드 변경은 최소화함
+
+## A. 참조
+::: left
+Tom, "전략패턴(Strategy Pattern)를 이용해 코드 리팩토링," *Tistory*, Feb. 13, 2020. [Online]. Available: [https://naming0617.tistory.com/33](https://naming0617.tistory.com/33) [Accessed Sep. 3, 2022].
+:::
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>
