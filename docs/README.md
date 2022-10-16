@@ -44,6 +44,11 @@ projects:
     desc: Computer Science
     link: category/operating-system/
 
+  - icon: /assets/icon/git.png
+    name: Git
+    desc: DevOps
+    link: category/git/
+
   - icon: /assets/icon/c++.png
     name: C++
     desc: Programming Language
