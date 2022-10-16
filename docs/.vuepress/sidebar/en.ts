@@ -250,6 +250,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/dev-ops/git/": [
+    {
+      icon: "/assets/icon/git.png",
+      text: "Git",
+      link: "/category/git/",
+      children: "structure",
+    },
+  ],
   "/programming-language/c++/": [
     {
       icon: "/assets/icon/c++.png",
