@@ -23,7 +23,12 @@ projects:
     name: Spring Boot
     desc: Back-end
     link: category/spring-boot/
-  
+
+  - icon: /assets/icon/aws.png
+    name: AWS
+    desc: Cloud
+    link: category/aws/
+
   - icon: /assets/icon/computer-network.png
     name: Computer Network
     desc: Computer Science

@@ -218,6 +218,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/cloud/aws/": [
+    {
+      icon: "/assets/icon/aws.png",
+      text: "AWS",
+      link: "/category/aws/",
+      children: "structure",
+    },
+  ],
   "/computer-science/computer-network/": [
     {
       icon: "/assets/icon/computer-network.png",
