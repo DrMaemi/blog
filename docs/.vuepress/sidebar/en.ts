@@ -284,4 +284,12 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/project/bulletin-board-jsp/": [
+    {
+      icon: "/assets/icon/jsp.png",
+      text: "게시판 만들기 - JSP",
+      link: "/category/게시판-만들기---JSP/",
+      children: "structure",
+    },
+  ],
 });

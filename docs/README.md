@@ -64,5 +64,10 @@ projects:
     desc: Programming Language
     link: category/java/
 
+  - icon: /assets/icon/jsp.png
+    name: 게시판 만들기 - JSP
+    desc: Project
+    link: category/게시판-만들기---jsp/
+
 # footer: customize your footer text
 ---

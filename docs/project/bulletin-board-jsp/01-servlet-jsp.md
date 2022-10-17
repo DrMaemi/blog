@@ -1,0 +1,83 @@
+---
+title: '[게시판 만들기 - JSP] 01. 서블릿(Servlet)과 JSP'
+icon: article
+category: 게시판 만들기 - JSP
+date: 2022-04-26
+order: 1
+---
+
+한국에서 많은 기업들이 백엔드 서버를 프로그래밍할 때 Java 기반의 Spring 프레임 워크를 가장 많이 쓴다. 필자는 백엔드 분야에 관심이 많아서 Spring이 왜 많이 쓰이는지, 그리고 어떻게 사용하는지 궁금해서 공부를 시작했는데, Spring을 제대로 이해하기 위해서는 Spring이 등장하기 전에 자바로 서버를 프로그래밍하기 위한 Servlet, JSP 등을 선행 공부하는 것이 필요하다고 한다.
+
+## 서블릿(Servlet)
+서블릿(Servelet)이란 **자바를 사용하여 웹페이지를 동적으로 생성하는 서버 프로그램, 즉 자바 웹 프로그래밍 기술**이다. 서블릿은 CGI(Common Gateway Interface)의 단점을 보완하기 위해 만들어진 것으로 특정 프로토콜에 국한되지 않지만 보통 HTTP 환경에서 서블릿을 사용한다.
+
+### 서블릿 특징
+- 클라이언트 요청에 동적으로 동작하는 웹 어플리케이션 컴포넌트
+- HTML을 사용해 요청에 응답
+- 자바 스레드(Java Thread)를 이용
+- MVC 패턴에서 Controller 담당
+- HTTP 서비스를 지원하는 javax.servlet.http.HttpServlet 클래스 상속
+- UDP보다 느린 처리 속도
+- **Java 코드 안에 HTML 코드**
+- HTML 소스 코드 변경 시 서블릿을 다시 컴파일해야 하는 단점 존재
+
+### HTTP 서블릿 역할
+- 폼(form)으로 제출된 데이터 처리 및 저장
+- 동적 컨텐츠 제공
+- State 관리
+
+## 서블릿 컨테이너(Servlet Container)
+**서블릿을 관리하고 서버 구동에 필요한 인터페이스나 컴퓨팅 자원 관리 등을 수행하는 주체가 바로 서블릿 컨테이너(Servlet Container)**다. 서블릿을 위한 실행 환경인 컨테이너가 없다면 서블릿이 생성되지도, 적절히 사용되지도 못한다.
+
+### 서블릿 컨테이너 역할
+- 웹 서버 인터페이싱
+    - 컨테이너는 클라이언트의 모든 요청을 가로채어 URL 안의 패턴을 확인하고 상응하는 서블릿에 요청을 전달
+- 서블릿 생명주기 관리
+- 멀티 스레드 지원 및 관리
+- 선언적 보완 관리
+    - XML 배포 서술자(Deployment Descriptor, DD)를 통해 관리
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-04-25T18:35:52.216Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\&quot; etag=\&quot;dRbCJgRCSTGvEASzXboC\&quot; version=\&quot;17.4.5\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;OT2FRHN7Rbsnf5K7chrg\&quot; name=\&quot;Page-1\&quot;&gt;5Zhdb9sgFIZ/DdJ2sSkY4ziXsZN2N5O6Vlq1q4naNEZzTIZJ0/TXDwJ2bOO0aZc00ZaLCA5wMM95+QQonj9eCrLIvvKU5sAbpI8ATYDnYR+qf21YG0OAPGOYCZYaE9wabtgTtcaBtS5ZSstWRcl5LtmibUx4UdBEtmxECL5qV7vnebvXBZlRx3CTkNy13rJUZsYaesOt/Qtls6zqGQYjUzInVWU7kjIjKV81TGgKUCw4lyY1f4xprtlVXEy7ix2l9YcJWsh9Gvzk5AccL79/kwIFl0/eNBvcfrJeHki+tAMG0wkIIYh8MI3AaAKiGEzjTcLfJAIQhZs6Y50wI5PrCpfgyyKluscBQNEqY5LeLEiiS1dKH8qWyXmuclAlbd9USPq4c1CwRqUkRvmcSrFWVWyDkYVr1YUgNvnVNlawCkDWiFNgbcTKY1Z73hJUCQvxFUC9HqAxCH0wijVQhWy0ITtWHC9URV0aqaxhikHYxB3phuFfUtZ8mRL0OGezQtkkXxyGvTdsw6+D0YCPcA98b3As+v6r6SsVDzRuHQZPQzchCZE1qraRwhDk6tujO6FSM1nj6w0JfBfheyPUVj5y4fcqHx2LPXbYs4LJDx/PD9Vwz0XiaKgCB1VJxQNLqKbVlVrKL6nsL7ji5TkC9r09tYiDIwEOHcDqECEFX/dxPDk/P2wvpD5CJxboyF1Hu5BokY71+UrlkpyUJUvaXNp7lGlOU+ew1WGkuuBLkdCXjyySiBmVL+0FLvMG0769qbIJmhPJHtqf28fZ9nDFmRpIHVLYOZjgYSdUZpi2VfPU1nHk+R1HXseR4eA42oS9HvbblVCdw89SCv6eUsCnlEI9S6vZ7b9RCgii5x0dWwo9l4WzkQLeUwrBOUkBBfgwUnAcHVsKPdecs5FCsKcUwlNKwYeddf2tq4LjCL+zFNA/IIUd57N3WhXwC1v8/qtC8HnU/D3vdocwVKTIulFtoSuUuz8f4u7+FnZ0ZjweVnXuTf+a/l6qQ74jPnUul225EfsSkig9UdHzRDJnaaqbR4KW7IncbVxpaVoWyi+OAJ5oX0vJS/NqqV3rS8YvGvOcK7+Tghfayz3L844JHODW1Zn4qOfWFfSotiuDg10aoPsCcE3LBS9K+t8EBVZvC9VkwG5QhocJispuH4/NvNq+wKPpHw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="caption">&lt;그림 1. 서블릿 생명주기(Life Cycle)&gt;</div>
+
+## JSP
+JSP는 서블릿의 단점이었던 HTML 소스 코드 변경 시 다시 컴파일해야 했던 생산성 저하 문제를 해결한 동적 웹 프로그래밍 기술이다.
+
+### JSP 특징
+- 서블릿을 보완하고 기술을 확장한 스크립트 방식 표준
+    - 서블릿의 모든 장점을 가지며 몇 가지 추가 기능을 가진다.
+        - Implicit objects
+        - Predefined tags
+        - Expression language
+        - Custom tags
+- **HTML 코드 안에 Java 코드**
+
+JSP는 `.jsp` 확장자 파일을 통해 웹페이지를 생성한다. JSP임을 알리기 위해 페이지 지시자 `<%@ page%>`가 있어야 한다.
+
+### JSP 동작 구조
+1. 클라이언트(브라우저)가 JSP 웹페이지 요청(`a.jsp`)
+2. 웹서버가 요청을 서블릿 컨테이너에 전달
+3. 컨테이너가 해당 JSP 파일로부터 서블릿 파일 생성(`a_jsp.java`)
+4. 서블릿 파일이 컴파일되어 서블릿 클래스 파일 생성(`a_jsp.class`)
+5. 컨테이너가 웹 서버로 서블릿 클래스 파일 전달
+6. 웹 서버가 해당 서블릿 클래스 파일의 출력 결과인 HTML 웹페이지를 클라이언트에 전달
+
+JSP 파일이 서블릿으로 변환되는 과정은 해당 페이지에 대한 최초 요청 1회뿐이다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-04-29T05:22:07.379Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\&quot; etag=\&quot;28ff31mS0Q593cbFtYcK\&quot; version=\&quot;17.4.6\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;Tnp8DQkiI_wHCOmRKNzy\&quot; name=\&quot;JSP Life Cycle\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="align-center">&lt;그림 2. JSP 동작 구조&gt;</div>
+
+## A. 참조
+::: left
+망나니개발자, "[JSP] 서블릿(Servlet)이란?", *Tistory*, Nov. 4, 2017. [Online]. Available: [https://mangkyu.tistory.com/14](https://mangkyu.tistory.com/14) [Accessed Apr. 26, 2022].
+
+Java, "서블릿(Servlet)의 구조와 접근 방식 (feat. CGI)", *Tistory*, Feb. 16, 2021. [Online]. Available: [https://kadensungbincho.tistory.com/61](https://kadensungbincho.tistory.com/61) [Accessed Apr. 26, 2022].
+
+권택현, "[Front] JSP동작 원리와 기초", *medium.com*, Jun. 10, 2020. [Online]. Available: [https://medium.com/@denyok1995/front-jsp동작-원리와-기초-928d1e89bbcb](https://medium.com/@denyok1995/front-jsp동작-원리와-기초-928d1e89bbcb) [Accessed Apr. 26, 2022].
+:::
+
+<script setup lang="ts">
+import UmlScript from "@UmlScript";
+</script>
+
+<UmlScript/>
