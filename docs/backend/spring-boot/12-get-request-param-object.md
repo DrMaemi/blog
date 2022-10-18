@@ -3,7 +3,7 @@ title: '[Spring Boot] GET 요청에 RequestParam을 객체로 매핑하기'
 icon: article
 category: Spring Boot
 date: 2022-10-02
-order: 11
+order: 12
 ---
 
 ## RequestParam

@@ -3,7 +3,7 @@ title: '[Spring Boot] Annotation 동작 원리와 사용법'
 icon: article
 category: Spring Boot
 date: 2022-08-21
-order: 1
+order: 2
 ---
 
 ## 1. 어노테이션(Annotation)이란?

@@ -3,7 +3,7 @@ title: '[Spring Boot] application.yml 분리, import'
 icon: article
 category: Spring Boot
 date: 2022-09-08
-order: 8
+order: 9
 ---
 
 스프링부트 어플리케이션 설정 파일인 `application.yml`에서 DB 연결 정보 등 보안 상 민감한 정보들을 따로 분리해서 구성하는 방법이 궁금했습니다.

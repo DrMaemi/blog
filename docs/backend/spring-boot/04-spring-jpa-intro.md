@@ -3,7 +3,7 @@ title: '[Spring Boot] 스프링 JPA(Java Persistence API) 개요'
 icon: article
 category: Spring Boot
 date: 2022-08-16
-order: 3
+order: 4
 ---
 
 ## 0. 들어가며, 관계형 DB와 ORM

@@ -3,7 +3,7 @@ title: '[Spring Boot] JPA 연관 관계 코딩'
 icon: article
 category: Spring Boot
 date: 2022-06-17
-order: 6
+order: 7
 ---
 
 ## 단방향 연관 관계

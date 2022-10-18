@@ -3,7 +3,7 @@ title: '[Spring Boot] 왜 JPA Entity는 기본 생성자를 가져야 하는가?
 icon: article
 category: Spring Boot
 date: 2022-09-06
-order: 5
+order: 6
 ---
 
 ## 에러 - No default constructor for entity

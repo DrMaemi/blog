@@ -3,7 +3,7 @@ title: '[Spring Boot] 스프링 부트와 도커 - 어플리케이션 배포'
 icon: article
 category: Spring Boot
 date: 2022-08-22
-order: 12
+order: 13
 ---
 
 본문에서는 스프링 부트 기반의 간단한 웹 어플리케이션을 도커 이미지로 빌드하고 클라우드에 배포하는 방법에 대해서 다룹니다.

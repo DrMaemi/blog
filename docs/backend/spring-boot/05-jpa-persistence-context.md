@@ -3,7 +3,7 @@ title: '[Spring Boot] JPA 영속성 문맥(Persistence Context)'
 icon: article
 category: Spring Boot
 date: 2022-08-18
-order: 4
+order: 5
 ---
 
 ## 1. 영속성이란

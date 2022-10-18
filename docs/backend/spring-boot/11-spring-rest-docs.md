@@ -3,7 +3,7 @@ title: '[Spring Boot] Spring Rest Docs 적용해보기'
 icon: article
 category: Spring Boot
 date: 2022-09-06
-order: 10
+order: 11
 ---
 
 ## API 명세서 작성 문제

@@ -3,7 +3,7 @@ title: '[Spring Boot] Spring Data의 Page 객체에서 제공하는 메서드'
 icon: article
 category: Spring Boot
 date: 2022-09-06
-order: 13
+order: 14
 ---
 
 최근에 Spring Boot 기반 게시판 어플리케이션 API 서버를 개발해보면서 페이징 요청 기능을 구현해볼 기회가 있었습니다. 

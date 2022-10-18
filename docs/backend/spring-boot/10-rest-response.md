@@ -3,7 +3,7 @@ title: '[Spring Boot] RESTful API Response 객체 만들기'
 icon: article
 category: Spring Boot
 date: 2022-09-04
-order: 9
+order: 10
 ---
 
 스프링 부트로 백엔드 서버를 구축하면서 RESTful API를 설계할 때 어떻게 해야 클라이언트에게 이해하기 쉽고 직관적인 결과를 반환할 수 있을지 고민하다가, 가장 먼저 응답 형식을 통일해야겠다는 생각이 들었습니다. 그래서 RsetResponse라는 클래스를 작성하고 제네릭 타입을 이용하여 정해진 형식에 원하는 객체 데이터를 반환할 수 있도록 했습니다.

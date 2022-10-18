@@ -3,7 +3,7 @@ title: '[Spring Boot] 스프링 AOP(Aspect Oriented Programming)'
 icon: article
 category: Spring Boot
 date: 2022-08-14
-order: 2
+order: 3
 ---
 
 ## 1. AOP란?
