@@ -69,5 +69,10 @@ projects:
     desc: Project
     link: category/게시판-만들기---jsp/
 
+  - icon: /assets/icon/springboot-project.png
+    name: 게시판 만들기 - Spring Boot
+    desc: Project
+    link: category/게시판-만들기---spring-boot/
+
 # footer: customize your footer text
 ---

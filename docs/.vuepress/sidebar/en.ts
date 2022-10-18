@@ -292,4 +292,12 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/project/bulletin-board-springboot/": [
+    {
+      icon: "/assets/icon/springboot-project.png",
+      text: "게시판 만들기 - Spring Boot",
+      link: "/category/게시판-만들기---spring-boot/",
+      children: "structure",
+    },
+  ],
 });

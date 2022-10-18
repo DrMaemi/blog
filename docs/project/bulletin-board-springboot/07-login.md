@@ -1,0 +1,890 @@
+---
+title: '[게시판 만들기 - Spring Boot] 07. 로그인 기능 구현(Spring Security, JPA)'
+icon: article
+category: 게시판 만들기 - Spring Boot
+date: 2022-05-17
+order: 7
+---
+
+본 포스트에서는 Spring Boot Security, JPA, MySQL, Thymeleaf를 이용해서 로그인 기능을 구현하는 방법에 대해 다룬다. 웹 어플리케이션에서 유저의 인증과 권한에 따른 리소스에 대한 접근을 제어하는 것이 비즈니스 로직에 중요한 역할을 한다.
+
+본 포스트에서 다룰 로그인 기능을 구현하기 위해 정말 많은 구글링과 시행착오를 겪었다. 스프링 시큐리티 사용법과 기능, ORM인 JPA를 이용한 MySQL 상 연관 테이블 데이터 접근 방법 등 필자가 몰랐던 부분과 겪었던 시행착오들을 내재화하고 정리하여 내용을 수정해나갈 예정이다.
+
+본 포스트는 <화면 1>과 같은 구조에서 내용을 다룰 예정이다.
+
+![](https://drive.google.com/uc?export=view&id=14pbAb3kMEH5_kRH87TSDuZBfyO4-9mzz)
+&lt;화면 1. 프로젝트 전체 구조&gt;
+{ .align-center }
+
+## 사용자 역할(권한) - 1:N 연관 테이블 데이터 삽입
+스프링 JPA 환경에서 게시글-댓글과 같은 1:N 관계의 테이블과 그들의 데이터를 어떻게 다루는지 알 필요가 있다고 생각했다. 해당 기능을 구현하기 앞서 비슷한 모델인 사용자와 사용자의 역할(권한) 관계의 테이블 `USER`와 `USER_ROLE`를 이용해서 사용자가 회원가입을 수행하면 `USER` 테이블에 레코드가 생성되면서 `USER_ROLE`에도 레코드를 생성시키는 기능을 구현했다. 사용자는 여러 개의 역할을 가질 수 있기 때문에 `USER`와 `USER_ROLE`은 1:N 관계를 가진다. 구현한 사용자 역할은 로그인과 역할에 따른 리소스 접근 기능에 사용된다.
+
+<div class="mxgraph" style="max-width:100%; margin:auto;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-05-18T14:16:35.933Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36\&quot; etag=\&quot;33Z3grBjhqGnG5j5gJ0q\&quot; version=\&quot;18.0.7\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;1dMmQ6C18w8N45v1Bd1y\&quot; name=\&quot;[ERD] USER - USER_ROLE\&quot;&gt;7Vxbb+I4FP41SJ2HWeUOPHJJZ9BAW1G6q90X5CEGrA0x65gW5tevndiEEAKEhsuQSBVKThxfzvedL+45gYremi2/ETCf9rAD3YqmOMuK3q5oWr2msk9uWIUG09BCw4QgJzSpkeEV/YLCqAjrAjnQjzWkGLsUzePGEfY8OKIxGyAEf8SbjbEbH3UOJjBheB0BN2n9Czl0GlprWjWyf4doMpUjq1Y9vDIDsrFYiT8FDv7YMOl2RW8RjGl4NFu2oMt9J/0S3veYcnU9MQI9eswN7eXE+ef18UW1/p1ZBvrbmg2/fhW9vAN3IRYsJktX0gPQYQ4Rp2woRFd96AKKsGdHV5rQcxrc3ayR3cceHOAe8BjmTZ8CQmOXwtaPiM1ObyuyycZ5OAU+bupShcnHCzKCe9anGYIzgEwg3dOwukaEMRniGaRkxe77iDBXFQHkdBNvaSSBT97jMwaCfJN1h+sxXjBia9EUESe6IfoRYVKVrJFdhCsVd22ivNWRsdWRtd1R6IlER+xgY+GRKSBRBkLpCUK9vdr9Yf+5ayeYxSJizg8p+BlwKOCBkACdE4EFNQXIg4QZ1ODcdcHcR0Hz0DJFrtMFK7ygsiN51hyjJXT6oQLwtoyCXdaZL1g2Zp1LXvPLwEUTjx2PGMn4iE0CfTaXLvCpaCGWBgmFy/3MTBJJwlOPw6NKeDaIpu8kWk1J51QMxKyIGYclQALF1kkRcPtMaIE3CTCLQ8L96hA8H8hw44Y55xok9jvz0dr5LNpb2MUcWS/UhKBZsDizyf7YclvKH2bFZBNosXM1Omd/vDmhLez5lAAU+B4yoD4gB6tJ8VyM48KxnAYRzuTHPzGleJYF1nSyJ7FeSRyPg1Y/F7JmAtmXH1mwxcwnYzcQ7ilyHOiFIcmfsyDCeweUO/2/9vk2GNuBeDoexkER1zP6X3QWeSVzb8Bl3PcAhU288Bz/HJprJXBmzTWl2fnWeRqwg8bb4HnYeWr17Z4dGJ6eg8+3bvcG6SB1OGzb9OdghLxJN7zT2uKLeQ6+LCtp8atVc+XPUd1dgEDVIj8ClDM+AqxrPwJqCWQff6hZwL1Q0J8OwOGN+11qfj0B7MKHZBgI/5+Nfut7o/+gKV9uEOqD+p47Fwqn5zJ5Ugp63oJev7agq0dkbK4f46e7X1V2+//e9VzVErgSHMzVfnrrPVQ0678FzxQ2eSZlyHMqkYkHE88jxJo02r3OU2Qr2JMgjUaFexSYeqn8uSj/0Zm686VzjBuM4dPdbab4+96V3kym5UYEsiGdocM+2ZV2Y2APOj37wfry2ydr8udH8STcKiU8Hwk3ry7h1RuM4U+EqFVQCU+m1VxG9uEMO2iMSiE/jiWFE3Jtd3E8lQ0Fqouvd9d7dtvr5MsmjJqRjRYZxrsV1pQF+pOlR8tcod9JsrPtB7TClei1gtbotZQifaxW85tvEfIrzKexZM+Wwcp3y3BMd5egTVmaP5f476jNX1j8k/9F3GDUf8L/BS3Na8na/Bz4/gcmm4KvKneg+PmTo3AKr9dKQc9H0HfU5i8r6Hr9BmP4dHeHzCyefsuMwoZ+e2AG72yznj8vCifdRqY3KUvpzlZcv6x2y68l3lQQn+5vIyXdevfanUyxT6DnQFKq9wFmFE+9M71OU6p3trr6hdXbvMEg/kSMFjRJbiST5HAGkLsh3maxxbvMiwtHZHqRphTvPeJdu7p4Z8qA3b54FzTtbSTT3uV7rRn4UTgNl7vGUsM/q+HrX0u6moab9/WlYjPl60P3ruGmltDw8sXWzCy5IyVnp9EvlIXNo5950+3/AQ==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<div class="align-center">&lt;그림 1. `USER`, `USER_ROLE` 테이블 ERD&gt;</div>
+{ .align-center }
+
+`USER_ROLE`의 `role` 속성으로 `ENUM` 자료형을 사용함으로써 데이터 정합성을 향상시킬 수 있다. `USER` 테이블은 [지난 포스트](06-restful-api-for-user-join.html#db-table-생성)에서 사용한 테이블을 그대로 사용하고, `USER_ROLE` 테이블을 다음 SQL문으로 생성한다.
+
+```sql:no-line-numbers
+CREATE TABLE USER_ROLE (
+    id BIGINT AUTO_INCREMENT,
+    user_id VARCHAR(20),
+    role ENUM("ROLE_USER", "ROLE_ADMIN"),
+    created_date DATETIME(6) NOT NULL,
+    last_modified_date DATETIME(6) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES USER(id)
+    ON DELETE CASCADE
+);
+```
+
+### UserEntity, UserRoleEntity
+[지난 포스트](06-restful-api-for-user-join.html#userentity-timeentity)에서 `USER` 테이블의 튜플과 매핑되는 객체 `UserEntity`를 구현했었다. 이제는 사용자 역할 정보를 담고 있는 `USER_ROLE` 테이블의 튜플과 매핑되는 객체 `UserRoleEntity`를 구현하고 `UserEntity`가 `UserRoleEntity`와 1:N 연관 관계를 가지도록 구현한다.
+
+::: details src/main/java/maemi.dr.SpringDemo.entity.UserEntity
+```java
+package maemi.dr.SpringDemo.entity;
+
+import lombok.*;
+import maemi.dr.SpringDemo.dto.UserDto;
+import maemi.dr.SpringDemo.dto.UserRoleDto;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@NoArgsConstructor(access=AccessLevel.PROTECTED) @Getter @Setter
+@Entity
+@Table(name="USER")
+public class UserEntity extends TimeEntity {
+    @Id
+    @Column(length=20)
+    private String id;
+
+    @Column(length=100, nullable=false)
+    private String password;
+
+    @Column(length=20, nullable=false)
+    private String name;
+
+    @Column(length=20, nullable=false)
+    private String gender;
+
+    @Column(length=50, nullable=false)
+    private String email;
+
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="userId")
+    private List<UserRoleEntity> roles;
+
+    public UserDto toDto() {
+        List<UserRoleDto> userRoleDtos = this.getRoles().stream().map(userRoleEntity ->
+                userRoleEntity.toDto()).collect(Collectors.toList());
+
+        return UserDto.builder()
+                .id(this.getId())
+                .password(this.getPassword())
+                .name(this.getName())
+                .gender(this.getGender())
+                .email(this.getEmail())
+                .roles(userRoleDtos)
+                .createdDate(this.getCreatedDate())
+                .lastModifiedDate(this.getLastModifiedDate())
+                .build();
+    }
+
+    @Builder
+    public UserEntity(String id, String password, String name, String gender, String email, List<UserRoleEntity> roles) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.roles = roles;
+    }
+}
+```
+:::
+
+위 `UserEntity`의 코드를 보면 `List<UserRoleEntity> roles` 필드가 추가된 것을 확인할 수 있다. `UserRoleEntity`와의 연관 관계를 매개하는 필드로 1:N 관계에서 1인 엔티티는 `@OneToMany` 어노테이션을 사용하여 관계를 명시한다. 또한 Entity 객체를 Dto 객체로 변환하기 위한 메서드 `toDto()`가 추가됐다.
+
+- fetch=FetchType
+    - 연관 테이블 간 조인(Join)을 할 시점을 결정
+    - `LAZY` 타입은 연관 엔티티 데이터에 접근할 때 조인하기 때문에 경우에 따라 성능을 향상시킬 수 있음
+    - `EAGER` 타입은 해당 엔티티 데이터에 접근할 때 바로 조인
+- cascade=CascadeType.ALL
+    - 해당 엔티티의 데이터 조작에 따라 연관 엔티티의 데이터 조작 정책을 결정
+    - 해당 엔티티의 데이터 조작에 따라 연관 엔티티의 데이터도 조작됨(수정, 삭제)
+- @JoinColumn(name=&lt;연관 엔티티 필드 명&gt;)
+    - SQL JOIN 구문의 WHERE 절 조건에 들어갈 연관 엔티티의 필드 명시
+    - 이 경우 `USER_ROLE` 테이블의 FK인 필드 명 `user_id`와 매핑되는 `UserRoleEntity`의 필드 명 `userId`
+    - `userId`는 테이블의 `user_id` 필드로 인식함(엔티티 객체의 필드 명이 카멜 케이스(Camel Case)이면 스네이크 케이스(Snake Case)로 변환하는 것으로 추측됨)
+
+::: details src/main/java/maemi.dr.SpringDemo.entity.UserRoleEntity
+```java
+package maemi.dr.SpringDemo.entity;
+
+import lombok.*;
+import maemi.dr.SpringDemo.dto.UserDto;
+import maemi.dr.SpringDemo.dto.UserRoleDto;
+
+import javax.persistence.*;
+
+@NoArgsConstructor(access=AccessLevel.PROTECTED)
+@Getter @Setter
+@Entity
+@Table(name="USER_ROLE")
+public class UserRoleEntity extends TimeEntity {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(length=20)
+    private String userId;
+
+    @Column(length=20)
+    private String role;
+
+    public UserRoleDto toDto() {
+        return UserRoleDto.builder()
+                .id(this.getId())
+                .userId(this.getUserId())
+                .role(this.getRole())
+                .createdDate(this.getCreatedDate())
+                .lastModifiedDate(this.getLastModifiedDate())
+                .build();
+    }
+
+    @Builder
+    public UserRoleEntity(Long id, String userId, String role) {
+        this.id = id;
+        this.userId = userId;
+        this.role = role;
+    }
+}
+```
+:::
+
+`UserRoleEntity`에서 `@ManyToOne` 어노테이션을 사용하면 양방향, 위와 같이 사용하지 않으면 단방향 연관 관계를 가진다고 한다. 어플리케이션에서 엔티티 정보를 CRUD하는 목적과 순서에 따라 양방향, 단방향 연관 관계를 가지도록 설계하는 것이 바람직해보인다.
+
+- @GeneratedValue(strategy=GenerationType.IDENTITY)
+    - 기본 키 생성 전략을 명시하는 어노테이션
+    - IDENTITY, SEQUENCE, AUTO 등의 생성 전략이 있음
+    - IDENTITY의 경우 테이블 내부 시퀀스에 따라 1씩 증가, SQL INSERT 구문 사용 시 해당 필드에 직접 삽입할 필요 없음
+    - SQL 테이블 필드 특성에 AUTO_INCREMENT 명시 필요
+
+이렇게 엔티티 클래스들을 구현한 뒤 후술할 DTO 클래스들까지 모두 구현하면, 사용자 조회나 회원 가입, 회원 정보 수정 등 사용자와 관련된 CRUD 기능 동작 시 `UserEntity`와 `UserRoleEntity`가 `Service`, `Repository` 로직을 통해 DB에 정상적으로 반영된다.
+
+### UserDto, UserRoleDto
+앞서 `UserEntity`가 `List<UserRoleEntity> roles` 필드를 가졌던 것처럼, DTO 객체 `UserDto`도 그에 맞게 사용자 역할 DTO 객체를 리스트로 가지는 `List<UserRoleDto> roles` 필드를 가진다.
+
+::: details src/main/java/maemi.dr.SpringDemo.entity.UserDto
+```java
+package maemi.dr.SpringDemo.dto;
+
+import lombok.*;
+import maemi.dr.SpringDemo.entity.UserEntity;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@NoArgsConstructor @Getter @Setter @ToString
+public class UserDto {
+    private String id;
+    private String password;
+    private String name;
+    private String gender;
+    private String email;
+    private List<UserRoleDto> roles;
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
+
+    public UserEntity toEntity() {
+        return UserEntity.builder()
+                .id(id)
+                .password(password)
+                .name(name)
+                .gender(gender)
+                .email(email)
+                .roles(roles.stream().map(userRoleDto -> userRoleDto.toEntity()).collect(Collectors.toList()))
+                .build();
+    }
+
+    @Builder
+    public UserDto(String id, String password, String name, String gender, String email, List<UserRoleDto> roles, LocalDateTime createdDate, LocalDateTime lastModifiedDate) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.roles = roles;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+    }
+}
+```
+:::
+
+::: details src/main/java/maemi.dr.SpringDemo.entity.UserRoleDto
+```java
+package maemi.dr.SpringDemo.dto;
+
+import lombok.*;
+import maemi.dr.SpringDemo.entity.UserRoleEntity;
+
+import java.time.LocalDateTime;
+
+@NoArgsConstructor @Getter @Setter @ToString
+public class UserRoleDto {
+    private Long id;
+    private String userId;
+    private String role;
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
+
+    public UserRoleEntity toEntity() {
+        return UserRoleEntity.builder()
+                .id(id)
+                .userId(userId)
+                .role(role)
+                .build();
+    }
+
+    @Builder
+    public UserRoleDto(Long id, String userId, String role, LocalDateTime createdDate, LocalDateTime lastModifiedDate) {
+        this.id = id;
+        this.userId = userId;
+        this.role = role;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+    }
+}
+```
+:::
+
+다음으로 사용자 및 사용자 역할 정보를 DB로부터 조회하거나, 컨트롤러로부터 전달받은 DTO 객체들을 DB에 저장/수정하는 `UserService` 객체의 트랜잭션 메서드들에도 약간의 수정이 필요하다.
+
+### UserService
+[지난 포스트](06-restful-api-for-user-join.html#userservice)에서 작성했던 코드에서 `UserEntity`의 `roles` 필드에 관련된 코드들을 추가해줘야 한다. 한 가지 더 추가된 점은, 사용자의 회원 가입 기능을 담당하는 `.joinUser()` 메서드에서, 컨트롤러로부터 전달받는 `userDto` 객체에는 사용자 역할에 관련된 필드인 `roles`가 전달되지 않기 때문에 신규 회원 가입자에 대해 *ROLE_USER* 역할을 부여하는 코드가 필요하다.
+
+::: details src/main/java/maemi.dr.SpringDemo.service.UserService
+```java
+package maemi.dr.SpringDemo.service;
+
+import lombok.AllArgsConstructor;
+import maemi.dr.SpringDemo.entity.UserEntity;
+import maemi.dr.SpringDemo.repository.UserRepository;
+import maemi.dr.SpringDemo.dto.UserDto;
+import maemi.dr.SpringDemo.dto.UserRoleDto;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@AllArgsConstructor
+public class UserService {
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
+
+    @Transactional
+    public List<UserDto> getUserList() {
+        List<UserEntity> userEntities = userRepository.findAll();
+        List<UserDto> userDtoList = new ArrayList<>();
+
+        for (UserEntity userEntity: userEntities) {
+            userDtoList.add(userEntity.toDto());
+        }
+
+        return userDtoList;
+    }
+
+    @Transactional
+    public UserDto getUser(String id) {
+        Optional<UserEntity> userEntityWrapper = userRepository.findById(id);
+        UserEntity userEntity = userEntityWrapper.get();
+        return userEntity.toDto();
+    }
+
+    @Transactional
+    public void joinUser(UserDto userDto) {
+        // 비밀번호 암호화
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        List<UserRoleDto> roles = new ArrayList<UserRoleDto>();
+        UserRoleDto role = UserRoleDto.builder()
+                .userId(userDto.getId())
+                .role("ROLE_USER")
+                .build();
+        roles.add(role);
+        userDto.setRoles(roles);
+        userRepository.save(userDto.toEntity());
+    }
+
+    @Transactional
+    public void updateUser(String id, UserDto userDto) {
+        Optional<UserEntity> user = userRepository.findById(id);
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        user.ifPresent(selectUser -> {
+            selectUser.setId(userDto.getId());
+            selectUser.setPassword(userDto.getPassword());
+            selectUser.setName(userDto.getName());
+            selectUser.setGender(userDto.getGender());
+            selectUser.setEmail(userDto.getEmail());
+        });
+    }
+
+    @Transactional
+    public void deleteUser(String id) {
+        userRepository.deleteById(id);
+    }
+}
+```
+:::
+
+`UserRoleEntity` 객체와 `UserRoleDto` 객체 간 상호 변환을 위해 `Collection` 객체의 `.stream().map()` 메소드를 이용한다. 해당 메서드는 람다 함수 형식으로 각 원소에 대한 처리를 수행한다.
+
+`.joinUser()` 메서드에서 `role` 객체를 빌드 패턴으로 생성할 때 PK인 `id` 필드를 설정하지 않더라도 JPA가 `UserRoleEntity` 객체의 기본 키 생성 전략을 참고하여 자동으로 값을 설정해준다.
+
+지난 포스트와 달리 비밀번호 암호화를 위한 객체 `passwordEncoder`를 서비스 객체 내부에서 생성하지 않고 후술할 [스프링 시큐리티](#스프링-시큐리티와-기본-로그인-폼을-이용한-로그인-기능-구현)에 언급한 스프링 빈 객체를 주입하도록 코딩했다.
+
+여기까지 완료했다면, DB의 기존 레코드들을 전부 삭제한 뒤 API를 테스트하면 기존 사용자의 CRUD 기능 전부 정상적으로 동작하며, 회원가입 시 `ROLE_USER` 역할이 추가되는 것을 확인할 수 있다.
+
+### 테스트
+![](https://drive.google.com/uc?export=view&id=1_iYagqRkGOoL81VCZ5GApXqCKBYBJ9L1)
+&lt;테스트 1. user1 가입&gt;
+{ .align-center }
+
+admin 유저는 user1보다 먼저 <테스트 1>과 같이 가입 API를 호출했다. 이후 <테스트 2>처럼 목록 조회 시 역할이 자동 생성되는 것을 확인할 수 있다.
+
+![](https://drive.google.com/uc?export=view&id=1wRAIHKTySmuofUb3VNRLzC-HppjHV1-w)
+&lt;테스트 2. admin, user1 가입 후 유저 목록 조회&gt;
+{ .align-center }
+
+테스트를 위해 admin 유저에게 *ROLE_ADMIN* 역할을 다음과 같이 추가하고
+
+::: details CMD
+```:no-line-numbers
+mysql> INSERT INTO USER_ROLE(user_id, role, created_date, last_modified_date) VALUES('admin', 'ROLE_ADMIN', NOW(), NOW());
+Query OK, 1 row affected (0.01 sec)
+```
+:::
+
+&lt;테스트 3&gt;처럼 admin 유저의 추가된 역할 또한 정상적으로 조회됨을 확인할 수 있다.
+
+![](https://drive.google.com/uc?export=view&id=1RD2XstwLZiKEaY3LsZ06k9u7jFRo_1-0)
+&lt;테스트 3. admin 유저에게 *ROLE_ADMIN* 역할을 추가한 뒤 유저 목록 조회&gt;
+{ .align-center }
+
+<테스트 4>와 같이 user1 유저 정보를 삭제한 뒤, 유저 목록을 조회하면 <테스트 5>처럼 user1에 대한 정보가 조회되지 않는다.
+
+![](https://drive.google.com/uc?export=view&id=1kapUbXX2Awneo-EljNJ_7L4Ph6r5zwvT)
+&lt;테스트 4. user1 유저 정보 삭제&gt;
+{ .align-center }
+
+![](https://drive.google.com/uc?export=view&id=1FHFHOCdup1TiH6F3Q5xEPEDUiIgdroex)
+&lt;테스트 5. user1 정보 삭제 후 유저 목록 조회&gt;
+{ .align-center }
+
+SQL문으로 `USER_ROLE` 테이블에서 id 2였던 user1 유저의 역할이 삭제됨을 확인할 수 있다.
+
+::: details CMD
+```:no-line-numbers
+mysql> SELECT * FROM USER_ROLE;
++----+---------+------------+----------------------------+----------------------------+
+| id | user_id | role       | created_date               | last_modified_date         |
++----+---------+------------+----------------------------+----------------------------+
+|  1 | admin   | ROLE_USER  | 2022-05-20 13:28:45.166697 | 2022-05-20 13:28:45.166697 |
+|  3 | admin   | ROLE_ADMIN | 2022-05-20 13:48:40.000000 | 2022-05-20 13:48:40.000000 |
++----+---------+------------+----------------------------+----------------------------+
+2 rows in set (0.00 sec)
+```
+:::
+
+## 스프링 시큐리티와 기본 로그인 폼을 이용한 로그인 기능 구현
+스프링부트 어플리케이션에서 로그인 기능을 비롯해 각종 보안 관련 설정을 수행할 수 있는 스프링 시큐리티(Spring Security)를 사용한다. 스프링 시큐리티의 아키텍처와 구성 요소, 동작 원리를 잘 설명한 [포스트](https://www.bottlehs.com/springboot/스프링-부트-spring-security를-활용한-인증-및-권한부여/)로 그와 관련된 자세한 내용은 생략한다.
+
+스프링 시큐리티를 사용하기 위해서 먼저 `build.gradle`에 다음 코드를 작성해 의존성 사용을 명시한다.
+
+::: details build.gradle
+```gradle:no-line-numbers
+...
+dependencies {
+    ...
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    ...
+}
+```
+:::
+
+의존성을 추가하면 항상 rebuild 해야 함을 잊지 않도록 한다. 이후 자바 프로젝트 패키지 하위에 `config` 패키지를 생성해 `SecurityConfig.java`를 다음과 같이 작성한다.
+
+::: details src/main/java/maemi.dr.SpringDemo.config.SecurityConfig
+```java
+package maemi.dr.SpringDemo.config;
+
+import lombok.AllArgsConstructor;
+import maemi.dr.SpringDemo.service.UserAuthService;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration // 자바 기반의 Config 명시
+@EnableWebSecurity // 시큐리티 필터가 등록
+@AllArgsConstructor
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private UserAuthService userAuthService;
+
+    @Bean // 비밀번호 암호화를 위해 사용, 어플리케이션에서 해당 객체가 한 개만 필요하므로 스프링 빈으로 등록
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /*
+    스프링 시큐리티가 어플리케이션의 유저 인증 로직에서 유저의 아이디와 비밀번호를 가로채 인증 진행
+    유저가 회원가입했을 때 해쉬화한 암호화 인코더와 동일한 인코더를 사용하여 DB 내 유저 정보와 비교
+    */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userAuthService).passwordEncoder(passwordEncoder());
+    }
+
+    // 정적 자원에 대해서는 Security 설정을 적용하지 않음.
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable() // Non-browser client를 위한 disable. disable 하지 않으면 Postman과 같은 테스트 플랫폼에서 GET을 제외한 API 호출이 막히게 된다. 테스트 시에만 disable
+                .cors() // Front와 Back 도메인이 다른 경우 CORS 허용
+                .and() // 그리고
+                .authorizeRequests() // 인가(Authorization) 요청 수신 시
+                    .antMatchers("/api/**", "/").permitAll() // 일반적인 ant 패턴 URL을 감지하여 정책 적용
+                    .mvcMatchers("/user/**").permitAll() // MVC 패턴의 URL을 감지하여 정책 적용
+                    .mvcMatchers("/manage/**").hasRole("ADMIN") // ROLE_로 시작되는 경우 java.lang.IllegalArgumentException: role should not start with 'ROLE_' since it is automatically inserted 오류 발생
+                    .anyRequest().authenticated() // 다른 모든 요청은 인증이 된 후에 접근 가능
+                .and() // 그리고
+                    .formLogin(); // 로그인 폼 사용
+    }
+}
+```
+:::
+
+- **@Configuration**
+    - 자바 기반 config 사용 명시, 스프링 빈 설정 담당 클래스가 됨
+    - 해당 클래스 내부에서 @Bean 어노테이션을 사용한 메서드를 사용하면 스프링 빈으로 정의되어 생명주기가 결정됨
+    - 자바 기반의 config를 사용하기 싫다면 XML을 사용해야 함
+- **@Bean**
+    - 기존에 작성했던 `UserService` 클래스에서 암호화 인코더 객체를 매 번 생성하던 것을 스프링 빈으로 관리하도록 변경
+- **configure(&lt;SecurityFilter&gt;)**
+    - 설정 오버로딩을 통해 해당 필터의 설정들을 변경함
+
+[지난 포스트](06-restful-api-for-user-join#userentity-timeentity)에서 언급한 내용으로, 스프링 시큐리티를 사용하면 웹 어플리케이션을 이용할 때 자동으로 로그인 보안을 적용한다. 위와 같이 `SecurityConfig.java` 파일을 작성한 뒤 http://localhost:8080에 접속해보면 스프링 시큐리티의 기본 로그인 폼을 <화면 2>와 같이 확인할 수 있다.
+
+![](https://drive.google.com/uc?export=view&id=17TjhVfVmZXOG3m5l2PZyrgHKm7Hm_R1M)
+&lt;화면 2. 스프링 시큐리티 기본 로그인 폼&gt;
+{ .align-center }
+
+이 때 `USER` 테이블에 저장된 회원 정보를 입력해서 로그인을 시도할 수 있는데, 정상적으로 로그인 기능을 이용하려면 스프링 시큐리티의 인증 공금자(AuthenticationProvider)가 사용자 인증을 수행하는데 필요한 인터페이스 `UserDetails`, `UserDetailsService`를 구현한 구현체가 필요하다. 본 프로젝트에서는 각각 `UserAuth`, `UserAuthService`가 해당 인터페이스들을 구현한다. 해당 구현체들이 없다면 로그인 기능이 정상 동작하지 않는다.
+
+![](https://drive.google.com/uc?export=view&id=1vnqEHbuRPmZkG30rW1e5HFfLahr_I5CW)
+&lt;화면 3. 로그인 정보를 정확히 입력해도 로그인 실패(로그인 기능이 동작하지 않음)&gt;
+{ .align-center }
+
+따라서 다음과 같이 `UserAuth`, `UserAuthService`를 구현한다.
+
+::: details src/main/java/maemi.dr.SpringDemo.config.auth.UserAuth
+```java
+package maemi.dr.SpringDemo.config.auth;
+
+import maemi.dr.SpringDemo.entity.UserEntity;
+import maemi.dr.SpringDemo.entity.UserRoleEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+public class UserAuth implements UserDetails {
+    private UserEntity userEntity;
+
+    public UserAuth(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    // 계정이 갖고있는 권한 목록
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+
+        for (UserRoleEntity userRoleEntity: userEntity.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(userRoleEntity.getRole()));
+        }
+
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return userEntity.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return userEntity.getId();
+    }
+
+    // 계정 만료 여부 (true: 만료되지 않음)
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    // 계정 잠금 여부 (true: 잠기지 않음)
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    // 암호 만료 여부 (true: 만료되지 않음)
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    // 계정 활성화 여부 (true: 활성화)
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
+```
+:::
+
+::: details src/main/java/maemi.dr.SpringDemo.service.UserAuthService
+```java
+package maemi.dr.SpringDemo.service;
+
+import lombok.AllArgsConstructor;
+import maemi.dr.SpringDemo.config.auth.UserAuth;
+import maemi.dr.SpringDemo.entity.UserEntity;
+import maemi.dr.SpringDemo.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class UserAuthService implements UserDetailsService {
+    UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> {
+                    return new UsernameNotFoundException("User not found.:"+userId);
+                });
+        return new UserAuth(user);
+    }
+}
+```
+:::
+
+위처럼 구현했다면, 스프링 시큐리티는 로그인 페이지로부터 사용자 정보를 입력받아 회원 DB에 있는 정보와 비교한 뒤(`.loadUserByUsername()`), 인증에 성공했다면 해당 유저 정보를 세션으로 등록하고 성공 페이지로 리디렉션을 수행한다. <화면 4>는 사용자 정보를 입력해 로그인에 성공한 뒤 `/` URL로 리디렉션된 모습이다. 보이는 화면은 필자가 임의로 작성해놨던 `index.html` 페이지다.
+
+![](https://drive.google.com/uc?export=view&id=1GnTieLXlCpCUi7wUgXjpkX7UvMFjToRm)
+&lt;화면 4. 로그인 성공 후 `/`로 리디렉션&gt;
+{ .align-center }
+
+## 커스텀 로그인 폼을 이용한 로그인 기능 구현
+`SpringConfig.java` 파일에 다음 코드를 추가해주면 스프링 시큐리티의 기본 로그인 폼을 사용하지 않고 별도로 구현한 로그인 폼을 사용할 수 있다.
+
+::: details src/main/java/maemi.dr.SpringDemo.config.SecurityConfig
+```java
+...
+
+@Configuration // 자바 기반의 Config 명시
+@EnableWebSecurity // 시큐리티 필터가 등록
+@AllArgsConstructor
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    ...
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                ...
+                .and() // 그리고
+                    .formLogin() // 로그인 폼 사용
+                    .loginPage("/user/login") // 커스텀 로그인 페이지 경로 .html
+                    .loginProcessingUrl("/user/loginAction") // 해당 Url로 전달되는 로그인 정보를 스프링 시큐리티가 가로채 인증 진행
+                    .usernameParameter("userId") // <input> 태그의 name 속성의 값이 userId인 데이터를 가로챔
+                    .passwordParameter("userPassword") // <input> 태그의 name 속성의 값이 userPassword인 데이터를 가로챔
+                    .defaultSuccessUrl("/"); // 로그인에 성공하면 해당 경로로 리디렉션
+    }
+}
+```
+:::
+
+### UserController
+`/user/login` URL을 비롯해 사용자 관련 URL 요청을 MVC 패턴으로 처리할 컨트롤러인 `UserController.java`를 다음과 같이 작성한다.
+
+::: details src/main/java/maemi.dr.SpringDemo.controller.UserController
+```java
+package maemi.dr.SpringDemo.controller;
+
+import lombok.AllArgsConstructor;
+import maemi.dr.SpringDemo.dto.UserDto;
+import maemi.dr.SpringDemo.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@AllArgsConstructor
+public class UserController {
+    UserService userService;
+
+    @GetMapping("/user/login")
+    public String login() {
+        return "/user/login";
+    }
+
+    @GetMapping("/user/join")
+    public String join() {
+        return "/user/join";
+    }
+
+    @PostMapping("/user/join")
+    public String join(UserDto userDto) {
+        userService.joinUser(userDto);
+        return "redirect:/user/login";
+    }
+}
+```
+:::
+
+### join.html
+사용자가 보게 될 회원가입 페이지를 작성한다.
+
+::: details src/main/resources/templates/user/join.html
+```html
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta name="viewport" content="width=device-width" initial-scale="1" charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+  <title>스프링부트 게시판 웹사이트</title>
+</head>
+<body>
+<div th:insert="/common/header.html" id="header"></div>
+<div class="container">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+    <div class="jumbotron" style="padding-top: 20px;">
+      <form method="post" action="/user/join">
+        <h3 style="text-align: center;">회원가입</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="아이디" name="id" maxlength="20">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="비밀번호" name="password" maxlength="20">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="이름" name="name" maxlength="20">
+        </div>
+        <div class="form-group" style="text-align: center;">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+              <input type="radio" name="gender" autocomplete="off" value="male" checked>남자
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="gender" autocomplete="off" value="female" checked>여자
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="이메일" name="email" maxlength="50">
+        </div>
+        <input type="submit" class="btn btn-primary form-control" value="가입">
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>
+```
+:::
+
+한 가지 유의할 점으로, 컨트롤러가 해당 HTTP 요청에 맞는 메서드를 호출할 때 메서드의 인자로 전달받는 DTO 객체의 필드 명과 `<input>`의 `name` 속성에 할당되는 값이 서로 같아야 한다. UI에서 사용자가 작성한 내용이 제출(submit)될 때 `<form>`의 `<input>`들의 `name`과 DTO 객체의 필드 명과 매핑시켜 초기화한 뒤 DTO 객체를 전달하기 때문이다.
+
+### login.html
+사용자가 보게 될 로그인 페이지를 작성한다.
+
+::: details src/main/resources/templates/user/login.html
+```html
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta name="viewport" content="width=device-width" initial-scale="1" charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+  <title>스프링부트 게시판 웹사이트</title>
+</head>
+<body>
+<div th:insert="/common/header.html" id="header"></div>
+<div class="container">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4">
+    <div class="jumbotron" style="padding-top: 20px;">
+      <form method="post" action="/user/loginAction">
+        <h3 style="text-align: center;">로그인</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="아이디" name="userId" maxlength="20">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="비밀번호" name="userPassword" id="userPassword" maxlength="20">
+        </div>
+        <input type="submit" class="btn btn-primary form-control" value="로그인">
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-4"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>
+```
+:::
+
+### index.html
+사용자가 보게 될 루트 페이지를 작성한다.
+
+::: details src/main/resources/templates/index.html
+```html
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta name="viewport" content="width=device-width" initial-scale="1" charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+  <title>스프링부트 게시판 웹사이트</title>
+</head>
+<body>
+<div th:insert="/common/header.html" id="header"></div>
+<p>임시 메인 페이지입니다 :)</p>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>
+```
+:::
+
+### header.html
+네비게이션 바와 관련된 코드가 있는 `header.html`은 각 페이지 공통으로 들어간다. 위 index.html, login.html에서 살펴볼 수 있듯이 `<div th:insert="common/header.html"><div>`로 헤더 html 파일을 삽입할 수 있다.
+
+::: details src/main/resources/templates/common/header.html
+```html
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed"
+            data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">스프링부트 게시판 웹사이트</a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/">메인</a></li>
+      <li><a href="/board/list">게시판</a></li>
+    </ul>
+    <ul sec:authorize="isAnonymous()" class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+           data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false">접속하기<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/user/login">로그인</a></li>
+          <li><a href="/user/join">회원가입</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+           data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false">회원관리<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/user/logout">로그아웃</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+```
+:::
+
+코드를 살펴보면 조건문 `sec:authorize=<condition>`으로 자격에 따른 분기 처리를 했다. 해당 구문은 HTML 파일 헤더에 스프링 시큐리티 태그 라이브러리 사용을 명시하는 `xmlns:sec="http://www.thymeleaf.org/extras/spring-security"`을 선언함으로써 사용할 수 있다. 여기서 xmlns는 XML네임스페이스를 사용하겠다는 의미이고 이를 통해 해당 네임스페이스 내부에 있는 변수나 함수 등을 사용할 수 있는 것과, 스프링 시큐리티는 사용자의 관련 정보를 세션 정보에 담아두고 있다는 것을 추측할 수 있다. `<condition>`으로 `isAnonymous()`, `isAuthenticated()`를 사용했는데 전자는 로그인되지 않은 익명의 사용자인 경우, 후자는 로그인으로 인증된 사용자인 경우 참(True)을 반환한다. 이외에도 다음과 같은 표현식들을 사용할 수 있다.
+
+표현식 | 설명
+--- | ---
+hasRole(&lt;ROLE&gt;) | 해당 권한이 있을 경우 참
+hasAnyRole(&lt;ROLE1, ROLE2, ...&gt;) | 나열된 권한 중 하나라도 있는 경우 참
+isAuthenticated() | 권한과 관계 없이, 로그인 인증이 된 경우 참
+isFullyAuthenticated() | 권한과 관계 없이, 로그인 인증 후 자동 로그인이 비활성화인 경우 참
+isAnonymous() | 권한이 없는 익명의 사용자인 경우 참
+isRememberMe() | 자동 로그인을 사용하는 경우 참
+
+여기까지 완료했다면 다음과 같이 로그인에 따라 네비게이션 바가 달리 보이는 것을 확인할 수 있다.
+
+![](https://drive.google.com/uc?export=view&id=1khLs_c1NnDWIBXg8SV2lpMeEMOP-0fxi)
+&lt;화면 5. 로그인 전, 커스텀 로그인 페이지&gt;
+{ .align-center }
+
+![](https://drive.google.com/uc?export=view&id=1B3SaSRMmIe4wM5ZoCC9lZW6sS-NChs-d)
+&lt;화면 6. 로그인 후, 메인 페이지&gt;
+{ .align-center }
+
+## A. 참조
+::: left
+Bottlehs Tech Blog, "스프링 부트 Spring Security를 활용한 인증 및 권한부여", *bottlehs.com*, Apr. 8, 2021. [Online]. Available: [https://www.bottlehs.com/springboot/스프링-부트-spring-security를-활용한-인증-및-권한부여/](https://www.bottlehs.com/springboot/스프링-부트-spring-security를-활용한-인증-및-권한부여/) [Accessed May 18, 2022].
+
+G_Gi, "[Spring] 스프링 시큐리티 로그인", *Tistory*, Feb. 14, 2021. [Online]. [https://tmdrl5779.tistory.com/72](https://tmdrl5779.tistory.com/72) [Accessed May 18, 2022].
+
+Ukjin Yang, "스프링 주요 어노테이션 정리", *dev.to*, Aug. 12, 2021. [Oneline]. Available: [https://dev.to/composite/-40c0](https://dev.to/composite/-40c0) [Accessed May 18, 2022].
+
+jogeum, "JPA 관계와 그 사용법에 대해 (단방향)", *jogeum.net*, Oct. 9, 2018. [Online]. Available: [https://jogeum.net/7](https://jogeum.net/7) [Accessed May 17, 2022].
+
+코딩벌레, "[Java]자바 스트림Stream(map,filter,sorted / collect,foreach)", *Tistory*, Aug. 9, 2021. [Online]. Available: [https://dpdpwl.tistory.com/81](https://dpdpwl.tistory.com/81) [Accessed May 19, 2022].
+
+coco3o, "Spring Boot JPA 게시판 댓글 작성 및 조회 구현하기", *Tistory*, Jan. 4, 2022. [Online]. Available: [https://dev-coco.tistory.com/132](https://dev-coco.tistory.com/132) [Accessed May 18, 2022].
+
+eunji, "#5-2 spring boot 게시판 만들기 - 게시글 등록", *Velog.io*, Jun. 1, 2021. [Online]. Available: [https://velog.io/@eunji/6-spring-boot-게시판-만들기-게시글-등록](https://velog.io/@eunji/6-spring-boot-게시판-만들기-게시글-등록) [Accessed May 22, 2022].
+:::
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+import UmlScript from "@UmlScript";
+</script>
+
+<DetailsOpen/>
+<UmlScript/>
