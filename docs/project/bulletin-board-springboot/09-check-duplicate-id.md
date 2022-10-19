@@ -125,8 +125,9 @@ User ID : <input type="text" id="inputId">
 
 사실, html 파일을 작성한 뒤 바로 테스트했을 때 ERROR 200 오류를 발생시켰다. 어플리케이션 URL로 GET 요청 시 오류가 발생하고 있었는데, 확인해보니 스프링부트 어플리케이션이 CORS를 허용하지 않아 발생한 문제였다. 나는 분명 CORS를 허용한 걸로 이해하고 있었는데, 알고보니 CORS 허용을 위해 스프링 시큐리티에 추가적으로 CORS 요청에 대한 리소스 관리 로직을 구현하는 구현체가 필요했다.
 
+::: info
 CORS란 Cross Origin Resource Sharing의 약자로, 말 그대로 다른 출처의 리소스를 공유하는 것이다. 출처는 URL 구성요소 중 Protocol, Host, Port를 합친 것이다. 그 중 하나라도 다르다면 다른 출처로 인식한다.
-{: .notice--info}
+:::
 
 ## 스프링 시큐리티 CORS 설정
 [지난 포스트](07-login.html#스프링-시큐리티와-기본-로그인-폼을-이용한-로그인-기능-구현)에서 작성했던 `SecurityConfig.java` 파일에서 `CorsConfigurationSource` 인터페이스를 구현하는 구현체 코드를 스프링 빈으로서 작성하고, CORS 예비 요청(PreflightRequest) 방식에 대해 허용한다.
@@ -272,8 +273,8 @@ public class UserRestController {
         return userService.isExistId(id);
     }
 }
-
 ```
+:::
 
 ## join.html
 여기까지 완료했다면 이제 회원가입 페이지에 비동기 처리를 위한 자바스크립트를 작성하면 된다. 솔직히 위에서 실습한 대로 작성하면 금방 해결될 줄 알았는데 웹페이지가 의도대로 동작해주지 않았다.
