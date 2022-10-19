@@ -300,4 +300,12 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/other/": [
+    {
+      icon: "/assets/icon/rocket-launch.png",
+      text: "Other",
+      link: "/category/other/",
+      children: "structure",
+    },
+  ],
 });

@@ -74,5 +74,10 @@ projects:
     desc: Project
     link: category/게시판-만들기---spring-boot/
 
+  - icon: /assets/icon/rocket-launch.png
+    name: IDEs, Tools, etc.
+    desc: Other
+    link: category/other/
+
 # footer: customize your footer text
 ---
