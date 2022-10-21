@@ -3,7 +3,7 @@ home: true
 layout: Blog
 icon: home
 title: Maemi's Devlog
-heroImage: /logo.png
+heroImage: /hero-image.png
 bgImage: /assets/image/bg-image.png
 heroText: Maemi's Devlog
 tagline: 어려울수록 기본에 미쳐라
@@ -68,6 +68,11 @@ projects:
     name: 게시판 만들기 - JSP
     desc: Project
     link: category/게시판-만들기---jsp/
+
+  - icon: /assets/icon/devlog-icon.png
+    name: Maemi's Devlog
+    desc: Project
+    link: category/maemi's-devlog/
 
   - icon: /assets/icon/springboot-project.png
     name: 게시판 만들기 - Spring Boot

@@ -284,6 +284,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/project/maemi's-devlog/": [
+    {
+      icon: "/assets/icon/devlog-icon.png",
+      text: "Maemi's DevLog",
+      link: "/category/maemi's-devlog/",
+      children: "structure",
+    },
+  ],
   "/project/bulletin-board-jsp/": [
     {
       icon: "/assets/icon/jsp.png",
