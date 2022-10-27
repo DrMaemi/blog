@@ -4,7 +4,7 @@ import { enSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://drmaemi.github.io/blog",
-  darkmode: false,
+  darkmode: "disable",
   hideSiteNameonMobile: false,
 
   author: {
@@ -201,7 +201,7 @@ export default hopeTheme({
       cacheHTML: true,
       cachePic: true,
       appendBase: true,
-      update: "force",
+      // update: "force", // default "available" / "available", "hint", "disable", "force"
       apple: {
         icon: "/assets/icon/apple-icon-152.png",
         statusBarColor: "black",
