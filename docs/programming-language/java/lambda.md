@@ -63,6 +63,134 @@ int max(int a, int b) {
 :::
 ::::
 
+::: info 매개변수가 하나뿐인 경우 괄호 `()`를 생략할 수 있습니다.
+```java:no-line-numbers
+(a) -> a*a;
+a -> a*a;
+```
+
+단, 매개변수의 타입이 있으면 생략할 수 없습니다.
+```java:no-line-numbers
+(int a) -> a*a // OK
+int a -> a*a // Error
+```
+:::
+
+::: info 중괄호 `{}` 안의 문장이 하나일 때 중괄호를 생략할 수 있습니다.
+```java:no-line-numbers
+(String name, int i) -> {
+    System.out.println(name+"="+i);
+}
+
+(String name, int i) ->
+    System.out.println(name+"="+i);
+```
+:::
+
+::: details 메서드 - 람다 변환 예제
+```java:no-line-numbers
+int sum(int[] arr) {
+    int sum = 0;
+    for (int i: arr)
+        sum += i;
+    return sum;
+}
+
+(int[] arr) -> {
+    int sum = 0;
+    for (int i: arr)
+        sum += i;
+    return sum;
+}
+```
+:::
+
+## 1.3. 함수형 인터페이스(Functional Interface)
+자바에서 모든 메서드는 클래스 내에 포함되어야 합니다. 그럼 람다식은 어떤 클래스에 포함되는 것일까요?
+
+지금까지 람다식이 메서드와 동등한 것처럼 설명해왔으나, 사실 람다식은 익명 클래스 객체와 동등합니다.
+
+람다식
+```java:no-line-numbers
+(a, b) -> a > b? a: b
+```
+
+익명 클래스 객체
+```java:no-line-numbers
+new Object() {
+    int max(int a, int b) {
+        return a > b? a: b;
+    }
+}
+```
+
+람다식으로 정의된 익명 객체의 메서드는 어떻게 호출할 수 있을까요? 이미 알고 있는 것처럼, 참조변수가 있어야 객체의 메서드를 호출할 수 있으니 참조변수 `f`에 람다식을 바인딩해봅시다.
+
+```java:no-line-numbers
+타입 f = (a, b) -> a > b? a: b
+```
+
+이 때 참조변수 `f`의 타입은 무엇일까요? 참조형이니 클래스 또는 인터페이스가 가능합니다. 그리고 그 클래스나 인터페이스 내부에는 람다식에 대응되는 메서드가 정의되어 있어야 합니다.
+
+```java:no-line-numbers
+interface MyFunction {
+    public abstract int max(int a, int b);
+}
+```
+
+그러면 이 인터페이스를 구현한 익명 클래스의 객체를 다음과 같이 생성할 수 있습니다.
+
+```java:no-line-numbers
+MyFunction f = new MyFunction() {
+    public int max(int a, int b) {
+        return a > b? a: b;
+    }
+};
+
+int big = f.max(5, 3); // 익명 객체 메서드 호출
+```
+
+그리고 위 코드는 다시 람다식으로 다음과 같이 대체할 수 있습니다.
+
+```java:no-line-numbers
+MyFunction f = (a, b) -> a > b? a: b;
+int big = f.max(5, 3);
+```
+
+이처럼 MyFunction 인터페이스를 구현한 익명 객체를 람다식으로 대체 가능한 이유는, **람다식도 실제로는 익명 개체이며 MyFunction 인터페이스를 구현한 익명 객체의 메서드 max()와 람다식의 매개변수 타입, 개수, 반환값이 일치하기 때문**입니다.
+
+그리고 위에서 살펴본 것처럼, 하나의 메서드가 선언된 인터페이스를 정의해서 람다식을 다루는 것은 기존 자바 규칙들을 어기지 않으면서 자연스럽습니다. 그 결과 자바 진영에서는 인터페이스를 통해 람다식을 다루기로 결정했고, 하나의 메서드가 선언된 인터페이스를 **함수형 인터페이스(functional interface)**라 부르기로 했습니다.
+
+:::: info 함수형 인터페이스에는 오직 하나의 추상 메서드만 정의되어야 한다는 제약이 있습니다.
+그래야만 람다식과 인터페이스의 메서드가 1:1로 연결될 수 있기 때문입니다.
+
+반면에 static 메서드와 default 메서드의 개수에는 제약이 없습니다.
+
+::: tip @FunctionalInterface 어노테이션
+`@FunctionalInterface`를 클래스 레벨에 사용하면 컴파일러가 함수형 인터페이스를 올바르게 정의했는지 확인해주므로 유용하게 사용할 수 있습니다.
+:::
+::::
+
+::: details Collections.sort() 람다식 예제
+기존에는 아래와 같이 인터페이스의 메서드 하나를 구현하는데도 복잡하게 해야 했는데,
+```java:no-line-numbers
+List<String> list = Arrays.asList("abc", "aaa", "bbb", "ddd", "aaa");
+
+Collections.sort(list, new Comparator<>() {
+    public int compare(String s1, String s2) {
+        return s2.compareTo(s1);
+    }
+});
+```
+
+이제 람다식으로 아래와 같이 간단히 처리할 수 있게 됐습니다.
+```java:no-line-numbers
+List<String> list = Arrays.asList("abc", "aaa", "bbb", "ddd", "aaa");
+Collections.sort(list, (s1, s2) -> s2.compareTo(s1));
+```
+:::
+
+#### 함수형 인터페이스 타입의 매개변수와 반환 타입
 (작성 중)
 
 ## A. 참조
