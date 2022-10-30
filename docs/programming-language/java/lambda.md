@@ -191,6 +191,46 @@ Collections.sort(list, (s1, s2) -> s2.compareTo(s1));
 :::
 
 #### 함수형 인터페이스 타입의 매개변수와 반환 타입
+Collections.sort() 람다식 예제에서 익명 클래스 객체나 람다식을 인자로 받는 것, 즉 함수형 인터페이스 타입의 매개변수를 볼 수 있습니다.
+
+함수형 인터페이스 MyFunction이 아래와 같이 정의되어 있을 때,
+
+```java:no-line-numbers
+@FunctionalInterface
+interface MyFunction {
+    void myMethod(); // 추상 메서드
+}
+```
+
+어떤 메서드의 매개변수가 MyFunction 타입이라면, 해당 메서드를 호출할 때 **람다식을 참조하는 참조변수**를 매개변수에 전달해야 합니다.
+
+```java:no-line-numbers
+void aMethod(MyFunction f) {
+    f.myMethod();
+}
+
+MyFunction f = () -> System.out.println("myMethod()");
+aMethod(f);
+
+// 또는 참조변수 없이 직접 람다식을 매개변수에 작성 가능
+// aMethod(() -> System.out.println("myMethod()"));
+```
+
+또한 람다식을 가리키는 참조변수를 반환하거나 람다식을 바인딩한 참조변수를 반환하거나 람다식을 직접 반환할 수 있습니다.
+
+```java:no-line-numebrs
+MyFunction myMethod() {
+    MyFunction f = () -> {};
+    return f;
+
+    // 한 줄로 줄이면 다음과 같이 작성 가능
+    // return () -> {};
+}
+```
+
+메서드가 아니라 객체를 주고 받는 것이므로 근본적으로 달라진 것은 없으나 예전보다 코드가 더 간결하고 이해하기 쉬워졌습니다.
+
+#### 람다식의 타입과 형변환
 (작성 중)
 
 ## A. 참조
