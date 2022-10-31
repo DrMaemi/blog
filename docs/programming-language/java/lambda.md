@@ -231,7 +231,58 @@ MyFunction myMethod() {
 메서드가 아니라 객체를 주고 받는 것이므로 근본적으로 달라진 것은 없으나 예전보다 코드가 더 간결하고 이해하기 쉬워졌습니다.
 
 #### 람다식의 타입과 형변환
-(작성 중)
+**함수형 인터페이스로 람다식을 참조할 수 있는 것일 뿐, 람다식의 타입이 함수형 인터페이스의 타입과 일치하는 것은 아닙니다.**
+
+근본적으로 람다식은 익명 객체이고, 익명 객체는 타입이 없습니다(정확히는 타입이 있으나 컴파일러가 임의로 이름을 정한 것입니다).
+
+따라서 본래 대입 연산자 `=`를 이용해 참조변수에 람다식을 바인딩할 때 형변환이 필요합니다.
+
+```java:no-line-numbers
+MyFunction f = (MyFunction)(() -> {});
+```
+
+람다식은 MyFunction 인터페이스를 직접 구현하진 않았으나 인터페이스를 구현한 클래스의 객체와 완전히 동일하기 때문에 위와 같은 형변환을 허용합니다. 그리고 이 형변환은 생략 가능합니다.
+
+:::: warning 람다식은 이름이 없을 뿐 분명히 객체인데도 Object 타입으로 형변환할 수 없습니다.
+```java:no-line-numebers
+Object obj = (Object)(() -> {}); // Error. 함수형 인터페이스로만 형변환 가능
+```
+
+굳이 Object 타입으로 형변환하려면 먼저 함수형 인터페이스로 변환해야 합니다.
+
+```java:no-line-numbers
+Object obj = (Object)(MyFunction)(() -> {});
+String str = ((Object)(Myfunction)(() -> {})).toString();
+```
+
+::: details 예제
+```java:no-line-numbers
+@FunctionalInterface
+interface MyFunction {
+    void myMethod();
+}
+
+public class LambdaEx2 {
+    public static void main(String[] args) {
+        MyFunction f = () -> {}; // MyFunction f = (MyFunction)(() -> {});
+        Object obj = (MyFunction)(() -> {}); // Object 타입 형변환 생략 가능
+        String str = ((MyFunction)(() -> {})).toString();
+
+        System.out.println(f);
+        System.out.println(obj);
+        System.out.println(str);
+        System.out.println((MyFunction)(() -> {}));
+        System.out.println(((MyFunction)(() -> {})).toString());
+
+        System.out.println(() -> {}); // Error. 람다식은 Object 타입으로 형변환 불가능
+    }
+}
+```
+:::
+::::
+
+#### 외부 변수를 참조하는 람다식
+(작성 예정)
 
 ## A. 참조
 S. Namgung, "람다식(Lambda expression)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 14, sec. 1, pp. 794-796.
