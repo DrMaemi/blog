@@ -282,7 +282,62 @@ public class LambdaEx2 {
 ::::
 
 #### 외부 변수를 참조하는 람다식
-(작성 예정)
+::: details 예제 3
+MyFunction 함수형 인터페이스
+
+```java
+@FunctionalInterface
+public interface MyFunction { 
+    void myMethod();
+}
+```
+
+Outer, Inner 클래스
+```java {9,12}
+class Outer {
+    int val = 10; // Outer.this.val
+
+    class Inner {
+        int val = 20; // this.val
+
+        void method(int i) {
+            int val = 30; // val
+//          i = 10;
+
+            MyFunction f = () -> {
+                System.out.printf("%16s : %d\n", "i", i);
+                System.out.printf("%16s : %d\n", "val", val);
+                System.out.printf("%16s : %d\n", "this.val", ++this.val);
+                System.out.printf("%16s : %d\n", "Outer.this.val", ++Outer.this.val);
+            };
+
+            f.myMethod();
+        }
+    }
+}
+```
+
+LambdaEx3 - main
+```java
+public class LambdaEx3 {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        Outer.Inner inner = outer.new Inner();
+        inner.method(100);
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+               i : 100
+             val : 30
+        this.val : 21
+  Outer.this.val : 11
+```
+:::
+
+(작성 중)
 
 ## A. 참조
 S. Namgung, "람다식(Lambda expression)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 14, sec. 1, pp. 794-796.
