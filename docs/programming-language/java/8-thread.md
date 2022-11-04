@@ -370,11 +370,9 @@ Main thread terminated
 ```
 
 ## A. 참조
-::: left
-S. Namgung, "2. 스레드의 구현과 실행," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 13, sec. 2, pp. 724-7.
+S. Namgung, "2. 스레드의 구현과 실행," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 13, sec. 2, pp. 724-792.
 
 GeeksforGeeks, "Difference Between Callable and Runnable in Java," Aug. 16, 2022. [Online]. Available: [https://www.geeksforgeeks.org/difference-between-callable-and-runnable-in-java/](https://www.geeksforgeeks.org/difference-between-callable-and-runnable-in-java/) [Accessed Sep. 21, 2022].
-:::
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
