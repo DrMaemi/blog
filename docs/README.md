@@ -59,6 +59,11 @@ projects:
     desc: Programming Language
     link: category/c++/
 
+  - icon: /assets/icon/effective-java.png
+    name: Effective Java
+    desc: Programming Language
+    link: category/effective-java/
+
   - icon: /assets/icon/java.png
     name: Java
     desc: Programming Language

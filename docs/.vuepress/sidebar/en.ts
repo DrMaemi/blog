@@ -275,6 +275,15 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/programming-language/effective-java/": [
+    {
+      icon: "/assets/icon/effective-java.png",
+      text: "Effective Java",
+      link: "/category/effective-java/",
+      // activeMatch: "^/programming-language/cpp/",
+      children: "structure",
+    },
+  ],
   "/programming-language/java/": [
     {
       icon: "/assets/icon/java.png",
