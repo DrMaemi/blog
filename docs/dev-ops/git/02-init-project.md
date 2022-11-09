@@ -76,3 +76,15 @@ Total 21 (delta 0), reused 0 (delta 0), pack-reused 0
 To https://github.com/DrMaemi/BBS-JSP.git
  * [new branch]      master -> master
 ```
+
+## Git 파일 관리를 위한 3가지 영역
+### Working Directory
+- 프로젝트의 특정 버전을 Check-out한 영역
+
+### Staging Area
+- Staing Index, 또는 스테이징이라 부름
+- 저장할 파일들에 대한 정보를 담고 있는 파일
+- .git/index
+
+### Git Directory
+(작성 중...)
