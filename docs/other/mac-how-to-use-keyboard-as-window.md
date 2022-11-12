@@ -17,7 +17,7 @@ Mac에서 시스템 환경 설정 → 키보드 → 우측 하단 'Modifier Keys
 - Control 키를 Command로 바인딩
 - Command 키를 Control로 바인딩
 
-![](https://drive.google.com/uv?export=view&id=1xCaYTi4n0NoNOZ0om6Jpf0mIIxf30iwT)
+![](https://drive.google.com/uc?export=view&id=1xCaYTi4n0NoNOZ0om6Jpf0mIIxf30iwT)
 &lt;화면 1. 키보드 보조키(Modifier Keys) 설정&gt;
 { .align-center }
 
@@ -29,19 +29,26 @@ Mac에서 시스템 환경 설정 → 키보드 → 우측 하단 'Modifier Keys
 ### Karabiner-Elements 서드 파티 앱 설치 및 이용
 Karabiner-Elements는 [Karabiner-Elements 공식 다운로드 페이지](https://karabiner-elements.pqrs.org/)에서 다운로드할 수 있습니다.
 
-정상적으로 설치하여 실행하면 키보드 설정을 변경할 수 있는 창이 나타나는데, 사전에 확인해둔 한/영 입력 키를 `f18`과 같은, 존재하지 않는(사용하지 않는) 키로 변경합니다.
+정상적으로 설치하여 실행하면 키보드 설정을 변경할 수 있는 창이 나타나는데, 사전에 확인해둔 한/영 입력 시 인식되는 키(예를 들면 Right Command)를 `f13`과 같은, 존재하지 않는(사용하지 않는) 키로 변경합니다.
 
-이후 맥의 시스템 환경 설정(System Preferences) → 키보드 → 단축키(Shortcut) → 이전 입력 소스 선택에서 `이전 입력 소스 선택`의 `^스페이스` 부분을 클릭하고 `F18`로 변경해줍니다.
+이후 맥의 시스템 환경 설정(System Preferences) → 키보드 → 단축키(Shortcut) → 이전 입력 소스 선택에서 `이전 입력 소스 선택`의 `^스페이스` 부분을 클릭하고 `F13`로 변경해줍니다(한/영 키를 눌러주면 됩니다).
 
-![](https://drive.google.com/uv?export=view&id=1Lpjbd2beV3P3hBZjrDhdPXfwN-ox0XG0)
+![](https://drive.google.com/uc?export=view&id=1Lpjbd2beV3P3hBZjrDhdPXfwN-ox0XG0)
 &lt;화면 2. Keyboard - Shortcut - 이전 입력 소스 선택 - F18&gt;
 { .align-center }
 
 이후, 여전히 CapsLock 키의 한/영 변환 기능을 비활성화하기 위해 시스템 환경 설정(System Preferences) → 키보드 → 입력 소스(Input Source) → ABC에서 하단의 `한/영 키로 ABC 입력 소스 전환`을 체크 해제합니다.
 
-![](https://drive.google.com/uv?export=view&id=1Kxrg-AV_itkUNQUj2N9TX6cBPcpAkeaA)
+![](https://drive.google.com/uc?export=view&id=1Kxrg-AV_itkUNQUj2N9TX6cBPcpAkeaA)
 &lt;화면 3. Keyboard - Input Source - 한/영 키로 ABC 입력 소스 전환 체크 해제.png&gt;
 { .align-center }
+
+한 가지 당황스러웠던 게, 저는 맥북에 연결한 키보드로 한/영 키를 누르면 맥북이 그 어떤 키로도 인식하지 않았습니다. Right Command과 같이 어떤 형태로든 입력이 인식되어야 그 키를 입력 소스 전환 키로 바인딩할 수 있는데.. 결국 저는 한/영 키 오른쪽에 있는 alt 키가 Right Option으로 인식됨을 이용했습니다.
+
+## 4. 서드 파티 앱을 사용하고 싶지 않다면
+본문에서는 서드 파티 앱인 Karabiner을 활용한 키 매핑 방법을 설명했습니다. 그러나 이 방법은 MacOS 호환 문제 때문에 간혹 동작하지 않을 수 있습니다.
+
+이 때문에 서드 파티 앱을 사용하지 않고 키 매핑을 하는 방법을 따로 알아보았고, [[MacOS] 서드 파티 앱 없이 MacOS 키 매핑하기](mac-key-mapping-not-using-third-party-apps.html)에 정리했습니다.
 
 ## A. 참조
 괴물공장, "Windows처럼 Mac 키보드 사용하는 방법", *Tistory*, Feb. 21, 2021. [Online]. Available: [https://mfact12.tistory.com/entry/Windows-사용자의-Mac-외부-키보드-설정](https://mfact12.tistory.com/entry/Windows-사용자의-Mac-외부-키보드-설정) [Accessed Nov. 10, 2022].
