@@ -1,7 +1,9 @@
 ---
 title: '[MacOS] 맥북에서 윈도우 키보드를 윈도우처럼 사용하기'
 icon: article
-category: Other
+category:
+  - Others
+  - MacOS
 date: 2022-11-10
 ---
 

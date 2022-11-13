@@ -1,7 +1,9 @@
 ---
 title: '[MacOS] 서드 파티 앱 없이 MacOS 키 매핑하기'
 icon: article
-category: Other
+category:
+  - Others
+  - MacOS
 date: 2022-11-13
 ---
 

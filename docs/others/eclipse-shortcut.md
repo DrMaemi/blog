@@ -1,7 +1,7 @@
 ---
 title: '[Eclipse] 단축키'
 icon: article
-category: Other
+category: Others
 date: 2022-04-25
 ---
 

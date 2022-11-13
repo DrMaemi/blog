@@ -1,7 +1,9 @@
 ---
 title: '[MacOS] 맥북에서 마우스 가속도 끄기'
 icon: article
-category: Other
+category:
+  - Others
+  - MacOS
 date: 2022-11-11
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: '[MinGW] MinGW란? & 설치 방법'
 icon: article
-category: Other
+category: Others
 date: 2022-02-18
 ---
 
