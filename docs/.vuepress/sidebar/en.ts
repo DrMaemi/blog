@@ -317,12 +317,22 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
-  "/other/": [
+  "/others/": [
     {
       icon: "/assets/icon/rocket-launch.png",
-      text: "Other",
-      link: "/category/other/",
-      children: "structure",
+      text: "Others",
+      link: "/category/others/",
+      children: [
+        {
+          icon: "/assets/icon/macos.png",
+          text: "macOS",
+          prefix: "macos/",
+          collapsable: true,
+          children: "structure",
+        },
+        "eclipse-shortcut",
+        "install-mingw",
+      ],
     },
   ],
 });
