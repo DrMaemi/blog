@@ -86,8 +86,8 @@ projects:
 
   - icon: /assets/icon/rocket-launch.png
     name: IDEs, Tools, etc.
-    desc: Other
-    link: category/other/
+    desc: Others
+    link: category/others/
 
 # footer: customize your footer text
 ---
