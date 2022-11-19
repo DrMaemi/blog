@@ -4,7 +4,7 @@ import { enSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://drmaemi.github.io/blog",
-  darkmode: "disable",
+  darkmode: "auto",
   hideSiteNameonMobile: false,
 
   author: {
