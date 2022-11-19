@@ -332,6 +332,7 @@ export const enSidebar = sidebar({
         },
         "eclipse-shortcut",
         "install-mingw",
+        "intellij-java-sdk-errors",
       ],
     },
   ],
