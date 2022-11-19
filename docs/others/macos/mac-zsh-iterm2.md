@@ -69,23 +69,75 @@ vi ~/.zshrc
 source ~/.zshrc
 ```
 
-### 3.2. 프롬프트(prompt) 수정
-저는 사용자 ID와 기기 ID가 프롬프트에 표시되는 것이 싫었습니다. 이를 삭제하기 위해 3.1. 테마 변경 때와 같이 vi 명령어로 ~/.zshrc 설정 파일을 열어 다음 스크립트를 추가해줍니다.
+### 3.2. 프롬프트(prompt) 수정 - 항상 줄바꿈
+터미널에서 작업을 하다보면 git branch 명 또는 폴더 트리가 길어져 보기 불편할 수 있습니다.
 
-```:no-line-numbers
-DEFAULT_USER="$(whoami)"
+이를 해결하기 위해 프롬프트에서 명령어를 입력하는 부분을 새 줄에서 하도록 설정해줬습니다. [3.1. 테마 변경](#31-테마-변경)에서 설정한 Oh My Zsh 테마 설정 파일을 열어 `build_prompt()` 객체에 `prompt_newline` 함수를 추가하고, `prompt_newline` 함수에 줄바꿈 기능과 프롬프트 표시 형식을 작성해줍니다.
+
+::: details ~/.oh-my-zsh/themes/agnoster.zsh-theme
+저는 agnoster 테마를 사용했습니다.
+
+파일을 열어 스크립트를 살펴보면 다음과 같이 `build_prompt()` 객체에 `prompt_newline`를 추가해줍니다.
+```sh:no-line-numbers {12}
+...
+build_prompt() {
+  RETVAL=$?
+  prompt_status
+  prompt_virtualenv
+  prompt_aws
+  prompt_context
+  prompt_dir
+  prompt_git
+  prompt_bzr
+  prompt_hg
+  prompt_newline # 해당 줄을 추가합니다.
+  prompt_end
+}
+...
 ```
+
+그리고 다음과 같이 `prompt_newline` 함수를 파일 내에 정의해줍니다.
+```sh:no-line-numbers
+prompt_newline() {
+  if [[ -n $CURRENT_BG ]]; then
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
+%{%k%F{green}%}$SEGMENT_SEPARATOR"
+  else
+    echo -n "%{%k%}"
+  fi
+
+  echo -n "%{%f%}"
+  CURRENT_BG=''
+}
+```
+:::
+
+### 3.3. 프롬프트에 사용자ID & 기기ID 추가
+저는 사용자 ID와 기기 ID가 프롬프트에 표시되는 것이 싫었습니다. Oh My Zsh를 사용하면 자연스럽게 이를 삭제해주어 좋았는데, 만약 사용자 ID 및 기기 ID를 프롬프트에 추가하고 싶다면 `vi ~/.zshrc`로 zshrc 파일을 열어 다음 스크립트를 추가해야 합니다.
+
+::: details ~/.zshrc
+```sh:no-line-numbers
+prompt_context() {
+    prompt_segment black default "$USER@%m"
+}
+```
+- $USER@%m - 현재 로그인한 유저 이름과 기기 이름(%m) 명시
+:::
 
 이후 터미널 종료 후 재시작하거나, `source ~/.zshrc` 명령어를 실행해 변경 사항을 반영해줍니다.
 
-### 3.3. 컬러 테마 변경
+### 3.4. 컬러 테마 변경
 iTerm 터미널을 실행한 상태에서 메뉴바의 환경설정(Preferences)을 실행하거나 `cmd`+`,` 단축키를 실행해준 뒤 Profiles - Colors 탭을 선택한 후 우측 하단 Color Presets를 클릭하여 자신이 원하는 컬러 테마로 변경할 수 있습니다.
 
 저는 Tango Dark 컬러 테마가 가장 마음에 들었습니다.
 
 그리고 Color 탭의 Basic Colors나 Cursor Colors에서 세부 색상을 개인이 재설정할 수 있는데, 저는 Basic Colors - Foreground를 Grey 75%(#bfbfbf), Bold를 #c1ddff 색상으로 변경했습니다(Basic Colors - Selection과 같은 옅은 하늘색)
 
-### 3.4. 폰트 다운 및 변경
+![](https://drive.google.com/uc?export=view&id=1MmibQS_l5eYvcS740keA2hggILpyX5Gd)
+&lt;화면 2. iTerm Profiles > Colors 설정&gt;
+{ .align-center }
+
+### 3.5. 폰트 다운 및 변경
 폰트를 변경하는 이유는 보기 좋게 하기 위함도 있지만, 더 중요한 것은 터미널 테마로 agnoster를 선택했을 때 터미널에 표시되는 아이콘이나 기호가 깨져보이는 것을 막기 위함입니다.
 
 터미널 기본 폰트를 사용하면 agnoster 테마의 아이콘이나 기호가 꺠져보일 수 있습니다.
@@ -95,27 +147,35 @@ iTerm 터미널을 실행한 상태에서 메뉴바의 환경설정(Preferences)
 폰트 변경은 환경설정 - Profiles - Text - Font 에서 변경할 수 있습니다.
 
 ![](https://drive.google.com/uc?export=view&id=1KztbMU2ZiiH8aDa88D8YUHKlJupqzHQu){ .border-rectangle }
-&lt;화면 2. iTerm terminal font 변경 - BlexMono Nerd Font&gt;
+&lt;화면 3. iTerm terminal font 변경 - BlexMono Nerd Font&gt;
 { .align-center }
 
-### 3.5. status bar 추가
+### 3.6. status bar 추가
 iTerm 터미널에는 기기의 각종 상태를 볼 수 있는 status bar를 구성할 수 있습니다.
 
 status bar는 환경설정 - Profiles - Session 에서 다음 화면과 같이 설정할 수 있습니다.
 
 ![](https://drive.google.com/uc?export=view&id=1wh3qGe7SKjsfGkOaZCj_XDrI_dNUdwWN)
-&lt;화면 3. iTerm status bar setting&gt;
+&lt;화면 4. iTerm status bar setting&gt;
 { .align-center }
 
 ![](https://drive.google.com/uc?export=view&id=1iYiqt5fVikfFYZPPbx4MC1ST05mbcBzV)
-&lt;화면 4. iTerm status bar configuration&gt;
+&lt;화면 5. iTerm status bar configuration&gt;
 { .align-center }
 
 결과 다음과 같이 터미널에서 status bar를 볼 수 있습니다.
 
 ![](https://drive.google.com/uc?export=view&id=1JT77mGqQ2lOU8boudKxSkDS9r1tvE-4n)
-&lt;화면 5. iTerm status bar&gt;
+&lt;화면 6. iTerm status bar&gt;
 { .align-center}
 
 ## A. 참조
 easyhwan, "[Mac] 맥북 터미널 꾸미기 ( iTerm2, Oh My Zsh )," *Velog.io*, Jun. 28, 2022. [Online]. Available: [https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh](https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh) [Accessed Nov. 13, 2022].
+
+SAMIR MAKWANA, "How to Customize the zsh Prompt in the macOS Terminal," *makeuseof.com*, Apr. 29, 2022. [Online]. Available: [https://www.makeuseof.com/customize-zsh-prompt-macos-terminal/](https://www.makeuseof.com/customize-zsh-prompt-macos-terminal/) [Accessed Nov. 19, 2022].
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>
