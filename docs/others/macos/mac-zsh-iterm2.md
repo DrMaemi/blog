@@ -210,11 +210,26 @@ status bar는 환경설정 - Profiles - Session 에서 다음 화면과 같이 �
 &lt;화면 5. iTerm status bar configuration&gt;
 { .align-center }
 
+![](https://drive.google.com/uc?export=view&id=1JT77mGqQ2lOU8boudKxSkDS9r1tvE-4n)
+&lt;화면 6. status bar 위치 설정&gt;
+{ .align-center }
+
 결과 다음과 같이 터미널에서 status bar를 볼 수 있습니다.
 
 ![](https://drive.google.com/uc?export=view&id=1JT77mGqQ2lOU8boudKxSkDS9r1tvE-4n)
-&lt;화면 6. iTerm status bar&gt;
+&lt;화면 7. iTerm status bar&gt;
 { .align-center}
+
+### 3.7. Tab session bar 항상 보이기 & font 크기 조정
+별 거 아니긴 한데 Tab session bar 관련 설정들도 해줬습니다.
+
+![](https://drive.google.com/uc?export=view&id=18GE6n2gJzCl3ZCATC6v3tlx-PBMFLTrI)
+&lt;화면 8. iTerm - Appearance > Tabs > Show tab bar&gt;
+{ .align-center }
+
+![](https://drive.google.com/uc?export=view&id=1Yz0Z86JEOER1fDjH9Kz6elB8SiwsNzzj)
+&lt;화면 9. iTerm - Tab font size&gt;
+{ .align-center }
 
 ## A. 참조
 easyhwan, "[Mac] 맥북 터미널 꾸미기 ( iTerm2, Oh My Zsh )," *Velog.io*, Jun. 28, 2022. [Online]. Available: [https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh](https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh) [Accessed Nov. 13, 2022].
