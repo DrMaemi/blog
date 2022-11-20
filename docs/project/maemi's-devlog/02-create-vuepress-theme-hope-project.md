@@ -15,6 +15,15 @@ order: 2
 
 [VS Code 공식 다운로드 링크](https://code.visualstudio.com/)
 
+### yarn 설치
+yarn을 설치하지 않아도 되는데, 설치를 원한다면 Node를 설치한 뒤 npm으로 yarn을 설치해줍니다.
+
+```:no-line-numbers
+sudo npm install -g yarn
+```
+
+sudo 명령어 없이 `npm install -g yarn`을 실행하면 `npm ERR! Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/yarn'` 에러가 발생했었는데 유의바랍니다.
+
 ## 프로젝트 생성
 임의의 이름의 디렉토리를 생성한 뒤 해당 디렉토리에서 `npm create vuepress-theme-hope@next docs` 명령어를 실행합니다.
 
