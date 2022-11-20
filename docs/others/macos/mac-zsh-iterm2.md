@@ -97,8 +97,9 @@ build_prompt() {
 ```
 
 그리고 다음과 같이 `prompt_newline` 함수를 파일 내에 정의해줍니다.
+
 ```sh:no-line-numbers
-prompt_newline() {
+prompt_newline() { 
   if [[ -n $CURRENT_BG ]]; then
     echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
 %{%k%F{green}%}$SEGMENT_SEPARATOR"
@@ -110,18 +111,64 @@ prompt_newline() {
   CURRENT_BG=''
 }
 ```
+
+결과
+
+![](https://drive.google.com/uc?export=view&id=1GZPCO9hsXfkbavzyWRqj42exj2h4Bn1c)
+{ .align-center }
 :::
 
-### 3.3. 프롬프트에 사용자ID & 기기ID 추가
-저는 사용자 ID와 기기 ID가 프롬프트에 표시되는 것이 싫었습니다. Oh My Zsh를 사용하면 자연스럽게 이를 삭제해주어 좋았는데, 만약 사용자 ID 및 기기 ID를 프롬프트에 추가하고 싶다면 `vi ~/.zshrc`로 zshrc 파일을 열어 다음 스크립트를 추가해야 합니다.
+함수 내용에 따라 자신이 원하는 프롬프트 모양을 표시할 수 있습니다. 예를 들어 angle bracket 모양(`>`)을 사용하기 위해 다음과 같이 작성합니다.
+
+::: details ~/.oh-my-zsh/themes/agnoster.zsh-theme
+```sh:no-line-numbers {4}
+prompt_newline() {
+  if [[ -n $CURRENT_BG ]]; then
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
+%(?.%F{$CURRENT_BG}.%F{red})❯%f" # 프롬프트 > 모양 사용, CURRENT_BG 색상 동기화
+
+  else
+    echo -n "%{%k%}"
+  fi
+
+  echo -n "%{%f%}"
+  CURRENT_BG=''
+}
+```
+
+결과
+
+![](https://drive.google.com/uc?export=view&id=1lnysZ7wdAJxAZ49p5M-mNpxdi8s7CDMO)
+{ .align-center }
+:::
+
+이후 터미널 종료 후 재시작하거나, `source ~/.zshrc` 명령어를 실행해 변경 사항을 반영해줍니다.
+
+### 3.3. 프롬프트에 사용자ID & 기기ID 삭제
+저는 사용자 ID와 기기 ID가 프롬프트에 표시되는 것이 싫었습니다. 이를 삭제하기 위해서 우선 `~/.oh-my-zsh/themes/agnoster.zsh-theme` 파일에 있는 `prompt_context()` 함수를 살펴봤습니다.
+
+::: details ~/.oh-my-zsh/themes/agnoster.zsh-theme
+```sh:no-line-numbers
+...
+# Context: user@hostname (who am I and where am I)
+prompt_context() {
+  if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
+  fi
+}
+...
+```
+:::
+
+스크립트를 살펴보니 USERNAME 변수가 DEFAULT_USER와 같지 않거나 SSH 터널링으로 접속한 유저에 대해 유저명과 기기명을 표시하도록 로직이 구성되어 있음을 확인했습니다.
+
+위 스크립트를 전부 비활성화시킬 수 있지만 저는 `~/.zshrc` 파일에 DEFAULT_USER 변수에 whoami 변수값을 항상 바인딩하도록 다음과 같이 스크립트를 추가했습니다.
 
 ::: details ~/.zshrc
 ```sh:no-line-numbers
-prompt_context() {
-    prompt_segment black default "$USER@%m"
-}
+...
+DEFAULT_USER="$(whoami)"
 ```
-- $USER@%m - 현재 로그인한 유저 이름과 기기 이름(%m) 명시
 :::
 
 이후 터미널 종료 후 재시작하거나, `source ~/.zshrc` 명령어를 실행해 변경 사항을 반영해줍니다.
@@ -173,6 +220,8 @@ status bar는 환경설정 - Profiles - Session 에서 다음 화면과 같이 �
 easyhwan, "[Mac] 맥북 터미널 꾸미기 ( iTerm2, Oh My Zsh )," *Velog.io*, Jun. 28, 2022. [Online]. Available: [https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh](https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh) [Accessed Nov. 13, 2022].
 
 SAMIR MAKWANA, "How to Customize the zsh Prompt in the macOS Terminal," *makeuseof.com*, Apr. 29, 2022. [Online]. Available: [https://www.makeuseof.com/customize-zsh-prompt-macos-terminal/](https://www.makeuseof.com/customize-zsh-prompt-macos-terminal/) [Accessed Nov. 19, 2022].
+
+초보몽키의 개발공부블로그, "oh-my-zsh 테마 변경 및 설정 (alias, agnoster 멀티라인, 사용자명 숨김처리)," *github.io*, Mar. 12, 2017. [Online]. Available: [https://wayhome25.github.io/blog/page43/](https://wayhome25.github.io/blog/page43/) [Accessed Nov. 20, 2022].
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
