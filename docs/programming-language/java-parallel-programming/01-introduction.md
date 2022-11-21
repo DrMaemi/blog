@@ -1,5 +1,5 @@
 ---
-title: '[자바 병렬 프로그래밍] 01. 개요'
+title: '** [자바 병렬 프로그래밍] 01. 개요'
 icon: article
 category: 자바 병렬 프로그래밍
 date: 2022-11-08
@@ -158,3 +158,9 @@ Thread-0 : 19
 
 ## A. 참조
 B. Goetz, T. Peierls & 4 more, trans. C. G. Kang, "1장 개요," in *자바 병렬 프로그래밍* 1st ed. Seoul Yangcheon-gu, Korea: 에이콘, 2008, ch. 1
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>
