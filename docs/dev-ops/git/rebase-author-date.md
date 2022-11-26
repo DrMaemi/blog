@@ -40,6 +40,17 @@ git credential-osxkeychain erase
 ```
 :::
 
+::: info 등록된 Git 설정을 확인하고 싶다면 <code>git config --list</code> 명령어를 사용합니다.
+```:no-line-numbers
+git config --list
+```
+
+![](https://drive.google.com/uc?export=view&id=1QAc5VEOVJX1fdD0QNBF_h0Ssa6v14rC6)
+{ .align-center }
+
+확인해보니 global 명령어로 설정한 뒤 local 명령어로 설정하면 두 값 모두 확인 가능한데, 내부적으로 local 설정 값을 쓰도록 구현되어 있는 것 같습니다.
+:::
+
 ## 3. Git commit 작성자(author) 변경
 
 ### git log
@@ -134,6 +145,10 @@ detached HEAD 62cbf4e3] Post: [MacOS] 서드 파티 앱 없이 MacOS 키 매핑�
  1 file changed, 117 insertions(+)
  create mode 100644 docs/other/mac-key-mapping-not-using-third-party-apps.md
 $ git rebase --continue
+...
+...
+$ git rebase --continue
+Successfully rebased and updated refs/heads/master.
 ```
 
 테스트해보진 않았으나 e로 명시한 변경 대상 커밋에 한해서 `Stopped at <commit id>...` 문구가 출력되며 순회를 멈추고 변경 내용을 반영할지 넘어갈지 결정하는 것 같습니다.
