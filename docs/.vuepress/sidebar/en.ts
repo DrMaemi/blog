@@ -266,6 +266,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/frontend/react/": [
+    {
+      icon: "/assets/icon/react.png",
+      text: "React",
+      link: "/category/react/",
+      children: "structure",
+    },
+  ],
   "/programming-language/c++/": [
     {
       icon: "/assets/icon/c++.png",

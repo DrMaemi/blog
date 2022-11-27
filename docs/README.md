@@ -54,6 +54,11 @@ projects:
     desc: DevOps
     link: category/git/
 
+  - icon: /assets/icon/react.png
+    name: React
+    desc: Front-end
+    link: category/react/
+
   - icon: /assets/icon/c++.png
     name: C++
     desc: Programming Language
