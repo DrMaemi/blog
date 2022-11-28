@@ -4,7 +4,7 @@ icon: article
 category:
   - DevOps
   - Git
-date: 2022-11-26
+date: 2022-11-28
 order: 3
 ---
 
@@ -55,6 +55,30 @@ git remote rename <old alias> <new alias>
 git remote rename origin github
 ```
 
+### 최신화(업데이트)
+```:no-line-numbers
+git remote update
+```
+
+::: details <code>git remote --help</code>로 확인해본 update 설명
+```:no-line-numbers
+$ git remote --help
+...
+...
+       update
+           Fetch updates for remotes or remote groups in the repository as defined by remotes.<group>. If neither group nor rem
+ote is
+           specified on the command line, the configuration parameter remotes.default will be used; if remotes.default is 
+not defined, all remotes which do not have the configuration para
+meter remote.<name>.skipDefaultUpdate set to true will be 
+updated. (See git-config(1)).
+
+           With --prune option, run pruning against all the remotes that are updated.
+...
+...
+```
+:::
+
 ### 삭제
 ```:no-line-numbers
 git remote remove <alias>
@@ -64,3 +88,9 @@ git remote remove <alias>
 ```:no-line-numbers
 git remote remove origin
 ```
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>
