@@ -1,5 +1,5 @@
 ---
-title: '[React] 01. 개요'
+title: '[React] 개요'
 icon: article
 category: React
 date: 2022-11-26

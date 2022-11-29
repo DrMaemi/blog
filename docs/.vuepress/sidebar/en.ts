@@ -271,7 +271,20 @@ export const enSidebar = sidebar({
       icon: "/assets/icon/react.png",
       text: "React",
       link: "/category/react/",
-      children: "structure",
+      children: [
+        {
+          text: "Tutorial",
+          prefix: "tutorial/",
+          collapsable: true,
+          children: "structure",
+        },
+        {
+          text: "Hooks",
+          prefix: "hooks/",
+          collapsable: true,
+          children: "structure",
+        },
+      ],
     },
   ],
   "/programming-language/c++/": [
