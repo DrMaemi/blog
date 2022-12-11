@@ -74,6 +74,11 @@ projects:
     desc: Programming Language
     link: category/java/
 
+  - icon: /assets/icon/python.png
+    name: Python
+    desc: Programming Language
+    link: category/python/
+
   - icon: /assets/icon/jsp.png
     name: 게시판 만들기 - JSP
     desc: Project

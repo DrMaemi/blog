@@ -314,6 +314,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/programming-language/python/": [
+    {
+      icon: "/assets/icon/python.png",
+      text: "Python",
+      link: "/category/python/",
+      children: "structure",
+    },
+  ],
   "/project/maemi's-devlog/": [
     {
       icon: "/assets/icon/devlog-icon.png",
