@@ -189,7 +189,7 @@ iTerm 터미널을 실행한 상태에서 메뉴바의 환경설정(Preferences)
 
 터미널 기본 폰트를 사용하면 agnoster 테마의 아이콘이나 기호가 꺠져보일 수 있습니다.
 
-저는 스크립트나 코드를 볼 때 IBM Plex Mono 폰트를 선호하는데, 해당 폰트를 사용해도 문자가 깨져보여서 이 점을 보완한 BlexMono Nerd Font를 다운받아 사용했습니다.
+저는 스크립트나 코드를 볼 때 IBM Plex Mono 폰트를 선호하는데, 해당 폰트를 사용해도 문자가 깨져보여서 이 점을 보완한 BlexMono Nerd Font([zip download](https://drive.google.com/uc?export=download&id=1-y2PsaGEr9FMHnC1UFFHmvSHfaAXbRGm))([Github 공식 저장소](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/IBMPlexMono/Mono/complete))를 다운받아 사용했습니다.
 
 폰트 변경은 환경설정 - Profiles - Text - Font 에서 변경할 수 있습니다.
 
@@ -233,6 +233,8 @@ status bar는 환경설정 - Profiles - Session 에서 다음 화면과 같이 �
 
 ## A. 참조
 easyhwan, "[Mac] 맥북 터미널 꾸미기 ( iTerm2, Oh My Zsh )," *Velog.io*, Jun. 28, 2022. [Online]. Available: [https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh](https://velog.io/@easyhwan/Mac-맥북-터미널-꾸미기-iTerm2-Oh-My-Zsh) [Accessed Nov. 13, 2022].
+
+mindfull, "macOS 개발환경 세팅하기," *blog.mindfull.dev*, Jul. 9, 2020. [Online]. Available: [https://blog.mindfull.dev/7](https://blog.mindfull.dev/7) [Accessed Nov. 13, 2022].
 
 SAMIR MAKWANA, "How to Customize the zsh Prompt in the macOS Terminal," *makeuseof.com*, Apr. 29, 2022. [Online]. Available: [https://www.makeuseof.com/customize-zsh-prompt-macos-terminal/](https://www.makeuseof.com/customize-zsh-prompt-macos-terminal/) [Accessed Nov. 19, 2022].
 
