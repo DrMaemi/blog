@@ -63,6 +63,14 @@ CommandNotFoundError: Your shell has not been properly configured to use 'conda 
 source ~/anaconda3/etc/profile.d/conda.sh
 conda activate test-env
 ```
+
+위 명령어는 터미널을 껐다 킬 때마다 수행해줘야 합니다. 윈도우 시작 시 위 스크립트가 실행되도록 설정해주거나, 이게 번거롭다면 `source activate` 명령어를 통해서도 할 수 있습니다. 최초 한 번만 해주면 이후 conda activate 명령어를 사용할 수 있습니다.
+
+```:no-line-numbers
+source activate test-env
+```
+
+아나콘다를 설치한 뒤 가상환경 생성까지 문제 없이 되는데 왜 활성화 때 이런 문제가 발생하는지는 잘 모르겠습니다.
 :::
 
 가상환경 삭제는 base(root) 계정으로 활성화(activate) 후 삭제하는 게 좋습니다.
