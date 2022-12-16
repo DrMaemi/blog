@@ -37,7 +37,72 @@ xport/home/username/java/classes/checkers.jar
 ## CLASSPATH의 사용처
 작성 중...
 
+## 예제
+
+```java:no-line-numbers
+public class Item {
+    public void print() {
+        System.out.println("Hello world");
+    }
+}
+```
+
+```java:no-line-numbers
+public class ClasspathDemo {
+    public static void main(String[] args) {
+        Item item = new Item();
+        i.print();
+    }
+}
+```
+
+컴파일
+
+```:no-line-numbers
+javac ClasspathDemo.java
+```
+
+결과 다음 두 개의 클래스 파일이 생성됩니다.
+
+- ClasspathDemo.class
+- Item.class
+
+현재 디렉토리 하위에 `classpath` 디렉토리를 만들고 `Item.class` 파일을 이동시킨 뒤 다음 java 명령어로 main 클래스를 실행하면
+
+```:no-line-numbers
+java ClasspathDemo
+```
+
+다음과 같이 `Item`에 대한 classpath를 찾을 수 없다는 오류가 발생합니다.
+
+```:no-line-numbers
+Exception in thread "main" java.lang.NoClassDefFoundError: Item
+	at classpath.ClasspathDemo.main(ClasspathDemo.java:5)
+Caused by: java.lang.ClassNotFoundException: classpath.Item
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 1 more
+```
+
+이는 java 명령어에 `-classpath` 옵션을 추가하여 해결할 수 있습니다.
+
+```:no-line-numbers
+java -classpath ".:classpath" ClasspathDemo
+```
+
+(작성 중...)
+
 ## A. 참조
 pengang1011, "JAVA CLASSPATH / Class loading," *blog.naver.com*, Jan. 3, 2021. [Online]. Available: [https://blog.naver.com/pengang1011/222194349710](https://blog.naver.com/pengang1011/222194349710) [Accessed Nov. 15, 2022].
 
 코딩하는 오징어, "자바 클래스패스(classpath)란?," *Tistory*, Mar. 25, 2018. [Online]. Available: [https://effectivesquid.tistory.com/21](https://effectivesquid.tistory.com/21) [Accessed Nov. 15, 2022].
+
+생활 코딩, "클래스 패스," *opentutorials.org*, Dec. 16, 2013. [Online]. Available: [https://opentutorials.org/course/1223/5527](https://opentutorials.org/course/1223/5527) [Accessed Dec. 16, 2022].
+
+<script setup lang="ts">
+import DetailsOpen from "@DetailsOpen";
+</script>
+
+<DetailsOpen/>
