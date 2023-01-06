@@ -56,6 +56,17 @@ Karabiner-Elements는 [Karabiner-Elements 공식 다운로드 페이지](https:/
 
 Karabiner의 Device 설정에서 연결된 블루투스 키보드를 built-in 키보드로 인식하도록 관련 설정을 활성화해주면 문제가 해결됐습니다. built-in 키보드 인식 여부가 맥 시스템과 Karabiner 간 동작에 어떤 차이를 보이는지 정확하게 알진 못합니다.
 
+### 3.1.2. 한/영키가 right_option 대신 KanjiMode인 경우
+- 한/영키가 right_option 대신 KanjiMode인 경우
+  - lang1 → f13(자신이 정해둔)
+
+![](https://drive.google.com/uc?export=view&id=1283mckpacvrC7TZT36cxoOd2xarIfTzr)
+&lt;화면 5. 한영키가 right_option 대신 KanjiMode인 경우&gt;
+{ .align-center }
+
+- RControl 대신 Eisu인 경우
+  - lang2 → right_control
+
 ## 4. 서드 파티 앱을 사용하고 싶지 않다면
 본문에서는 서드 파티 앱인 Karabiner을 활용한 키 매핑 방법을 설명했습니다. 그러나 이 방법은 MacOS 호환 문제 때문에 간혹 동작하지 않을 수 있습니다.
 
