@@ -73,6 +73,11 @@ projects:
     name: Java
     desc: Programming Language
     link: category/java/
+  
+  - icon: /assets/icon/mysql.png
+    name: MySQL
+    desc: Programming Language
+    link: category/mysql/
 
   - icon: /assets/icon/python.png
     name: Python

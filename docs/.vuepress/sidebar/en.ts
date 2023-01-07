@@ -314,6 +314,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/programming-language/mysql/": [
+    {
+      icon: "/assets/icon/mysql.png",
+      text: "MySQL",
+      link: "/category/mysql/",
+      children: "structure",
+    },
+  ],
   "/programming-language/python/": [
     {
       icon: "/assets/icon/python.png",
