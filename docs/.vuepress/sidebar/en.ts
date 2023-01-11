@@ -287,6 +287,14 @@ export const enSidebar = sidebar({
       ],
     },
   ],
+  "/linux/": [
+    {
+      icon: "/assets/icon/linux.png",
+      text: "Linux",
+      link: "/category/linux/",
+      children: "structure",
+    },
+  ],
   "/programming-language/c++/": [
     {
       icon: "/assets/icon/c++.png",

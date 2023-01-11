@@ -58,6 +58,11 @@ projects:
     name: React
     desc: Front-end
     link: category/react/
+  
+  - icon: /assets/icon/linux.png
+    name: Linux
+    desc: Operating System
+    link: category/linux/
 
   - icon: /assets/icon/c++.png
     name: C++
