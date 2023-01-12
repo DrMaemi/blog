@@ -1,5 +1,5 @@
 ---
-title: '[Git] 02. 저장소 생성(초기화)'
+title: '[Git] 저장소 생성(초기화)'
 icon: article
 category: Git
 date: 2022-04-28
