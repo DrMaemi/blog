@@ -1,5 +1,5 @@
 ---
-title: '[Git] 01. 설치'
+title: '[Git] 설치'
 icon: article
 category: Git
 date: 2022-04-28

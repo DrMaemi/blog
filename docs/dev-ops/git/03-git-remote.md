@@ -1,5 +1,5 @@
 ---
-title: '[Git] 03. git remote'
+title: '[Git] git remote'
 icon: article
 category:
   - DevOps
