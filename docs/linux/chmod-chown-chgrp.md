@@ -1,5 +1,5 @@
 ---
-title: '[Linux] 리눅스 권한 관리 명령어 - chomod, chown, chgrp'
+title: '[Linux] 리눅스 권한 관리 명령어 - chmod, chown, chgrp'
 icon: article
 category:
   - Linux
@@ -78,11 +78,31 @@ $ ls -l test.c
 -rw------- 1 leesh users 0 Jan  8 14:58 test.c
 ```
 
-## 파일 그룹 변경 - chgrp
-작성 예정
-
 ## 파일 소유권 변경 - chown (root 사용자만 가능)
-작성 예정
+리눅스 chown 명령은 파일/디렉토리의 사용자(소유자)를 변경할 수 있습니다.
+
+chown 명령은 리눅스 시스템의 최상위 권한을 가진 root 사용자만 사용할 수 있습니다.
+
+```:no-line-numbers
+sudo chown user01 a.out
+```
+
+- a.out 파일의 사용자(소유자)를 user01로 변경
+
+## 파일 그룹 변경 - chgrp
+리눅스 chgrp 명령은 파일/디렉토리의 그룹을 변경할 수 있습니다.
+
+일반 사용자는 자신이 속한 그룹으로만 변경할 수 있습니다.
+
+```:no-line-numbers
+sudo chgrp user01 a.out
+```
+
+- a.out 파일의 그룹을 user01로 변경
+
+::: note 리눅스에서 사용자를 생성하면 같은 이름의 그룹이 자동 생성됩니다.
+생성된 사용자는 자동으로 자신의 이름과 같은 그룹에 속하게 됩니다.
+:::
 
 ## A. 참조
 빌노트, "리눅스 권한 관리 명령어 사용법 정리 (chmod, chown, chgrp 명령어)," *withcoding.com*, Aug. 18, 2017. [Online]. Available: [https://withcoding.com/103](https://withcoding.com/103) [Accessed Dec. 23, 2022].
