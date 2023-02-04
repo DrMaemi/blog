@@ -45,7 +45,7 @@ date: 2023-01-29
 - 자바의 모든 클래스의 조상은 Object이므로 에러와 예외 또한 Object의 자손 클래스임
 - &lt;그림 1&gt;에서 확인할 수 있듯 모든 예외의 최고 조상은 Exception 클래스임
 
-## 예외 처리 - try-catch 문
+## 예외 처리 - try-catch문
 - 예외 처리
   - 정의
     - 프로그램 실행 시 발생할 수 있는 예외에 대비한 코드를 작성하는 것
@@ -63,7 +63,7 @@ public class ExceptionEx1 {
             try { } catch (Exception e) { } // 에러 - 변수 e가 중복 선언됨
         }
         
-        try { // 하나의 메서드 내에 여러 try-catch 문을 사용할 수 있음
+        try { // 하나의 메서드 내에 여러 try-catch문을 사용할 수 있음
             
         } catch (Exception e) {
             
@@ -72,7 +72,7 @@ public class ExceptionEx1 {
 }
 ```
 - catch 블럭 괄호 내에 선언된 변수는 catch 블럭 내에서만 유효함
-  - catch 블럭 내에 또 다른 try-catch 문이 포함된 경우 같은 이름의 참조변수를 사용해선 안됨
+  - catch 블럭 내에 또 다른 try-catch문이 포함된 경우 같은 이름의 참조변수를 사용해선 안됨
 
 ## printStackTrace() & getMessage()
 - 예외 클래스의 인스턴스에는 발생한 예외에 대한 정보가 있으며 printStackTrace()와 getMessage() 메서드로부터 얻을 수 있음
@@ -111,7 +111,206 @@ try {
 ```
 
 ## 예외 발생시키기
-작성 중...
+### 예외 객체를 throw하기
+```java:no-line-numbers
+public class ExceptionEx9 {
+    public static void main(String[] args) {
+        try {
+            Exception e = new Exception("고의로 발생시킴");
+            throw e;
+
+            // throw new Exception("고의로 발생시킴 2"); 이렇게 한 줄로 할 수 있음
+        } catch (Exception e) {
+            System.out.println("에러 메시지 :" + e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("프로그램 정상 종료");
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+에러 메시지 :고의로 발생시킴
+프로그램 정상 종료
+java.lang.Exception: 고의로 발생시킴
+	at exception_handling.ExceptionEx9.main(ExceptionEx9.java:6)
+```
+
+#### 컴파일 오류
+```java:no-line-numbers
+public class ExceptionEx10 {
+    public static void main(String[] args) {
+        throw new Exception();
+    }
+}
+```
+
+실행 결과
+
+```:no-line-numbers
+java: unreported exception java.lang.Exception; must be caught or declared to be thrown
+```
+
+- 예외처리가 되어야 할 부분에 안되어있어 발생하는 컴파일 에러
+- **RuntimeException을 제외한 Exception이 발생할 가능성이 있는 코드에 대해서는 반드시 예외처리를 해야 함**
+
+### 메서드에 예외 선언
+형식
+
+```java:no-line-numbers
+void method() throws Exception1, Exception2, ... {
+    ...
+}
+```
+
+- 메서드를 호출한 상위 메서드에 예외처리를 위임하는 방식
+- 이렇게 예외를 선언하는 경우 해당 예외 뿐 아니라 자손 타입의 예외까지 발생할 수 있다는 점에 주의
+- 오버라이딩 시 단순히 선언된 예외 개수 뿐 아니라 상속 관계까지 고려해야 함
+- 자바에서 메서드를 작성할 때 메서드 내에서 발생할 가능성이 있는 옐외를 메서드 선언부에 명시하는 것
+- 선언된 예외를 보고 처리 강요 → 견고한 프로그램 코드 작성을 도움
+
+예제
+``java:no-line-numbers
+public class ExceptionEx12 {
+    public static void main(String[] args) {
+        try {
+            method1();
+
+        } catch (Exception e) {
+            System.out.println("main 메서드에서 예외가 처리됐습니다.");
+            e.printStackTrace();
+        }
+    }
+
+    static void method1() throws Exception {
+        throw new Exception();
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+main 메서드에서 예외가 처리됐습니다.
+java.lang.Exception
+	at exception_handling.ExceptionEx12.method1(ExceptionEx12.java:15)
+	at exception_handling.ExceptionEx12.main(ExceptionEx12.java:6)
+```
+
+## finally 블럭
+```java:no-line-numbers
+public class FinallyTest {
+    public static void main(String[] args) {
+        try {
+            startInstall();
+            copyFiles();
+            return; // System.exit(0) 을 사용하면 finally 블럭이 실행되지 않음
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            deleteTempFiles();
+        }
+    }
+
+    static void startInstall() {
+        System.out.println("Program installing....");
+    }
+    static void copyFiles() {
+        System.out.println("Files are copied");
+    }
+
+    static void deleteTempFiles() {
+        System.out.println("Temp files are deleted");
+    }
+}
+```
+
+실행 결과
+
+```:no-line-numbers
+Program installing....
+Files are copied
+Temp files are deleted
+```
+
+- try/catch 블럭 내 return문이 실행되는 경우에도 finally 블럭이 실행됨
+  - 에러 발생 여부와 상관 없이 반드시 실행되어야 하는 코드를 finally 블럭에 작성함
+- `System.exit(0)`의 경우 finally 블럭이 실행되지 않음
+- try/catch 블럭 앞에 선언된 return문이 있다면 try/catch/finally 블럭 코드가 실행되지 않음
+
+```java:no-line-numbers
+
+```
+
+## try-with-resources문
+- JDK 1.7 버전 이상부터 사용 가능
+
+```java:no-line-numbers
+public class FinallyTest2 {
+    public static void main(String[] args) {
+        FileInputStream fis = null;
+        DataInputStream dis = null;
+
+        try {
+            fis = new FileInputStream("score.dat");
+            dis = new DataInputStream(fis);
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        } finally {
+            try {
+                if (dis != null)
+                    dis.close();
+            } catch (IOException ie) {
+                ie.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+- finally 블럭 안에 null처리 if문 없이 `dis.close()`를 작성할 경우 그것이 예외를 발생시킬 수 있다는 문제가 있음
+- 그에 따라 위와 같이, finally 블럭 안에 try-catch 구문이 들어가있는 가독성 떨어지는 코드가 작성됨
+
+위 코드를 try-with-resources 구문으로 바꾸면
+
+```java:no-line-numbers
+public class TryWithResources {
+    public static void main(String[] args) {
+        int sum = 0;
+
+        try (
+            FileInputStream fis = new FileInputStream("score.dat");
+            DataInputStream dis = new DataInputStream(fis);
+        ) {
+            while (true) {
+                int score = dis.readInt();
+                System.out.println(score);
+                sum += score;
+            }
+        } catch (EOFException eofException) {
+            System.out.println("점수의 총합은 " + sum + "입니다.");
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        }
+    }
+}
+```
+
+- try-with-resources 구문은 try 괄호 () 안에 객체를 생성하는 문장을 넣는 것임
+- 이 객체는 별도로 close()를 호출하지 않아도 try 블럭을 벗어나는 순간 자동으로 close()가 호출됨
+- try-with-resources문에 의해 **자동으로 객체의 close()가 호출되려면 AutoCloseable 인터페이스를 구현해야 함**
+
+### AutoCloseable
+```java:no-line-numbers
+public interface AutoCloseable {
+    void close() throws Exception;
+}
+```
+
+- AutoCloseable 인터페이스는 각 클래스에서 적절히 자원 반환 작업을 하도록 구현되어 있음
+- **close()도 Exception을 발생시킬 수 있음**
+
+(작성 중...)
 
 ## A. 참조
-S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-424.
+S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-436.
