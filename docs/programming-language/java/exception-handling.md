@@ -310,7 +310,93 @@ public interface AutoCloseable {
 - AutoCloseable 인터페이스는 각 클래스에서 적절히 자원 반환 작업을 하도록 구현되어 있음
 - **close()도 Exception을 발생시킬 수 있음**
 
-(작성 중...)
+예제 - TryWithResourceEx
+```java:no-line-numbers
+public class TryWithResourceEx {
+    public static void main(String[] args) {
+        try (CloseableResource cr = new CloseableResource()) {
+            cr.exceptionWork(false); // 예외 발생 x
+        } catch (WorkException e) {
+            e.printStackTrace();
+        } catch (CloseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println();
+
+        try (CloseableResource cr = new CloseableResource()) {
+            cr.exceptionWork(true);
+        } catch (WorkException e) {
+            e.printStackTrace();
+        } catch (CloseException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+CloseableResource
+```java:no-line-numbers
+class CloseableResource implements AutoCloseable {
+    public void exceptionWork(boolean exception) throws WorkException {
+        System.out.println("exceptionWork(" + exception + ") called");
+
+        if (exception) {
+            throw new WorkException("WorkException occurred");
+        }
+    }
+
+    @Override
+    public void close() throws CloseException {
+        System.out.println("close() called");
+        throw new CloseException("CloseException occurred");
+    }
+}
+```
+
+WorkException
+```java:no-line-numbers
+class WorkException extends Exception {
+    WorkException(String msg) { super(msg); }
+}
+```
+
+CloseException
+```java:no-line-numbers
+class CloseException extends Exception {
+    CloseException(String msg) { super(msg); }
+}
+```
+
+실행 결과
+```:no-line-numbers{12-14}
+exceptionWork(false) called
+close() called
+
+exceptionWork(true) called
+close() called
+exception_handling.CloseException: CloseException occurred
+	at exception_handling.CloseableResource.close(TryWithResourceEx.java:37)
+	at exception_handling.TryWithResourceEx.main(TryWithResourceEx.java:7)
+exception_handling.WorkException: WorkException occurred
+	at exception_handling.CloseableResource.exceptionWork(TryWithResourceEx.java:30)
+	at exception_handling.TryWithResourceEx.main(TryWithResourceEx.java:16)
+	Suppressed: exception_handling.CloseException: CloseException occurred
+		at exception_handling.CloseableResource.close(TryWithResourceEx.java:37)
+		at exception_handling.TryWithResourceEx.main(TryWithResourceEx.java:17)
+```
+
+- main 메서드의 첫 번째 try-catch문에서는 CloseException 발생
+- 두 번째 try-catch문에서는 WorkException, CloseException 발생
+- 이 경우 WorkException 호출스택이 출력되고, CloseException 호출스택은 `Suppressed` 수식어와 함께 출력됨
+- 두 개 이상의 예외가 동시에 발생할 수 없기 때문에 실제 발생 예외는 WorkException으로, CloseException은 억제된(suppressed) 예외로 다룸
+- 억제된 예외에 대한 정보는 실제 발생한 예외에 함께 저장됨
+- Throwable 클래스에는 억제된 예외와 관련된 메서드가 정의되어 있음
+
+```java:no-line-numbers
+void addSuppressed(Throwable exception) // 억제된 예외 추가
+Throwable[] getSuppressed() // 억제된 예외들(배열) 반환
+```
 
 ## A. 참조
-S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-436.
+S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-438.
