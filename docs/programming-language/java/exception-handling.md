@@ -398,5 +398,81 @@ void addSuppressed(Throwable exception) // 억제된 예외 추가
 Throwable[] getSuppressed() // 억제된 예외들(배열) 반환
 ```
 
+## 사용자 정의 예외 만들기
+간단한 형태
+```java:no-line-numbers
+public class MyException extends Exception {
+    MyException(String msg) {
+        super(msg);
+    }
+}
+```
+
+필요하다면 멤버 변수나 메서드를 추가할 수 있습니다.
+```java:no-line-numbers
+public class MyException extends Exception {
+    private final int ERR_CODE;
+
+    MyException(String msg, int errCode) {
+        super(msg);
+        ERR_CODE = errCode;
+    }
+
+    public int getErrCode() {
+        return ERR_CODE;
+    }
+}
+```
+- catch 블럭에서 getMessage(), getErrCode() 메서드를 이용해 메시지와 에러 코드를 확인할 수 있음
+
+## 예외 되던지기(Exception re-throwing)
+```java:no-line-numbers{15}
+public class ExceptionEx17 {
+    public static void main(String[] args) {
+        try {
+            method1();
+        } catch (Exception e) {
+            System.out.println("main에서 예외 처리");
+        }
+    }
+
+    static void method1() throws Exception {
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            System.out.println("method1에서 예외 처리");
+            throw e;
+        }
+    }
+}
+```
+
+실행 결과
+```:no-line-numbers
+method1에서 예외 처리
+main에서 예외 처리
+```
+
+### return문
+반환값이 있는 메서드의 경우 catch블럭에도 return문이 있어야 합니다. 또는 Exception re-throwing을 해야합니다. 이 때문에 검증 시 assert문 대신 AssertError를 생성해 던집니다.
+
+finally블럭에도 return문을 사용할 수 있는데, try블럭이나 catch블럭의 return문 다음에 수행되지만 최종적으로 fianlly 블럭 내 return문 값이 반환됩니다.
+
+```java:no-line-numbers
+...
+    static int method2() throws Exception {
+        try {
+            return 0;
+        } catch (Exception e) {
+//            return 1;
+            throw new Exception();
+        }
+    }
+...
+```
+
+## 연결된 예외(Chained Exception)
+(작성 중...)
+
 ## A. 참조
-S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-438.
+S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-444.
