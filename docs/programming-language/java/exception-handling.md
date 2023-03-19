@@ -472,7 +472,56 @@ finally블럭에도 return문을 사용할 수 있는데, try블럭이나 catch�
 ```
 
 ## 연결된 예외(Chained Exception)
-(작성 중...)
+한 예외가 다른 예외를 발생시킬 수도 있습니다. 예를 들어 예외 A가 예외 B를 발생시켰다면 A를 B의 '원인 예외(cause exception)'라고 합니다.
+
+```java:no-line-numbers
+try {
+    startInstall();
+    copyFiles();
+} catch (SpaceException e) {
+    InstallException ie = new InstallException("설치 중 예외 발생");
+    ie.initCause(e);
+    throw ie;
+} catch (MemoryException me) {
+    ...
+}
+```
+
+- `InstallException`을 생성한 뒤 `initCause()`로 `SpaceException`을 `InstallException`의 원인 예외로 등록
+    - `initCause()`는 `Exception` 클래스의 조상인 `Throwable` 클래스에 정의되어 있음
+- 이후 `throw ie`로 예외 던짐
+
+### 사용 이유
+1. 여러가지 예외를 하나의 큰 분류의 예외로 묶어 다룰 때 편의를 위해 사용함
+- ex. `SpaceException`과 `MemoryException`이 `InstallException`을 상속받을 때, catch 블럭으로 `InstallException`만을 다루면?
+    - 세부 Exception 확인이 불가능함
+    - `SpaceException`, `MemoryException`의 상속 관계 변경 필요 시 번거로움
+- 위 문제를 해결하기 위해 예제와 같이 Chained Exception 기법(예외가 원인 예외를 포함할 수 있는)을 사용함
+
+2. checked 예외를 unchecked 예외로 바꾸기 위함
+```java:no-line-numbers
+static void startInstall() throws SpaceException, MemoryException {
+    if (!enoughSpace())
+        throw new SpaceException("설치할 공간이 부족합니다");
+    
+    if (!enoughMemory())
+        throw new MemoryException("메모리가 부족합니다");
+}
+```
+
+```java:no-line-numbers
+static void startInstall() throws SpaceException {
+    if (!enoughSpace())
+        throw new SpaceException("설치할 공간이 부족합니다");
+    
+    if (!enoughMemory())
+        throw new RuntimeException(new MemoryException("메모리가 부족합니다."));
+}
+```
+
+- `MemoryException`은 `Exception`의 자손으로 반드시 예외를 처리해야 하는데, `RuntimeException`으로 감쌈
+  - unchecked가 됨
+  - `startInstall()` 선언부에 `MemoryException`을 선언하지 않아도(`throws`에 명시하지 않아도) 됨
 
 ## A. 참조
-S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-444.
+S. Namgung, "8. 예외처리(exception handling)," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 6, sec. 3, pp. 414-447.
