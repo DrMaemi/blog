@@ -391,6 +391,92 @@ Main thread terminated
 1
 ```
 
+## 5. 쓰레드의 우선순위
+쓰레드의 우선순위와 관련된 메서드와 상수는 다음과 같습니다.
+
+```java:no-line-numbers
+void setPriority(int newPriority)
+int getPriority()
+
+public static final int MAX_PRIORITY = 10; // 최대 우선 순위
+public static final int MIN_PRIORITY = 1; // 최소 우선 순위
+public static final int NORM_PRIORITY = 5; // 보통 우선 순위
+```
+
+- 쓰레드가 가질 수 있는 우선순위의 범위는 1~10이며, 숫자가 높을 수록 우선순위가 높음
+- 쓰레드의 우선순위는 쓰레드를 생성한 쓰레드로부터 상속받음
+- 우선순위가 높으면 실행 시간이 비교적 증가함
+
+## 6. 쓰레드 그룹(Thread Group)
+- 서로 관련된 쓰레들르 그룹으로 다루기 위해 존재
+- 쓰레드 그룹에 다른 쓰레드 그룹을 포함시킬 수 있음
+
+```java:no-line-numbers
+public class ThreadGroup implements Thread.UncaughtExceptionHandler {
+    private final THreadGroup parent;
+    String name;
+    int maxPriority;
+    boolean desctroyed;
+    boolean daemon;
+    boolean vmAllowSuspension;
+
+    int nUnstartedThreads = 0;
+    int nthreads;
+    Thread threads[];
+
+    ThreadGroup(String name) // 파라미터로 넘긴 이름의 새로운 쓰레드 그룹 생성
+    ThreadGroup(ThreadGroup parent, String name) // 지정된 쓰레드 그룹에 포함되는 새로운 쓰레드 그룹 생성
+    ...
+    void list() // 지정된 쓰레드 그룹에 속한 쓰레드와 하위 쓰레드 그룹에 대한 정보 출력
+    ...
+}
+```
+
+- 쓰레드를 쓰레드 그룹에 포함시키려면 Thread 생성자를 이용해야 함
+
+```java:no-line-numbers
+public class Thread implements Runnable {
+    ...
+    public Thread(ThreadGroup group, String name)
+    public Thread(ThreadGroup group, Runnable target)
+    public Thread(ThreadGroup group, Runnable target, String name)
+    public Thread(ThreadGroup group, Runnable target, String name, long stackSize)
+    ...
+}
+```
+
+- 모든 쓰레드는 반드시 쓰레드 그룹에 포함되어 있어야 함
+    - 쓰레드 그룹을 지정하지 않는 생성자를 사용한 쓰레드는 기본적으로 자신을 생성한 쓰레드와 같은 쓰레드 그룹에 속하게 됨
+- 자바 어플리케이션이 실행되면 JVM은 `main`과 `system`이라는 쓰레드 그룹을 만들고 JVM 운영에 필요한 쓰레드들을 생성해서 이 쓰레드 그룹에 포함시킴
+    - ex. `main` 메서드를 실행하는 `main` 이름의 쓰레드는 `main` 쓰레드 그룹에, 가비지컬렉션을 수행하는 `Finalizer` 쓰레드는 `system` 쓰레드 그룹에 속함
+
+예제
+
+```java:no-line-numbers
+Runnable r = () -> {
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+
+    }
+};
+
+ThreadGroup group1 = new ThreadGroup("Group1");
+new Thread(group1, r, "th1").start();
+```
+
+- 참조 변수 없이 쓰레드를 생성해 바로 실행시켰다 해서 해당 쓰레드가 가비지 컬렉터 제거 대상이 되지 않음
+    - 쓰레드의 참조가 ThreadGroup에 저장되기 때문
+
+## 7. 데몬 쓰레드(Daemon Thread)
+- 일반 쓰레드의 작업을 돕는 보조 역할을 수행하는 쓰레드를 데몬 쓰레드라 함
+    - ex. 가비지 컬렉터, 워드 프로세서의 자동 저장, 화면 자동 갱신 등
+- 일반적으로 무한 루프와 조건문을 이용해 실행 후 대기 중 특정 조건 만족 시 작업 수행 후 다시 대기하도록 작성
+- 데몬 쓰레드와 일반 쓰레드의 생성, 실행 방법이 같지만 쓰레드 생성 후 `setDaemon(true)` 메서드를 호출해줘야 함
+- 데몬 쓰레드가 생성한 쓰레드는 자동으로 데몬 쓰레드가 됨
+
+(작성 중...)
+
 ## A. 참조
 S. Namgung, "2. 쓰레드의 구현과 실행," in *Java의 정석*, Jung-gu, Korea: 도우출판, 2022, ch. 13, sec. 2, pp. 724-792.
 
