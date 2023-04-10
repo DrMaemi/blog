@@ -171,7 +171,7 @@ void method() throws Exception1, Exception2, ... {
 - 선언된 예외를 보고 처리 강요 → 견고한 프로그램 코드 작성을 도움
 
 예제
-``java:no-line-numbers
+```java:no-line-numbers
 public class ExceptionEx12 {
     public static void main(String[] args) {
         try {
@@ -237,10 +237,6 @@ Temp files are deleted
   - 에러 발생 여부와 상관 없이 반드시 실행되어야 하는 코드를 finally 블럭에 작성함
 - `System.exit(0)`의 경우 finally 블럭이 실행되지 않음
 - try/catch 블럭 앞에 선언된 return문이 있다면 try/catch/finally 블럭 코드가 실행되지 않음
-
-```java:no-line-numbers
-
-```
 
 ## try-with-resources문
 - JDK 1.7 버전 이상부터 사용 가능
