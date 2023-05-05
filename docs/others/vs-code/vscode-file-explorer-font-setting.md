@@ -27,5 +27,9 @@ Settings을 열어 "window.zoomLevel"을 설정해줍니다.
 &lt;화면 3. VS Code - zoom level with setting json&gt;
 { .align-center }
 
+zoom level은 0이 default인데, 개인적으로 `Terminal Integration Font Size`, `Editor Font Size` 모두 15로 세팅한 뒤 zoom level을 0.2로 설정했을 때 가장 보기 편했습니다.
+
 ## A. 참조
-ruffin, "Visual Studio Code change font size for file explorer tray?," *stackoverflow.com*, Mar. 16, 2016. [Online]. Available: [https://stackoverflow.com/questions/36040857/visual-studio-code-change-font-size-for-file-explorer-tray](https://stackoverflow.com/questions/36040857/visual-studio-code-change-font-size-for-file-explorer-tray) [Accessed Nov. 25, 2022].
+"Visual Studio Code change font size for file explorer tray?," *stackoverflow.com*, Mar. 16, 2016. [Online]. Available: [https://stackoverflow.com/questions/36040857/visual-studio-code-change-font-size-for-file-explorer-tray](https://stackoverflow.com/questions/36040857/visual-studio-code-change-font-size-for-file-explorer-tray) [Accessed Nov. 25, 2022].
+
+"How to change environment's font size?," *stackoverflow.com*, Nov. 13, 2015. [Online]. Available: [https://stackoverflow.com/questions/33701933/how-to-change-environments-font-size](https://stackoverflow.com/questions/33701933/how-to-change-environments-font-size) [Accessed May 6, 2023].
