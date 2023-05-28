@@ -5,7 +5,12 @@ category: Git
 date: 2023-05-06
 ---
 
-`git submodule`은 상위 저장소에서 하위 저장소를 포함시켜 관리하기 위해 사용하는 기능입니다.
+`git submodule`은 상위 저장소에서 하위 저장소를 포함시켜 관리하기 위해 사용하는 기능입니다. 상위 저장소와 하위 저장소가 각각 원격 저장소로 관리되어야 하면서, 동시에 상위 저장소가 하위 저장소를 의존하여 사용할 때 사용합니다.
+
+- Submodule은 다른 Repository에 embed 된 어떤 Repository를 의미합니다.
+- Submodule은 고유의 history를 가집니다.
+- 상위 Repository를 superproject라 합니다.
+- 파일시스템 상 Submodule은 주로(언제나는 아니고) superproject의 `$GIT_DIR/modules/` 하위에 Git 디렉토리...(1)를 가집니다. 그리고 `.git` 파일이 Submodule의 workding 디렉토리 루트에 위치하는데, 이 `.git` 파일은 (1)을 가리킵니다.
 
 ## 사용법
 ```:no-line-numbers
@@ -99,3 +104,5 @@ or you are unsure what this means choose another name with the '--name' option.
 
 ## A. 참조
 노초코, "9.1: submodule 을 포함하는 git 저장소를 clone 하기," *tistory.com*, Oct. 12, 2019. [Online]. Available: [https://nochoco-lee.tistory.com/87](https://nochoco-lee.tistory.com/87) [Accessed May 6, 2023].
+
+Software Freedom Conservancy, "gitsubmodules - Mounting one repository inside another," *git-scm.com*, last updated in 2.40.1. [Online]. Available: [https://git-scm.com/docs/gitsubmodules](https://git-scm.com/docs/gitsubmodules) [Accessed May 28, 2023].
