@@ -168,8 +168,8 @@ MinGW가 정상적으로 설치됐다면, VSCode에 g++로 cpp 파일을 컴파�
 
 위 설정을 끝내면 `.vscode` 폴더 내에 `c_cpp_properties.json` 파일이 생성됩니다.
 
-## Trouble Shootings
-### Git Bash - 윈도우 환경 경로 구분자 충돌
+### Trouble Shootings
+#### Git Bash - 윈도우 환경 경로 구분자 충돌
 윈도우에서 git bash를 VS Code의 기본 터미널로 설정한 경우, C/C++ 컴파일 시 `:\`와 같은 디렉토리 구분자를 인식하지 못해 `No such file or directory` 오류를 만났었습니다.
 
 위 오류를 해결하기 위해선 `tasks.json` 파일 내부에서 `gcc`, `g++` 명령어 인자인 `args`에 파일 및 경로와 관련된 부분을 `''`(작은 따옴표)로 감싸야합니다. 또한 바이너리 실행에 필요한 인자에서 `/C`를 제거합니다.
@@ -217,8 +217,15 @@ MinGW가 정상적으로 설치됐다면, VSCode에 g++로 cpp 파일을 컴파�
 ```
 :::
 
+## 윈도우 - VS(Visual Studio)
+Visual Studio는 공식 문서를 읽는 것이 도움이 될 것입니다.
+
+[Visual Studio - Install Visual Studio 2022](https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022)
+
 ## A. 참조
 Microsoft, "Key Bindings for Visual Studio Code," *code.visualstudio.com*, May 3, 2023. [Online]. Availble: [https://code.visualstudio.com/docs/getstarted/keybindings](https://code.visualstudio.com/docs/getstarted/keybindings) [Accseed May 29, 2023].
+
+Microsoft, "Visual Studio documentation," *learn.microsoft.com*, [Online]. Available: [https://learn.microsoft.com/en-us/visualstudio/windows/?view=vs-2022](https://learn.microsoft.com/en-us/visualstudio/windows/?view=vs-2022) [Accessed Jun. 3, 2023].
 
 <script setup lang="ts">
 import DetailsOpen from "@DetailsOpen";
