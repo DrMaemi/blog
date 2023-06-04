@@ -64,6 +64,11 @@ projects:
     desc: Operating System
     link: category/linux/
 
+  - icon: /assets/icon/c.png
+    name: C
+    desc: Programming Language
+    link: category/c/
+
   - icon: /assets/icon/c++.png
     name: C++
     desc: Programming Language

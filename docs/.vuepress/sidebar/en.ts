@@ -295,6 +295,14 @@ export const enSidebar = sidebar({
       children: "structure",
     },
   ],
+  "/programming-language/c/": [
+    {
+      icon: "/assets/icon/c.png",
+      text: "C",
+      link: "/category/c/",
+      children: "structure",
+    },
+  ],
   "/programming-language/c++/": [
     {
       icon: "/assets/icon/c++.png",
