@@ -1,5 +1,5 @@
 ---
-title: '06. Vuepress에서 마크다운 파일에 Vue 사용하기'
+title: 'Vuepress에서 마크다운 파일에 Vue 사용하기'
 icon: article
 category: Maemi's Devlog
 date: 2022-11-20

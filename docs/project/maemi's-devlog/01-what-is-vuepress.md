@@ -1,5 +1,5 @@
 ---
-title: '01. VuePress란 무엇인가'
+title: 'VuePress란 무엇인가'
 icon: article
 category: Maemi's Devlog
 date: 2022-10-19

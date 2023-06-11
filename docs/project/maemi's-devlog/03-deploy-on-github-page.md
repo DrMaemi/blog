@@ -1,5 +1,5 @@
 ---
-title: '03. Github Page에 배포하기'
+title: 'Github Page에 배포하기'
 icon: article
 category: Maemi's Devlog
 date: 2022-10-23

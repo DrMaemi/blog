@@ -1,5 +1,5 @@
 ---
-title: 'Custom container 내부 마지막 요소 스타일 무시 현상에 대한 고찰'
+title: Custom container 내부 마지막 요소 스타일 무시 현상에 대한 고찰
 icon: article
 category: Maemi's Devlog
 date: 2022-11-27

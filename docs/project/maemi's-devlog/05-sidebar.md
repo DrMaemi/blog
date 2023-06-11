@@ -1,5 +1,5 @@
 ---
-title: '05. 사이드바 및 TOC 설정'
+title: '사이드바 및 TOC 설정'
 icon: article
 category: Maemi's Devlog
 date: 2022-10-24

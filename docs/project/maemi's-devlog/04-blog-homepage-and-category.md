@@ -1,5 +1,5 @@
 ---
-title: '04. 블로그 홈페이지의 프로젝트, 카테고리 연동'
+title: '블로그 홈페이지의 프로젝트, 카테고리 연동'
 icon: article
 category: Maemi's Devlog
 date: 2022-10-23

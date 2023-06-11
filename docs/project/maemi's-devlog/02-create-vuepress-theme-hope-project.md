@@ -1,5 +1,5 @@
 ---
-title: '02. vuepress-theme-hope 프로젝트 시작하기'
+title: 'vuepress-theme-hope 프로젝트 시작하기'
 icon: article
 category: Maemi's Devlog
 date: 2022-10-19
