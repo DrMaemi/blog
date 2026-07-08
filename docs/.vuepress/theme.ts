@@ -23,7 +23,6 @@ export default hopeTheme({
   pageInfo: ["Author", "Original", "Date", "Category", "Tag"],
 
   blog: {
-    avatar: "/assets/image/profile.png",
     medias: {
       // Baidu: "https://example.com",
       // Bitbucket: "https://example.com",
